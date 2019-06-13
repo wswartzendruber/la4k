@@ -19,6 +19,12 @@ kotlin {
             }
         }
 
+        js().compilations["main"].defaultSourceSet {
+            dependencies {
+                implementation(kotlin("stdlib-js"))
+            }
+        }
+
         jvm().compilations["main"].defaultSourceSet {
             dependencies {
                 implementation(kotlin("stdlib-jdk8"))
