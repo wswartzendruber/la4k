@@ -1,4 +1,6 @@
 package org.la4k.api
 
-public class Logger {
+public expect class Logger(name: String) {
+
+    public fun fatal(message: String)
 }
