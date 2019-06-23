@@ -8,11 +8,11 @@ public class Logger(val name: String) {
         tags: List<String>? = null
     ) = log(name, Level.off, message, throwable, tags)
 
-    public fun <R> off(
-        block: () -> R,
+    public fun off(
+        block: () -> CharSequence,
         throwable: Throwable?,
         tags: List<String>? = null
-    ) = log(name, Level.off, block, throwable, tags)
+    ) = logConditional(name, Level.off, block, throwable, tags)
 
     public fun fatal(
         message: CharSequence,
@@ -20,11 +20,11 @@ public class Logger(val name: String) {
         tags: List<String>? = null
     ) = log(name, Level.fatal, message, throwable, tags)
 
-    public fun <R> fatal(
-        block: () -> R,
+    public fun fatal(
+        block: () -> CharSequence,
         throwable: Throwable?,
         tags: List<String>? = null
-    ) = log(name, Level.fatal, block, throwable, tags)
+    ) = logConditional(name, Level.fatal, block, throwable, tags)
 
     public fun error(
         message: CharSequence,
@@ -32,11 +32,11 @@ public class Logger(val name: String) {
         tags: List<String>? = null
     ) = log(name, Level.error, message, throwable, tags)
 
-    public fun <R> error(
-        block: () -> R,
+    public fun error(
+        block: () -> CharSequence,
         throwable: Throwable?,
         tags: List<String>? = null
-    ) = log(name, Level.error, block, throwable, tags)
+    ) = logConditional(name, Level.error, block, throwable, tags)
 
     public fun warn(
         message: CharSequence,
@@ -44,11 +44,11 @@ public class Logger(val name: String) {
         tags: List<String>? = null
     ) = log(name, Level.warn, message, throwable, tags)
 
-    public fun <R> warn(
-        block: () -> R,
+    public fun warn(
+        block: () -> CharSequence,
         throwable: Throwable?,
         tags: List<String>? = null
-    ) = log(name, Level.warn, block, throwable, tags)
+    ) = logConditional(name, Level.warn, block, throwable, tags)
 
     public fun info(
         message: CharSequence,
@@ -56,11 +56,11 @@ public class Logger(val name: String) {
         tags: List<String>? = null
     ) = log(name, Level.info, message, throwable, tags)
 
-    public fun <R> info(
-        block: () -> R,
+    public fun info(
+        block: () -> CharSequence,
         throwable: Throwable?,
         tags: List<String>? = null
-    ) = log(name, Level.info, block, throwable, tags)
+    ) = logConditional(name, Level.info, block, throwable, tags)
 
     public fun debug(
         message: CharSequence,
@@ -68,11 +68,11 @@ public class Logger(val name: String) {
         tags: List<String>? = null
     ) = log(name, Level.debug, message, throwable, tags)
 
-    public fun <R> debug(
-        block: () -> R,
+    public fun debug(
+        block: () -> CharSequence,
         throwable: Throwable?,
         tags: List<String>? = null
-    ) = log(name, Level.debug, block, throwable, tags)
+    ) = logConditional(name, Level.debug, block, throwable, tags)
 
     public fun trace(
         message: CharSequence,
@@ -80,11 +80,11 @@ public class Logger(val name: String) {
         tags: List<String>? = null
     ) = log(name, Level.trace, message, throwable, tags)
 
-    public fun <R> trace(
-        block: () -> R,
+    public fun trace(
+        block: () -> CharSequence,
         throwable: Throwable?,
         tags: List<String>? = null
-    ) = log(name, Level.trace, block, throwable, tags)
+    ) = logConditional(name, Level.trace, block, throwable, tags)
 
     public fun all(
         message: CharSequence,
@@ -92,11 +92,11 @@ public class Logger(val name: String) {
         tags: List<String>? = null
     ) = log(name, Level.all, message, throwable, tags)
 
-    public fun <R> all(
-        block: () -> R,
+    public fun all(
+        block: () -> CharSequence,
         throwable: Throwable?,
         tags: List<String>? = null
-    ) = log(name, Level.all, block, throwable, tags)
+    ) = logConditional(name, Level.all, block, throwable, tags)
 
     public fun custom(
         level: Level,
@@ -105,12 +105,12 @@ public class Logger(val name: String) {
         tags: List<String>? = null
     ) = log(name, level, message, throwable, tags)
 
-    public fun <R> custom(
+    public fun custom(
         level: Level,
-        block: () -> R,
+        block: () -> CharSequence,
         throwable: Throwable?,
         tags: List<String>? = null
-    ) = log(name, level, block, throwable, tags)
+    ) = logConditional(name, level, block, throwable, tags)
 
     public fun isOffEnabled(tags: List<String>?) = isEnabled(Level.off, tags)
 
@@ -129,4 +129,18 @@ public class Logger(val name: String) {
     public fun isAllEnabled(tags: List<String>?) = isEnabled(Level.all, tags)
 
     public fun isLevelEnabled(level: Level, tags: List<String>?) = isEnabled(level, tags)
+
+    private companion object {
+
+        private fun logConditional(
+            name: String,
+            level: Level,
+            block: () -> CharSequence,
+            throwable: Throwable?,
+            tags: List<String>?
+        ) {
+            if (isEnabled(level, tags))
+                log(name, level, block(), throwable, tags)
+        }
+    }
 }

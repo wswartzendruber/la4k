@@ -10,12 +10,4 @@ internal expect fun log(
     tags: List<String>?
 )
 
-internal expect fun <R> log(
-    name: String,
-    level: Level,
-    block: () -> R,
-    throwable: Throwable?,
-    tags: List<String>?
-)
-
 internal expect fun isEnabled(level: Level, tags: List<String>?): Boolean

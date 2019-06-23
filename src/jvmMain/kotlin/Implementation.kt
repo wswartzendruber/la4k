@@ -23,21 +23,6 @@ internal actual fun log(
     }
 }
 
-internal actual fun <R> log(
-    name: String,
-    level: Level,
-    block: () -> R,
-    throwable: Throwable?,
-    tags: List<String>?
-) {
-    if (isEnabled(level, tags)) {
-        synchronized(providers) {
-            for (provider in providers)
-                provider.log(name, level, block, throwable, tags)
-        }
-    }
-}
-
 internal actual fun isEnabled(level: Level, tags: List<String>?) =
     synchronized(providers) {
         providers.any { it.isEnabled(level, tags) }
