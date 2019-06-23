@@ -10,5 +10,13 @@ public interface JvmProvider {
         tags: List<String>?
     )
 
+    public fun <R> log(
+        name: String,
+        level: Level,
+        block: () -> R,
+        throwable: Throwable?,
+        tags: List<String>?
+    )
+
     public fun isEnabled(level: Level, tags: List<String>?): Boolean
 }
