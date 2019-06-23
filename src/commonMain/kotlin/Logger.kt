@@ -4,7 +4,7 @@ public expect class Logger(name: String) {
 
     public fun fatal(message: String)
 
-    companion object {
+    public companion object {
 
         public fun reload()
     }

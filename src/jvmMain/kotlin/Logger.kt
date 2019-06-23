@@ -10,7 +10,7 @@ public actual class Logger actual constructor(name: String) {
         logMessage(name, 0, message)
     }
 
-    actual companion object {
+    public actual companion object {
 
         private val loader = ServiceLoader.load(JvmProvider::class.java)
 
