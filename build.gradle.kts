@@ -3,7 +3,7 @@ val version: String by project
 
 plugins {
     kotlin("multiplatform").version("1.3.31")
-    `maven-publish`
+    id("maven-publish")
 }
 
 repositories {

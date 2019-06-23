@@ -2,5 +2,5 @@ package org.la4k.api
 
 public interface JvmProvider {
 
-    public fun logMessage(name: String, level: Int, message: String)
+    public fun log(name: String, level: Level, message: String)
 }
