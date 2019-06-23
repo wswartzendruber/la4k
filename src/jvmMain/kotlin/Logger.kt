@@ -7,16 +7,28 @@ public actual class Logger actual constructor(name: String) {
     private val name = name
 
     public actual fun fatal(message: String) {
-        for (provider in providers)
-            provider.fatal(name, message)
+        logMessage(name, 0, message)
     }
 
-    companion object {
+    actual companion object {
 
-        private val providers = ServiceLoader
-            .load(JvmProvider::class.java)
-            .iterator()
-            .asSequence()
-            .toList()
+        private val loader = ServiceLoader.load(JvmProvider::class.java)
+
+        init {
+            reload()
+        }
+
+        public actual fun reload() {
+            synchronized (this) {
+                loader.reload()
+            }
+        }
+
+        private fun logMessage(name: String, level: Int, message: String) {
+            synchronized(this) {
+                for (provider in loader)
+                    provider.logMessage(name, level, message)
+            }
+        }
     }
 }
