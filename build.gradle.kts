@@ -12,46 +12,22 @@ repositories {
 }
 
 kotlin {
-
     js()
     jvm()
+}
 
-    sourceSets {
+dependencies {
 
-        val commonMain by getting {
-            dependencies {
-                implementation(kotlin("stdlib-common"))
-            }
-        }
-        val commonTest by getting {
-            dependencies {
-                implementation(kotlin("test-common"))
-                implementation(kotlin("test-annotations-common"))
-                implementation("org.la4k:la4k-test-metadata:0.0.1")
-            }
-        }
+    commonMainImplementation(kotlin("stdlib-common"))
+    commonTestImplementation(kotlin("test-common"))
+    commonTestImplementation(kotlin("test-annotations-common"))
+    commonTestImplementation("org.la4k:la4k-test-metadata:0.0.1")
 
-        js().compilations["main"].defaultSourceSet {
-            dependencies {
-                implementation(kotlin("stdlib-js"))
-            }
-        }
-        js().compilations["test"].defaultSourceSet {
-            dependencies {
-                implementation("org.la4k:la4k-test-js:0.0.1")
-            }
-        }
+    "jsMainImplementation"(kotlin("stdlib-js"))
+    "jsTestImplementation"(kotlin("test-js"))
+    "jsTestImplementation"("org.la4k:la4k-test-js:0.0.1")
 
-        jvm().compilations["main"].defaultSourceSet {
-            dependencies {
-                implementation(kotlin("stdlib-jdk8"))
-            }
-        }
-        jvm().compilations["test"].defaultSourceSet {
-            dependencies {
-                implementation(kotlin("test-junit"))
-                implementation("org.la4k:la4k-test-jvm:0.0.1")
-            }
-        }
-    }
+    "jvmMainImplementation"(kotlin("stdlib-jdk8"))
+    "jvmTestImplementation"(kotlin("test-junit"))
+    "jvmTestImplementation"("org.la4k:la4k-test-jvm:0.0.1")
 }
