@@ -1,1 +1,1 @@
-rootProject.name = "la4k-api"
+rootProject.name = "la4k"

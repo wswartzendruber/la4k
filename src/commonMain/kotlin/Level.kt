@@ -1,4 +1,4 @@
-package org.la4k.api
+package org.la4k
 
 public class Level(val name: String, val value: Int) {
 

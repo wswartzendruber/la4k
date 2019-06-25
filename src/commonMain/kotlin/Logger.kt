@@ -1,10 +1,10 @@
-package org.la4k.api
+package org.la4k
 
-import org.la4k.api.impl.getAvailableProviders
+import org.la4k.impl.getAvailableImplementations
 
 public class Logger(val name: String) {
 
-    private val loggers = providers.map { it.getProviderLogger(name) }
+    private val loggers = implementations.map { it.getImplementationLogger(name) }
 
     public fun off(
         message: CharSequence,
@@ -167,6 +167,6 @@ public class Logger(val name: String) {
 
     private companion object {
 
-        private val providers = getAvailableProviders()
+        private val implementations = getAvailableImplementations()
     }
 }

@@ -1,8 +1,8 @@
-package org.la4k.api.impl
+package org.la4k.impl
 
-import org.la4k.api.Level
+import org.la4k.Level
 
-public abstract class ProviderLogger protected constructor(val name: String) {
+public abstract class ImplementationLogger protected constructor(val name: String) {
 
     public abstract fun log(
         level: Level,
