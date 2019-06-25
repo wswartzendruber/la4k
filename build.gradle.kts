@@ -24,10 +24,6 @@ dependencies {
     commonTestImplementation("org.la4k:la4k-test-metadata:0.0.1")
 
     "jsMainImplementation"(kotlin("stdlib-js"))
-    "jsTestImplementation"(kotlin("test-js"))
-    "jsTestImplementation"("org.la4k:la4k-test-js:0.0.1")
 
     "jvmMainImplementation"(kotlin("stdlib-jdk8"))
-    "jvmTestImplementation"(kotlin("test-junit"))
-    "jvmTestImplementation"("org.la4k:la4k-test-jvm:0.0.1")
 }
