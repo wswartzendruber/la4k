@@ -12,7 +12,6 @@ repositories {
 }
 
 kotlin {
-    js()
     jvm()
 }
 
@@ -21,9 +20,6 @@ dependencies {
     commonMainImplementation(kotlin("stdlib-common"))
     commonTestImplementation(kotlin("test-common"))
     commonTestImplementation(kotlin("test-annotations-common"))
-    commonTestImplementation("org.la4k:la4k-test-metadata:0.0.1")
-
-    "jsMainImplementation"(kotlin("stdlib-js"))
 
     "jvmMainImplementation"(kotlin("stdlib-jdk8"))
 }
