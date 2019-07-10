@@ -6,8 +6,8 @@ public abstract class Logger protected constructor(val name: String) {
         level: Level,
         message: CharSequence,
         throwable: Throwable?,
-        tags: List<String>?
+        tag: String?
     )
 
-    public abstract fun isEnabled(level: Level, tags: List<String>?): Boolean
+    public abstract fun isEnabled(level: Level, tag: String?): Boolean
 }

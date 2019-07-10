@@ -10,115 +10,115 @@ public class Logger(val name: String) {
     public fun fatal(
         message: CharSequence,
         throwable: Throwable? = null,
-        tags: List<String>? = null
-    ) = log(Level.FATAL, message, throwable, tags)
+        tag: String? = null
+    ) = log(Level.FATAL, message, throwable, tag)
 
     public fun fatal(
         block: () -> CharSequence,
         throwable: Throwable? = null,
-        tags: List<String>? = null
-    ) = log(Level.FATAL, block, throwable, tags)
+        tag: String? = null
+    ) = log(Level.FATAL, block, throwable, tag)
 
     public fun error(
         message: CharSequence,
         throwable: Throwable? = null,
-        tags: List<String>? = null
-    ) = log(Level.ERROR, message, throwable, tags)
+        tag: String? = null
+    ) = log(Level.ERROR, message, throwable, tag)
 
     public fun error(
         block: () -> CharSequence,
         throwable: Throwable? = null,
-        tags: List<String>? = null
-    ) = log(Level.ERROR, block, throwable, tags)
+        tag: String? = null
+    ) = log(Level.ERROR, block, throwable, tag)
 
     public fun warn(
         message: CharSequence,
         throwable: Throwable? = null,
-        tags: List<String>? = null
-    ) = log(Level.WARN, message, throwable, tags)
+        tag: String? = null
+    ) = log(Level.WARN, message, throwable, tag)
 
     public fun warn(
         block: () -> CharSequence,
         throwable: Throwable? = null,
-        tags: List<String>? = null
-    ) = log(Level.WARN, block, throwable, tags)
+        tag: String? = null
+    ) = log(Level.WARN, block, throwable, tag)
 
     public fun info(
         message: CharSequence,
         throwable: Throwable? = null,
-        tags: List<String>? = null
-    ) = log(Level.INFO, message, throwable, tags)
+        tag: String? = null
+    ) = log(Level.INFO, message, throwable, tag)
 
     public fun info(
         block: () -> CharSequence,
         throwable: Throwable? = null,
-        tags: List<String>? = null
-    ) = log(Level.INFO, block, throwable, tags)
+        tag: String? = null
+    ) = log(Level.INFO, block, throwable, tag)
 
     public fun debug(
         message: CharSequence,
         throwable: Throwable? = null,
-        tags: List<String>? = null
-    ) = log(Level.DEBUG, message, throwable, tags)
+        tag: String? = null
+    ) = log(Level.DEBUG, message, throwable, tag)
 
     public fun debug(
         block: () -> CharSequence,
         throwable: Throwable? = null,
-        tags: List<String>? = null
-    ) = log(Level.DEBUG, block, throwable, tags)
+        tag: String? = null
+    ) = log(Level.DEBUG, block, throwable, tag)
 
     public fun trace(
         message: CharSequence,
         throwable: Throwable? = null,
-        tags: List<String>? = null
-    ) = log(Level.TRACE, message, throwable, tags)
+        tag: String? = null
+    ) = log(Level.TRACE, message, throwable, tag)
 
     public fun trace(
         block: () -> CharSequence,
         throwable: Throwable? = null,
-        tags: List<String>? = null
-    ) = log(Level.TRACE, block, throwable, tags)
+        tag: String? = null
+    ) = log(Level.TRACE, block, throwable, tag)
 
-    public fun isFatalEnabled(tags: List<String>?) = isEnabled(Level.FATAL, tags)
+    public fun isFatalEnabled(tag: String?) = isEnabled(Level.FATAL, tag)
 
-    public fun isErrorEnabled(tags: List<String>?) = isEnabled(Level.ERROR, tags)
+    public fun isErrorEnabled(tag: String?) = isEnabled(Level.ERROR, tag)
 
-    public fun isWarnEnabled(tags: List<String>?) = isEnabled(Level.WARN, tags)
+    public fun isWarnEnabled(tag: String?) = isEnabled(Level.WARN, tag)
 
-    public fun isInfoEnabled(tags: List<String>?) = isEnabled(Level.INFO, tags)
+    public fun isInfoEnabled(tag: String?) = isEnabled(Level.INFO, tag)
 
-    public fun isDebugEnabled(tags: List<String>?) = isEnabled(Level.DEBUG, tags)
+    public fun isDebugEnabled(tag: String?) = isEnabled(Level.DEBUG, tag)
 
-    public fun isTraceEnabled(tags: List<String>?) = isEnabled(Level.TRACE, tags)
+    public fun isTraceEnabled(tag: String?) = isEnabled(Level.TRACE, tag)
 
     private fun log(
         level: Level,
         message: CharSequence,
         throwable: Throwable?,
-        tags: List<String>?
+        tag: String?
     ) {
         for (logger in loggers)
-            logger.log(level, message, throwable, tags)
+            logger.log(level, message, throwable, tag)
     }
 
     private fun log(
         level: Level,
         block: () -> CharSequence,
         throwable: Throwable?,
-        tags: List<String>?
+        tag: String?
     ) {
 
         var value: CharSequence? = null
 
         for (logger in loggers) {
-            if (logger.isEnabled(level, tags)) {
+            if (logger.isEnabled(level, tag)) {
                 if (value == null)
                     value = block()
-                logger.log(level, value, throwable, tags)
+                logger.log(level, value, throwable, tag)
             }
         }
     }
 
-    private fun isEnabled(level: Level, tags: List<String>?) =
-        loggers.any { it.isEnabled(level, tags) }
+    private fun isEnabled(level: Level, tag: String?) =
+        loggers.any { it.isEnabled(level, tag) }
 }

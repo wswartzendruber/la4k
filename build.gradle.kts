@@ -18,8 +18,6 @@ kotlin {
 dependencies {
 
     commonMainImplementation(kotlin("stdlib-common"))
-    commonTestImplementation(kotlin("test-common"))
-    commonTestImplementation(kotlin("test-annotations-common"))
 
     "jvmMainImplementation"(kotlin("stdlib-jdk8"))
 }
