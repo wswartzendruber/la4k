@@ -1,6 +1,6 @@
 package org.la4k.impl
 
-internal expect fun implementations(): List<Implementation>
+internal expect fun currentImplementations(): List<Implementation>
 
 public abstract class Implementation {
 

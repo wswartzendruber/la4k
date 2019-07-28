@@ -1,11 +1,14 @@
 package org.la4k
 
-import org.la4k.impl.implementations
+import org.la4k.impl.currentImplementations
+import org.la4k.impl.Implementation
 import org.la4k.impl.Level
+import org.la4k.impl.Logger as ImplementationLogger
 
 public class Logger(val name: String) {
 
-    private val loggers = implementations().map { it.getLogger(name) }
+    private val loggers = mutableListOf<ImplementationLogger>()
+    private var knownHashCode = 0
 
     public fun fatal(
         message: CharSequence,
@@ -97,6 +100,7 @@ public class Logger(val name: String) {
         throwable: Throwable?,
         tag: String?
     ) {
+        validateLoggers()
         for (logger in loggers)
             logger.log(level, message, throwable, tag)
     }
@@ -107,6 +111,7 @@ public class Logger(val name: String) {
         throwable: Throwable?,
         tag: String?
     ) {
+        validateLoggers()
 
         var value: CharSequence? = null
 
@@ -119,6 +124,36 @@ public class Logger(val name: String) {
         }
     }
 
-    private fun isEnabled(level: Level, tag: String?) =
+    private fun isEnabled(level: Level, tag: String?) {
+        validateLoggers()
         loggers.any { it.isEnabled(level, tag) }
+    }
+
+    private fun validateLoggers() {
+        if (knownHashCode != currentHashCode) {
+            platformSynchronized(implementations) {
+                loggers.clear()
+                loggers.addAll(implementations.map({ it.getLogger(name) }))
+                knownHashCode = currentHashCode
+            }
+        }
+    }
+
+    public companion object {
+
+        private val implementations = mutableListOf<Implementation>()
+        private var currentHashCode = 0
+
+        init {
+            refresh()
+        }
+
+        public fun refresh() {
+            platformSynchronized(implementations) {
+                implementations.clear()
+                implementations.addAll(currentImplementations())
+                currentHashCode = implementations.hashCode()
+            }
+        }
+    }
 }
