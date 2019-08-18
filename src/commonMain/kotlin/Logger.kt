@@ -1,9 +1,9 @@
 package org.la4k
 
-import org.la4k.impl.currentImplementations
+import org.la4k.impl.getImplementations
 import org.la4k.impl.Implementation
+import org.la4k.impl.ImplementationLogger
 import org.la4k.impl.Level
-import org.la4k.impl.Logger as ImplementationLogger
 
 /**
  * The main class of the LA4K API; libraries should use it and only it for logging via LA4K.
@@ -284,7 +284,7 @@ public class Logger(val name: String) {
         if (knownHashCode != currentHashCode) {
             platformSynchronized(implementations) {
                 loggers.clear()
-                loggers.addAll(implementations.map({ it.getLogger(name) }))
+                loggers.addAll(implementations.map({ it.getImplementationLogger(name) }))
                 knownHashCode = currentHashCode
             }
         }
@@ -310,7 +310,7 @@ public class Logger(val name: String) {
         public fun refresh() {
             platformSynchronized(implementations) {
                 implementations.clear()
-                implementations.addAll(currentImplementations())
+                implementations.addAll(getImplementations())
                 currentHashCode = implementations.hashCode()
             }
         }
