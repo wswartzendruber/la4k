@@ -47,7 +47,7 @@ public class Logger(val name: String) {
     private var knownHashCode = 0
 
     /**
-     * Dispatches a message that an unrecoverable error has occurred to all implementations.
+     * Dispatches a [message] that an unrecoverable error has occurred to all implementations.
      *
      * @param[throwable] An exception relating to the cause of the incident.
      * @param[tag] An arbitrary tag to apply to the message.
@@ -76,7 +76,7 @@ public class Logger(val name: String) {
     ) = log(Level.FATAL, block, throwable, tag)
 
     /**
-     * Dispatches a message that a recoverable error has occurred to all implementations.
+     * Dispatches a [message] that a recoverable error has occurred to all implementations.
      *
      * @param[throwable] An exception relating to the cause of the incident.
      * @param[tag] An arbitrary tag to apply to the message.
@@ -105,7 +105,7 @@ public class Logger(val name: String) {
     ) = log(Level.ERROR, block, throwable, tag)
 
     /**
-     * Dispatches a message that a possible issue has arisen to all implementations.
+     * Dispatches a [message] that a possible issue has arisen to all implementations.
      *
      * @param[throwable] An exception relating to the cause of the incident.
      * @param[tag] An arbitrary tag to apply to the message.
@@ -134,7 +134,7 @@ public class Logger(val name: String) {
     ) = log(Level.WARN, block, throwable, tag)
 
     /**
-     * Dispatches an arbitrary informational message to all implementations.
+     * Dispatches an arbitrary informational [message] to all implementations.
      *
      * @param[throwable] An exception relating to the cause of the incident.
      * @param[tag] An arbitrary tag to apply to the message.
@@ -163,7 +163,7 @@ public class Logger(val name: String) {
     ) = log(Level.INFO, block, throwable, tag)
 
     /**
-     * Dispatches a message containing diagnostics information to all implementations.
+     * Dispatches a [message] containing diagnostics information to all implementations.
      *
      * @param[throwable] An exception relating to the cause of the incident.
      * @param[tag] An arbitrary tag to apply to the message.
@@ -192,7 +192,7 @@ public class Logger(val name: String) {
     ) = log(Level.DEBUG, block, throwable, tag)
 
     /**
-     * Dispatches a message containing internal state information to all implementations.
+     * Dispatches a [message] containing internal state information to all implementations.
      *
      * @param[throwable] An exception relating to the cause of the incident.
      * @param[tag] An arbitrary tag to apply to the message.
@@ -326,7 +326,7 @@ public class Logger(val name: String) {
          * class to have to separately reinstanciate internal handles to all available
          * implementations, which will happen on each instance's next logging call.
          */
-        public fun refresh() {
+        public fun refresh(): Unit {
             platformSynchronized(implementations) {
                 implementations.clear()
                 implementations.addAll(getImplementations())

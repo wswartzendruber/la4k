@@ -37,7 +37,7 @@ public abstract class ImplementationLogger protected constructor(val name: Strin
         message: CharSequence,
         throwable: Throwable?,
         tag: String?
-    )
+    ): Unit
 
     /**
      * Called by instances of [org.la4k.Logger] to determine if the implementation will show
