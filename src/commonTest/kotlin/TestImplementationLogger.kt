@@ -17,39 +17,32 @@
  * FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-import org.jetbrains.dokka.gradle.DokkaTask
+package org.la4k.test
 
-val group: String by project
-val version: String by project
+import org.la4k.impl.Level
+import org.la4k.impl.ImplementationLogger
 
-plugins {
-    kotlin("multiplatform").version("1.3.61")
-    id("org.jetbrains.dokka").version("0.10.1")
-    id("maven-publish")
-}
+class TestImplementationLogger(name: String) : ImplementationLogger(name) {
 
-repositories {
-    mavenLocal()
-    jcenter()
-}
+    private val loggerMessages = messages.getOrPut(name, { mutableListOf<Message>() })
 
-kotlin {
-    jvm()
-}
-
-dependencies {
-
-    commonMainImplementation(kotlin("stdlib-common"))
-    commonTestImplementation(kotlin("test-common"))
-    commonTestImplementation(kotlin("test-annotations-common"))
-
-    "jvmMainImplementation"(kotlin("stdlib-jdk8"))
-    "jvmTestImplementation"(kotlin("test-junit"))
-}
-
-tasks {
-    val dokka by getting(DokkaTask::class) {
-        outputFormat = "html"
-        outputDirectory = "$buildDir/dokka"
+    override fun log(
+        level: Level,
+        message: CharSequence,
+        throwable: Throwable?,
+        tag: String?
+    ) {
+        if (isEnabled(level, tag))
+            loggerMessages.add(Message(level, message, throwable, tag))
     }
+
+    override fun isEnabled(level: Level, tag: String?) =
+        when (level) {
+            Level.FATAL -> true
+            Level.ERROR -> false
+            Level.WARN -> true
+            Level.INFO -> false
+            Level.DEBUG -> true
+            Level.TRACE -> false
+        }
 }
