@@ -17,8 +17,31 @@
  * FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
- allprojects {
-     repositories {
-         jcenter()
-     }
- }
+import org.jetbrains.dokka.gradle.DokkaTask
+
+plugins {
+    kotlin("multiplatform").version("1.3.61")
+    id("org.jetbrains.dokka").version("0.10.1")
+    id("maven-publish")
+}
+
+kotlin {
+    jvm()
+}
+
+dependencies {
+    // COMMON
+    commonMainImplementation(kotlin("stdlib-common"))
+    commonTestImplementation(kotlin("test-common"))
+    commonTestImplementation(kotlin("test-annotations-common"))
+    // JVM
+    "jvmMainImplementation"(kotlin("stdlib-jdk8"))
+    "jvmTestImplementation"(kotlin("test-junit"))
+}
+
+tasks {
+    val dokka by getting(DokkaTask::class) {
+        outputFormat = "html"
+        outputDirectory = "$buildDir/dokka"
+    }
+}

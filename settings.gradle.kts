@@ -17,4 +17,5 @@
  * FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-rootProject.name = "la4k-api"
+rootProject.name = "la4k"
+include("la4k-api")
