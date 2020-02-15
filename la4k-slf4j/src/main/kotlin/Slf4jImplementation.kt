@@ -17,12 +17,11 @@
  * FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
- plugins {
-     kotlin("multiplatform").version("1.3.61").apply(false)
- }
+package org.la4k.slf4j
 
- allprojects {
-    repositories {
-        jcenter()
-    }
- }
+import org.la4k.impl.Implementation
+
+public class Slf4jImplementation() : Implementation() {
+
+    public override fun getImplementationLogger(name: String) = Slf4jImplementationLogger(name)
+}

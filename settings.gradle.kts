@@ -18,4 +18,4 @@
  */
 
 rootProject.name = "la4k"
-include("la4k-api")
+include("la4k-api", "la4k-slf4j")

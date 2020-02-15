@@ -20,7 +20,7 @@
 import org.jetbrains.dokka.gradle.DokkaTask
 
 plugins {
-    kotlin("multiplatform").version("1.3.61")
+    kotlin("multiplatform")
     id("org.jetbrains.dokka").version("0.10.1")
     id("maven-publish")
 }
