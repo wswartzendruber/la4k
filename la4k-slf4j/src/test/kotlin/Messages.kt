@@ -17,17 +17,15 @@
  * FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-plugins {
-    kotlin("jvm")
-    id("java")
-    id("maven-publish")
-}
+package org.la4k.slf4j.test
 
-dependencies {
-    implementation(project(":la4k-api"))
-    implementation(kotlin("stdlib-jdk8"))
-    implementation("org.slf4j:slf4j-api:1.7.26")
-    testImplementation(kotlin("test"))
-    testImplementation(kotlin("test-annotations-common"))
-    testImplementation(kotlin("test-junit"))
-}
+import org.slf4j.Marker
+
+val messages = mutableMapOf<String, MutableList<Message>>()
+
+data class Message(
+    val level: String,
+    val message: String,
+    val throwable: Throwable? = null,
+    val marker: Marker? = null
+)

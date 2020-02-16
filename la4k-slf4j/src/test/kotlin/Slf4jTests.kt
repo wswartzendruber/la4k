@@ -17,17 +17,20 @@
  * FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-plugins {
-    kotlin("jvm")
-    id("java")
-    id("maven-publish")
-}
+package org.la4k.slf4j.test
 
-dependencies {
-    implementation(project(":la4k-api"))
-    implementation(kotlin("stdlib-jdk8"))
-    implementation("org.slf4j:slf4j-api:1.7.26")
-    testImplementation(kotlin("test"))
-    testImplementation(kotlin("test-annotations-common"))
-    testImplementation(kotlin("test-junit"))
+import kotlin.test.assertFalse
+import kotlin.test.assertTrue
+import kotlin.test.fail
+import kotlin.test.Test
+
+import org.la4k.Logger
+
+class Slf4jTests {
+
+    @Test
+    fun `enabled message is logged`() {
+        Logger("test-1").fatal("test-message-1")
+        assertTrue(messages["test-1"]!!.any({ it.message == "test-message-1" }))
+    }
 }
