@@ -17,4 +17,4 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 #
 
-org.la4k.test.TestImplementation
+org.la4k.proxy.ProxyImplementation

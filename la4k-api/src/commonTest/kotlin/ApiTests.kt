@@ -22,26 +22,73 @@ package org.la4k.test
 import kotlin.test.assertFalse
 import kotlin.test.assertTrue
 import kotlin.test.fail
+import kotlin.test.BeforeTest
 import kotlin.test.Test
 
 import org.la4k.Logger
+import org.la4k.impl.Level
+import org.la4k.proxy.action
+import org.la4k.proxy.isDebugEnabled
+import org.la4k.proxy.isErrorEnabled
+import org.la4k.proxy.isFatalEnabled
+import org.la4k.proxy.isInfoEnabled
+import org.la4k.proxy.isTraceEnabled
+import org.la4k.proxy.isWarnEnabled
 
 class ApiTests {
+
+    init {
+        action = { name, level, message, throwable, tag ->
+            messages.add(Message(name, level, message, throwable, tag))
+        }
+    }
 
     @Test
     fun `enabled message is logged`() {
         Logger("test-1").fatal("test-message-1")
-        assertTrue(messages["test-1"]!!.any({ it.message == "test-message-1" }))
+        assertTrue(messages.any({
+            it.name == "test-1" &&
+            it.message == "test-message-1"
+        }))
     }
 
     @Test
     fun `disabled message is not logged`() {
+        isErrorEnabled = false
         Logger("test-2").error("test-message-2")
-        assertFalse(messages["test-2"]!!.any({ it.message == "test-message-2" }))
+        assertFalse(messages.any({
+            it.name == "test-2" &&
+            it.message == "test-message-2"
+        }))
     }
 
     @Test
     fun `disabled lambda is not logged`() {
+        isErrorEnabled = false
         Logger("test-3").error({ fail("Lambda was evaluated.") })
+    }
+
+    @BeforeTest
+    fun prepare() {
+        messages.clear()
+        isDebugEnabled = true
+        isErrorEnabled = true
+        isFatalEnabled = true
+        isInfoEnabled = true
+        isTraceEnabled = true
+        isWarnEnabled = true
+    }
+
+    companion object {
+
+        val messages = mutableListOf<Message>()
+
+        data class Message(
+            val name: String,
+            val level: Level,
+            val message: CharSequence,
+            val throwable: Throwable?,
+            val tag: String?
+        )
     }
 }

@@ -32,10 +32,12 @@ kotlin {
 dependencies {
     // COMMON
     commonMainImplementation(kotlin("stdlib-common"))
+    commonTestImplementation(project(":la4k-proxy"))
     commonTestImplementation(kotlin("test-common"))
     commonTestImplementation(kotlin("test-annotations-common"))
     // JVM
     "jvmMainImplementation"(kotlin("stdlib-jdk8"))
+    "jvmTestImplementation"(project(":la4k-proxy"))
     "jvmTestImplementation"(kotlin("test-junit"))
 }
 

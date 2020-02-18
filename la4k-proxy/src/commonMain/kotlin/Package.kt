@@ -17,32 +17,20 @@
  * FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-package org.la4k.test
+package org.la4k.proxy
 
 import org.la4k.impl.Level
-import org.la4k.impl.ImplementationLogger
 
-class TestImplementationLogger(name: String) : ImplementationLogger(name) {
+var action: (String, Level, CharSequence, Throwable?, String?) -> Unit = { _, _, _, _, _ -> }
 
-    private val loggerMessages = messages.getOrPut(name, { mutableListOf<Message>() })
+var isFatalEnabled = true
 
-    override fun log(
-        level: Level,
-        message: CharSequence,
-        throwable: Throwable?,
-        tag: String?
-    ) {
-        if (isEnabled(level, tag))
-            loggerMessages.add(Message(level, message, throwable, tag))
-    }
+var isErrorEnabled = true
 
-    override fun isEnabled(level: Level, tag: String?) =
-        when (level) {
-            Level.FATAL -> true
-            Level.ERROR -> false
-            Level.WARN -> true
-            Level.INFO -> false
-            Level.DEBUG -> true
-            Level.TRACE -> false
-        }
-}
+var isWarnEnabled = true
+
+var isInfoEnabled = true
+
+var isDebugEnabled = true
+
+var isTraceEnabled = true

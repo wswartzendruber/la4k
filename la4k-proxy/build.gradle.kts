@@ -17,15 +17,20 @@
  * FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-package org.la4k.test
+plugins {
+    kotlin("multiplatform")
+    id("maven-publish")
+}
 
-import org.la4k.impl.Level
+kotlin {
+    jvm()
+}
 
-val messages = mutableMapOf<String, MutableList<Message>>()
-
-data class Message(
-    val level: Level,
-    val message: CharSequence,
-    val throwable: Throwable?,
-    val tag: String?
-)
+dependencies {
+    // COMMON
+    commonMainImplementation(project(":la4k-api"))
+    commonMainImplementation(kotlin("stdlib-common"))
+    // JVM
+    "jvmMainImplementation"(project(":la4k-api"))
+    "jvmMainImplementation"(kotlin("stdlib-jdk8"))
+}

@@ -17,11 +17,31 @@
  * FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-package org.la4k.test
+package org.la4k.proxy
 
-import org.la4k.impl.Implementation
+import org.la4k.impl.Level
+import org.la4k.impl.ImplementationLogger
 
-public class TestImplementation() : Implementation() {
+class ProxyImplementationLogger(name: String) : ImplementationLogger(name) {
 
-    public override fun getImplementationLogger(name: String) = TestImplementationLogger(name)
+    override fun log(
+        level: Level,
+        message: CharSequence,
+        throwable: Throwable?,
+        tag: String?
+    ) {
+        if (isEnabled(level, tag)) {
+            action(name, level, message, throwable, tag)
+        }
+    }
+
+    override fun isEnabled(level: Level, tag: String?) =
+        when (level) {
+            Level.FATAL -> isFatalEnabled
+            Level.ERROR -> isErrorEnabled
+            Level.WARN -> isWarnEnabled
+            Level.INFO -> isInfoEnabled
+            Level.DEBUG -> isDebugEnabled
+            Level.TRACE -> isTraceEnabled
+        }
 }
