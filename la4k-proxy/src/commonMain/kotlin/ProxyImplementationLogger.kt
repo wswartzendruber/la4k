@@ -31,17 +31,9 @@ class ProxyImplementationLogger(name: String) : ImplementationLogger(name) {
         tag: String?
     ) {
         if (isEnabled(level, tag)) {
-            action(name, level, message, throwable, tag)
+            logMessage(name, level, message, throwable, tag)
         }
     }
 
-    override fun isEnabled(level: Level, tag: String?) =
-        when (level) {
-            Level.FATAL -> isFatalEnabled
-            Level.ERROR -> isErrorEnabled
-            Level.WARN -> isWarnEnabled
-            Level.INFO -> isInfoEnabled
-            Level.DEBUG -> isDebugEnabled
-            Level.TRACE -> isTraceEnabled
-        }
+    override fun isEnabled(level: Level, tag: String?) = isLevelEnabled(level, tag)
 }

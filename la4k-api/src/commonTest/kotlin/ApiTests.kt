@@ -27,18 +27,13 @@ import kotlin.test.Test
 
 import org.la4k.Logger
 import org.la4k.impl.Level
-import org.la4k.proxy.action
-import org.la4k.proxy.isDebugEnabled
-import org.la4k.proxy.isErrorEnabled
-import org.la4k.proxy.isFatalEnabled
-import org.la4k.proxy.isInfoEnabled
-import org.la4k.proxy.isTraceEnabled
-import org.la4k.proxy.isWarnEnabled
+import org.la4k.proxy.isLevelEnabled
+import org.la4k.proxy.logMessage
 
 class ApiTests {
 
     init {
-        action = { name, level, message, throwable, tag ->
+        logMessage = { name, level, message, throwable, tag ->
             messages.add(Message(name, level, message, throwable, tag))
         }
     }
@@ -54,7 +49,7 @@ class ApiTests {
 
     @Test
     fun `disabled message is not logged`() {
-        isErrorEnabled = false
+        isLevelEnabled = { _, _ -> false }
         Logger("test-2").error("test-message-2")
         assertFalse(messages.any({
             it.name == "test-2" &&
@@ -64,19 +59,14 @@ class ApiTests {
 
     @Test
     fun `disabled lambda is not logged`() {
-        isErrorEnabled = false
+        isLevelEnabled = { _, _ -> false }
         Logger("test-3").error({ fail("Lambda was evaluated.") })
     }
 
     @BeforeTest
     fun prepare() {
         messages.clear()
-        isDebugEnabled = true
-        isErrorEnabled = true
-        isFatalEnabled = true
-        isInfoEnabled = true
-        isTraceEnabled = true
-        isWarnEnabled = true
+        isLevelEnabled = { _, _ -> true }
     }
 
     companion object {
