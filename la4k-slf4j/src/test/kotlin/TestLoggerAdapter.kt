@@ -123,7 +123,7 @@ class TestLoggerAdapter(private val name: String) : Logger {
 
     override fun isErrorEnabled() = true
 
-    override fun isErrorEnabled(marker: Marker) = true
+    override fun isErrorEnabled(marker: Marker) = marker.toString().length == 5
 
     override fun warn(message: String) {
         if (isWarnEnabled) {
@@ -219,7 +219,7 @@ class TestLoggerAdapter(private val name: String) : Logger {
 
     override fun isWarnEnabled() = true
 
-    override fun isWarnEnabled(marker: Marker) = true
+    override fun isWarnEnabled(marker: Marker) = marker.toString().length == 4
 
     override fun info(message: String) {
         if (isInfoEnabled) {
@@ -315,7 +315,7 @@ class TestLoggerAdapter(private val name: String) : Logger {
 
     override fun isInfoEnabled() = true
 
-    override fun isInfoEnabled(marker: Marker) = true
+    override fun isInfoEnabled(marker: Marker) = marker.toString().length == 3
 
     override fun debug(message: String) {
         if (isDebugEnabled) {
@@ -409,9 +409,9 @@ class TestLoggerAdapter(private val name: String) : Logger {
         }
     }
 
-    override fun isDebugEnabled() = true
+    override fun isDebugEnabled() = false
 
-    override fun isDebugEnabled(marker: Marker) = true
+    override fun isDebugEnabled(marker: Marker) = marker.toString().length == 2
 
     override fun trace(message: String) {
         if (isTraceEnabled) {
@@ -505,7 +505,7 @@ class TestLoggerAdapter(private val name: String) : Logger {
         }
     }
 
-    override fun isTraceEnabled() = true
+    override fun isTraceEnabled() = false
 
-    override fun isTraceEnabled(marker: Marker) = true
+    override fun isTraceEnabled(marker: Marker) = marker.toString().length == 1
 }

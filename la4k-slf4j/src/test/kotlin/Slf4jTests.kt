@@ -88,6 +88,96 @@ class Slf4jTests {
         }))
     }
 
+    @Test
+    fun `fatal is enabled`() {
+        assertTrue(Logger("test").isFatalEnabled())
+    }
+
+    @Test
+    fun `error is enabled`() {
+        assertTrue(Logger("test").isErrorEnabled())
+    }
+
+    @Test
+    fun `info is enabled`() {
+        assertTrue(Logger("test").isInfoEnabled())
+    }
+
+    @Test
+    fun `warn is enabled`() {
+        assertTrue(Logger("test").isWarnEnabled())
+    }
+
+    @Test
+    fun `debug is disabled`() {
+        assertFalse(Logger("test").isDebugEnabled())
+    }
+
+    @Test
+    fun `trace is disabled`() {
+        assertFalse(Logger("test").isTraceEnabled())
+    }
+
+    @Test
+    fun `fatal with correct tag length is enabled`() {
+        assertTrue(Logger("test").isFatalEnabled("XXXXX"))
+    }
+
+    @Test
+    fun `fatal with incorrect tag length is disabled`() {
+        assertFalse(Logger("test").isFatalEnabled("XXXXXXXXXX"))
+    }
+
+    @Test
+    fun `error with correct tag length is enabled`() {
+        assertTrue(Logger("test").isErrorEnabled("XXXXX"))
+    }
+
+    @Test
+    fun `error with incorrect tag length is disabled`() {
+        assertFalse(Logger("test").isErrorEnabled("XXXXXXXXXX"))
+    }
+
+    @Test
+    fun `warn with correct tag length is enabled`() {
+        assertTrue(Logger("test").isWarnEnabled("XXXX"))
+    }
+
+    @Test
+    fun `warn with incorrect tag length is disabled`() {
+        assertFalse(Logger("test").isWarnEnabled("XXXXXXXXXX"))
+    }
+
+    @Test
+    fun `info with correct tag length is enabled`() {
+        assertTrue(Logger("test").isInfoEnabled("XXX"))
+    }
+
+    @Test
+    fun `info with incorrect tag length is disabled`() {
+        assertFalse(Logger("test").isInfoEnabled("XXXXXXXXXX"))
+    }
+
+    @Test
+    fun `debug with correct tag length is enabled`() {
+        assertTrue(Logger("test").isDebugEnabled("XX"))
+    }
+
+    @Test
+    fun `debug with incorrect tag length is disabled`() {
+        assertFalse(Logger("test").isDebugEnabled("XXXXXXXXXX"))
+    }
+
+    @Test
+    fun `trace with correct tag length is enabled`() {
+        assertTrue(Logger("test").isTraceEnabled("X"))
+    }
+
+    @Test
+    fun `trace with incorrect tag length is disabled`() {
+        assertFalse(Logger("test").isTraceEnabled("XXXXXXXXXX"))
+    }
+
     @BeforeTest
     fun prepare() = messages.clear()
 }
