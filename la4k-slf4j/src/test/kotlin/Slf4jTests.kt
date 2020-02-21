@@ -19,18 +19,75 @@
 
 package org.la4k.slf4j.test
 
+import org.la4k.Logger
+
 import kotlin.test.assertFalse
 import kotlin.test.assertTrue
 import kotlin.test.fail
+import kotlin.test.BeforeTest
 import kotlin.test.Test
-
-import org.la4k.Logger
 
 class Slf4jTests {
 
     @Test
-    fun `enabled message is logged`() {
-        Logger("test-1").fatal("test-message-1")
-        assertTrue(messages["test-1"]!!.any({ it.message == "test-message-1" }))
+    fun `null throwable, null tag`() {
+
+        Logger("test").info("test-message")
+
+        assertTrue(messages["test"]!!.any({
+            it.level == "INFO" &&
+            it.message == "test-message" &&
+            it.throwable == null &&
+            it.marker == null
+        }))
     }
+
+    @Test
+    fun `non-null throwable, null tag`() {
+
+        val throwable = Exception("Test exception.")
+
+        Logger("test").info("test-message", throwable)
+
+        assertTrue(messages["test"]!!.any({
+            it.level == "INFO" &&
+            it.message == "test-message" &&
+            it.throwable == throwable &&
+            it.marker == null
+        }))
+    }
+
+    @Test
+    fun `null throwable, non-null tag`() {
+
+        val tag = "TEST_TAG"
+
+        Logger("test").info("test-message", null, tag)
+
+        assertTrue(messages["test"]!!.any({
+            it.level == "INFO" &&
+            it.message == "test-message" &&
+            it.throwable == null &&
+            it.marker.toString() == tag
+        }))
+    }
+
+    @Test
+    fun `non-null throwable, non-null tag`() {
+
+        val throwable = Exception("Test exception.")
+        val tag = "TEST_TAG"
+
+        Logger("test").info("test-message", throwable, tag)
+
+        assertTrue(messages["test"]!!.any({
+            it.level == "INFO" &&
+            it.message == "test-message" &&
+            it.throwable == throwable &&
+            it.marker.toString() == tag
+        }))
+    }
+
+    @BeforeTest
+    fun prepare() = messages.clear()
 }
