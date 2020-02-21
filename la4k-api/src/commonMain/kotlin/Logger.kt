@@ -54,7 +54,7 @@ public class Logger(val name: String) {
         message: CharSequence,
         throwable: Throwable? = null,
         tag: String? = null
-    ) = log(Level.FATAL, message, throwable, tag)
+    ): Unit = log(Level.FATAL, message, throwable, tag)
 
     /**
      * Selectively dispatches a message that an unrecoverable error has occurred.
@@ -71,7 +71,7 @@ public class Logger(val name: String) {
         block: () -> CharSequence,
         throwable: Throwable? = null,
         tag: String? = null
-    ) = log(Level.FATAL, block, throwable, tag)
+    ): Unit = log(Level.FATAL, block, throwable, tag)
 
     /**
      * Dispatches a [message] that a recoverable error has occurred to all implementations.
@@ -83,7 +83,7 @@ public class Logger(val name: String) {
         message: CharSequence,
         throwable: Throwable? = null,
         tag: String? = null
-    ) = log(Level.ERROR, message, throwable, tag)
+    ): Unit = log(Level.ERROR, message, throwable, tag)
 
     /**
      * Selectively dispatches a message that a recoverable error has occurred.
@@ -100,7 +100,7 @@ public class Logger(val name: String) {
         block: () -> CharSequence,
         throwable: Throwable? = null,
         tag: String? = null
-    ) = log(Level.ERROR, block, throwable, tag)
+    ): Unit = log(Level.ERROR, block, throwable, tag)
 
     /**
      * Dispatches a [message] that a possible issue has arisen to all implementations.
@@ -112,7 +112,7 @@ public class Logger(val name: String) {
         message: CharSequence,
         throwable: Throwable? = null,
         tag: String? = null
-    ) = log(Level.WARN, message, throwable, tag)
+    ): Unit = log(Level.WARN, message, throwable, tag)
 
     /**
      * Selectively dispatches a message that a possible issue has arisen.
@@ -129,7 +129,7 @@ public class Logger(val name: String) {
         block: () -> CharSequence,
         throwable: Throwable? = null,
         tag: String? = null
-    ) = log(Level.WARN, block, throwable, tag)
+    ): Unit = log(Level.WARN, block, throwable, tag)
 
     /**
      * Dispatches an arbitrary informational [message] to all implementations.
@@ -141,7 +141,7 @@ public class Logger(val name: String) {
         message: CharSequence,
         throwable: Throwable? = null,
         tag: String? = null
-    ) = log(Level.INFO, message, throwable, tag)
+    ): Unit = log(Level.INFO, message, throwable, tag)
 
     /**
      * Selectively dispatches an arbitrary informational message.
@@ -158,7 +158,7 @@ public class Logger(val name: String) {
         block: () -> CharSequence,
         throwable: Throwable? = null,
         tag: String? = null
-    ) = log(Level.INFO, block, throwable, tag)
+    ): Unit = log(Level.INFO, block, throwable, tag)
 
     /**
      * Dispatches a [message] containing diagnostics information to all implementations.
@@ -170,7 +170,7 @@ public class Logger(val name: String) {
         message: CharSequence,
         throwable: Throwable? = null,
         tag: String? = null
-    ) = log(Level.DEBUG, message, throwable, tag)
+    ): Unit = log(Level.DEBUG, message, throwable, tag)
 
     /**
      * Selectively dispatches a message containing diagnostics information.
@@ -187,7 +187,7 @@ public class Logger(val name: String) {
         block: () -> CharSequence,
         throwable: Throwable? = null,
         tag: String? = null
-    ) = log(Level.DEBUG, block, throwable, tag)
+    ): Unit = log(Level.DEBUG, block, throwable, tag)
 
     /**
      * Dispatches a [message] containing internal state information to all implementations.
@@ -199,7 +199,7 @@ public class Logger(val name: String) {
         message: CharSequence,
         throwable: Throwable? = null,
         tag: String? = null
-    ) = log(Level.TRACE, message, throwable, tag)
+    ): Unit = log(Level.TRACE, message, throwable, tag)
 
     /**
      * Selectively dispatches a message containing internal state information.
@@ -216,35 +216,35 @@ public class Logger(val name: String) {
         block: () -> CharSequence,
         throwable: Throwable? = null,
         tag: String? = null
-    ) = log(Level.TRACE, block, throwable, tag)
+    ): Unit = log(Level.TRACE, block, throwable, tag)
 
     /**
      * Checks if any implementation is enabled to show messages about unrecoverable errors.
      *
      * @param[tag] A tag qualifier.
      */
-    public fun isFatalEnabled(tag: String?) = isEnabled(Level.FATAL, tag)
+    public fun isFatalEnabled(tag: String? = null): Boolean = isEnabled(Level.FATAL, tag)
 
     /**
      * Checks if any implementation is enabled to show messages about recoverable errors.
      *
      * @param[tag] A tag qualifier.
      */
-    public fun isErrorEnabled(tag: String?) = isEnabled(Level.ERROR, tag)
+    public fun isErrorEnabled(tag: String? = null): Boolean = isEnabled(Level.ERROR, tag)
 
     /**
      * Checks if any implementation is enabled to show messages about possible issues.
      *
      * @param[tag] A tag qualifier.
      */
-    public fun isWarnEnabled(tag: String?) = isEnabled(Level.WARN, tag)
+    public fun isWarnEnabled(tag: String? = null): Boolean = isEnabled(Level.WARN, tag)
 
     /**
      * Checks if any implementation is enabled to show arbitrary informational messages.
      *
      * @param[tag] A tag qualifier.
      */
-    public fun isInfoEnabled(tag: String?) = isEnabled(Level.INFO, tag)
+    public fun isInfoEnabled(tag: String? = null): Boolean = isEnabled(Level.INFO, tag)
 
     /**
      * Checks if any implementation is enabled to show messages containing diagnostics
@@ -252,7 +252,7 @@ public class Logger(val name: String) {
      *
      * @param[tag] A tag qualifier.
      */
-    public fun isDebugEnabled(tag: String?) = isEnabled(Level.DEBUG, tag)
+    public fun isDebugEnabled(tag: String? = null): Boolean = isEnabled(Level.DEBUG, tag)
 
     /**
      * Checks if any implementation is enabled to show messages containing internal state
@@ -260,7 +260,7 @@ public class Logger(val name: String) {
      *
      * @param[tag] A tag qualifier.
      */
-    public fun isTraceEnabled(tag: String?) = isEnabled(Level.TRACE, tag)
+    public fun isTraceEnabled(tag: String? = null): Boolean = isEnabled(Level.TRACE, tag)
 
     private fun log(
         level: Level,
@@ -292,9 +292,11 @@ public class Logger(val name: String) {
         }
     }
 
-    private fun isEnabled(level: Level, tag: String?) {
+    private fun isEnabled(level: Level, tag: String?): Boolean {
+
         validateLoggers()
-        loggers.any { it.isEnabled(level, tag) }
+
+        return loggers.any { it.isEnabled(level, tag) }
     }
 
     private fun validateLoggers() {
