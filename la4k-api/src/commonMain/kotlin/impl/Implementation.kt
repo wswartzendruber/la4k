@@ -19,8 +19,6 @@
 
 package org.la4k.impl
 
-internal expect fun getImplementations(): List<Implementation>
-
 /**
  * Extended by LA4K implementation bridges to connect the [org.la4k.Logger] class to actual
  * logging implementations.

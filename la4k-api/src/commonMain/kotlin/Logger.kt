@@ -19,8 +19,6 @@
 
 package org.la4k
 
-import org.la4k.impl.getImplementations
-import org.la4k.impl.Implementation
 import org.la4k.impl.ImplementationLogger
 import org.la4k.impl.Level
 
@@ -309,29 +307,10 @@ public class Logger(val name: String) {
         }
     }
 
-    public companion object {
-
-        private val implementations = mutableListOf<Implementation>()
-        private var currentHashCode = 0
+    private companion object {
 
         init {
             refresh()
-        }
-
-        /**
-         * Forces a reinventory of all available implementations.
-         *
-         * This should only be done by host applications if a new logging implementation has
-         * been made available since application startup. It may cause all instances of this
-         * class to have to separately reinstanciate internal handles to all available
-         * implementations, which will happen on each instance's next logging call.
-         */
-        public fun refresh(): Unit {
-            platformSynchronized(implementations) {
-                implementations.clear()
-                implementations.addAll(getImplementations())
-                currentHashCode = implementations.hashCode()
-            }
         }
     }
 }

@@ -17,13 +17,25 @@
  * FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-package org.la4k.impl
+package org.la4k
 
-import java.util.ServiceLoader
+import org.la4k.impl.Implementation
 
-internal actual fun getImplementations() =
-    ServiceLoader
-        .load(Implementation::class.java)
-        .apply { reload() }
-        .asSequence()
-        .toList()
+internal val implementations = mutableListOf<Implementation>()
+internal var currentHashCode = 0
+
+/**
+ * Forces a reinventory of all available implementations.
+ *
+ * This should only be done by host applications if a new logging implementation has
+ * been made available since application startup. It may cause all instances of this
+ * class to have to separately reinstanciate internal handles to all available
+ * implementations, which will happen on each instance's next logging call.
+ */
+public fun refresh(): Unit {
+    platformSynchronized(implementations) {
+        implementations.clear()
+        implementations.addAll(getImplementations())
+        currentHashCode = implementations.hashCode()
+    }
+}

@@ -19,5 +19,16 @@
 
 package org.la4k
 
+import org.la4k.impl.Implementation
+
+import java.util.ServiceLoader
+
+internal actual fun getImplementations() =
+    ServiceLoader
+        .load(Implementation::class.java)
+        .apply { reload() }
+        .asSequence()
+        .toList()
+
 internal actual fun <R> platformSynchronized(lock: Any, block: () -> R) =
     synchronized(lock, block)
