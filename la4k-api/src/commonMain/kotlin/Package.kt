@@ -27,10 +27,10 @@ internal var currentHashCode = 0
 /**
  * Forces a reinventory of all available implementations.
  *
- * This should only be done by host applications if a new logging implementation has
- * been made available since application startup. It may cause all instances of this
- * class to have to separately reinstanciate internal handles to all available
- * implementations, which will happen on each instance's next logging call.
+ * This should only be done by host applications if a new logging implementation has been made
+ * available since application startup. It may cause all instances of this class to have to
+ * separately reinstanciate internal handles to all available implementations, which will happen
+ * on each instance's next logging call.
  */
 public fun refresh(): Unit {
     platformSynchronized(implementations) {
