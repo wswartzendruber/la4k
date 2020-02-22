@@ -17,11 +17,11 @@
  * FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-rootProject.name = "la4k"
+package org.la4k.log4j2
 
-include(
-    "la4k-api",
-    "la4k-proxy",
-    "la4k-log4j2",
-    "la4k-slf4j"
-)
+import org.la4k.impl.Implementation
+
+public class Log4j2Implementation() : Implementation() {
+
+    public override fun getImplementationLogger(name: String) = Log4j2ImplementationLogger(name)
+}

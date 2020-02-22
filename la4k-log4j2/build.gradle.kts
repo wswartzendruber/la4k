@@ -17,11 +17,17 @@
  * FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-rootProject.name = "la4k"
+plugins {
+    kotlin("jvm")
+    id("java")
+    id("maven-publish")
+}
 
-include(
-    "la4k-api",
-    "la4k-proxy",
-    "la4k-log4j2",
-    "la4k-slf4j"
-)
+dependencies {
+    implementation(project(":la4k-api"))
+    implementation(kotlin("stdlib-jdk8"))
+    implementation("org.apache.logging.log4j:log4j-api:2.12.0")
+    testImplementation(kotlin("test"))
+    testImplementation(kotlin("test-annotations-common"))
+    testImplementation(kotlin("test-junit"))
+}
