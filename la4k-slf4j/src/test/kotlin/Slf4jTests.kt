@@ -30,7 +30,184 @@ import kotlin.test.Test
 class Slf4jTests {
 
     @Test
-    fun `null throwable, null tag`() {
+    fun `fatal, null throwable, null tag`() {
+
+        Logger("test").fatal("test-message")
+
+        assertTrue(messages["test"]!!.any({
+            it.level == "ERROR" &&
+            it.message == "test-message" &&
+            it.throwable == null &&
+            it.marker == null
+        }))
+    }
+
+    @Test
+    fun `fatal, non-null throwable, null tag`() {
+
+        val throwable = Exception("Test exception.")
+
+        Logger("test").fatal("test-message", throwable)
+
+        assertTrue(messages["test"]!!.any({
+            it.level == "ERROR" &&
+            it.message == "test-message" &&
+            it.throwable == throwable &&
+            it.marker == null
+        }))
+    }
+
+    @Test
+    fun `fatal, null throwable, non-null tag`() {
+
+        val tag = "TEST_TAG"
+
+        Logger("test").fatal("test-message", null, tag)
+
+        assertTrue(messages["test"]!!.any({
+            it.level == "ERROR" &&
+            it.message == "test-message" &&
+            it.throwable == null &&
+            it.marker.toString() == tag
+        }))
+    }
+
+    @Test
+    fun `fatal, non-null throwable, non-null tag`() {
+
+        val throwable = Exception("Test exception.")
+        val tag = "TEST_TAG"
+
+        Logger("test").fatal("test-message", throwable, tag)
+
+        assertTrue(messages["test"]!!.any({
+            it.level == "ERROR" &&
+            it.message == "test-message" &&
+            it.throwable == throwable &&
+            it.marker.toString() == tag
+        }))
+    }
+
+    @Test
+    fun `error, null throwable, null tag`() {
+
+        Logger("test").error("test-message")
+
+        assertTrue(messages["test"]!!.any({
+            it.level == "ERROR" &&
+            it.message == "test-message" &&
+            it.throwable == null &&
+            it.marker == null
+        }))
+    }
+
+    @Test
+    fun `error, non-null throwable, null tag`() {
+
+        val throwable = Exception("Test exception.")
+
+        Logger("test").error("test-message", throwable)
+
+        assertTrue(messages["test"]!!.any({
+            it.level == "ERROR" &&
+            it.message == "test-message" &&
+            it.throwable == throwable &&
+            it.marker == null
+        }))
+    }
+
+    @Test
+    fun `error, null throwable, non-null tag`() {
+
+        val tag = "TEST_TAG"
+
+        Logger("test").error("test-message", null, tag)
+
+        assertTrue(messages["test"]!!.any({
+            it.level == "ERROR" &&
+            it.message == "test-message" &&
+            it.throwable == null &&
+            it.marker.toString() == tag
+        }))
+    }
+
+    @Test
+    fun `error, non-null throwable, non-null tag`() {
+
+        val throwable = Exception("Test exception.")
+        val tag = "TEST_TAG"
+
+        Logger("test").error("test-message", throwable, tag)
+
+        assertTrue(messages["test"]!!.any({
+            it.level == "ERROR" &&
+            it.message == "test-message" &&
+            it.throwable == throwable &&
+            it.marker.toString() == tag
+        }))
+    }
+
+    @Test
+    fun `warn, null throwable, null tag`() {
+
+        Logger("test").warn("test-message")
+
+        assertTrue(messages["test"]!!.any({
+            it.level == "WARN" &&
+            it.message == "test-message" &&
+            it.throwable == null &&
+            it.marker == null
+        }))
+    }
+
+    @Test
+    fun `warn, non-null throwable, null tag`() {
+
+        val throwable = Exception("Test exception.")
+
+        Logger("test").warn("test-message", throwable)
+
+        assertTrue(messages["test"]!!.any({
+            it.level == "WARN" &&
+            it.message == "test-message" &&
+            it.throwable == throwable &&
+            it.marker == null
+        }))
+    }
+
+    @Test
+    fun `warn, null throwable, non-null tag`() {
+
+        val tag = "TEST_TAG"
+
+        Logger("test").warn("test-message", null, tag)
+
+        assertTrue(messages["test"]!!.any({
+            it.level == "WARN" &&
+            it.message == "test-message" &&
+            it.throwable == null &&
+            it.marker.toString() == tag
+        }))
+    }
+
+    @Test
+    fun `warn, non-null throwable, non-null tag`() {
+
+        val throwable = Exception("Test exception.")
+        val tag = "TEST_TAG"
+
+        Logger("test").warn("test-message", throwable, tag)
+
+        assertTrue(messages["test"]!!.any({
+            it.level == "WARN" &&
+            it.message == "test-message" &&
+            it.throwable == throwable &&
+            it.marker.toString() == tag
+        }))
+    }
+
+    @Test
+    fun `info, null throwable, null tag`() {
 
         Logger("test").info("test-message")
 
@@ -43,7 +220,7 @@ class Slf4jTests {
     }
 
     @Test
-    fun `non-null throwable, null tag`() {
+    fun `info, non-null throwable, null tag`() {
 
         val throwable = Exception("Test exception.")
 
@@ -58,7 +235,7 @@ class Slf4jTests {
     }
 
     @Test
-    fun `null throwable, non-null tag`() {
+    fun `info, null throwable, non-null tag`() {
 
         val tag = "TEST_TAG"
 
@@ -73,7 +250,7 @@ class Slf4jTests {
     }
 
     @Test
-    fun `non-null throwable, non-null tag`() {
+    fun `info, non-null throwable, non-null tag`() {
 
         val throwable = Exception("Test exception.")
         val tag = "TEST_TAG"
@@ -82,6 +259,124 @@ class Slf4jTests {
 
         assertTrue(messages["test"]!!.any({
             it.level == "INFO" &&
+            it.message == "test-message" &&
+            it.throwable == throwable &&
+            it.marker.toString() == tag
+        }))
+    }
+
+    @Test
+    fun `debug, null throwable, null tag`() {
+
+        Logger("test").debug("test-message")
+
+        assertTrue(messages["test"]!!.any({
+            it.level == "DEBUG" &&
+            it.message == "test-message" &&
+            it.throwable == null &&
+            it.marker == null
+        }))
+    }
+
+    @Test
+    fun `debug, non-null throwable, null tag`() {
+
+        val throwable = Exception("Test exception.")
+
+        Logger("test").debug("test-message", throwable)
+
+        assertTrue(messages["test"]!!.any({
+            it.level == "DEBUG" &&
+            it.message == "test-message" &&
+            it.throwable == throwable &&
+            it.marker == null
+        }))
+    }
+
+    @Test
+    fun `debug, null throwable, non-null tag`() {
+
+        val tag = "TEST_TAG"
+
+        Logger("test").debug("test-message", null, tag)
+
+        assertTrue(messages["test"]!!.any({
+            it.level == "DEBUG" &&
+            it.message == "test-message" &&
+            it.throwable == null &&
+            it.marker.toString() == tag
+        }))
+    }
+
+    @Test
+    fun `debug, non-null throwable, non-null tag`() {
+
+        val throwable = Exception("Test exception.")
+        val tag = "TEST_TAG"
+
+        Logger("test").debug("test-message", throwable, tag)
+
+        assertTrue(messages["test"]!!.any({
+            it.level == "DEBUG" &&
+            it.message == "test-message" &&
+            it.throwable == throwable &&
+            it.marker.toString() == tag
+        }))
+    }
+
+    @Test
+    fun `trace, null throwable, null tag`() {
+
+        Logger("test").trace("test-message")
+
+        assertTrue(messages["test"]!!.any({
+            it.level == "TRACE" &&
+            it.message == "test-message" &&
+            it.throwable == null &&
+            it.marker == null
+        }))
+    }
+
+    @Test
+    fun `trace, non-null throwable, null tag`() {
+
+        val throwable = Exception("Test exception.")
+
+        Logger("test").trace("test-message", throwable)
+
+        assertTrue(messages["test"]!!.any({
+            it.level == "TRACE" &&
+            it.message == "test-message" &&
+            it.throwable == throwable &&
+            it.marker == null
+        }))
+    }
+
+    @Test
+    fun `trace, null throwable, non-null tag`() {
+
+        val tag = "TEST_TAG"
+
+        Logger("test").trace("test-message", null, tag)
+
+        assertTrue(messages["test"]!!.any({
+            it.level == "TRACE" &&
+            it.message == "test-message" &&
+            it.throwable == null &&
+            it.marker.toString() == tag
+        }))
+    }
+
+    @Test
+    fun `trace, non-null throwable, non-null tag`() {
+
+        val throwable = Exception("Test exception.")
+        val tag = "TEST_TAG"
+
+        Logger("test").trace("test-message", throwable, tag)
+
+        assertTrue(messages["test"]!!.any({
+            it.level == "TRACE" &&
             it.message == "test-message" &&
             it.throwable == throwable &&
             it.marker.toString() == tag
@@ -99,83 +394,53 @@ class Slf4jTests {
     }
 
     @Test
-    fun `info is enabled`() {
-        assertTrue(Logger("test").isInfoEnabled())
-    }
-
-    @Test
     fun `warn is enabled`() {
         assertTrue(Logger("test").isWarnEnabled())
     }
 
     @Test
-    fun `debug is disabled`() {
-        assertFalse(Logger("test").isDebugEnabled())
+    fun `info is enabled`() {
+        assertTrue(Logger("test").isInfoEnabled())
     }
 
     @Test
-    fun `trace is disabled`() {
-        assertFalse(Logger("test").isTraceEnabled())
+    fun `debug is enabled`() {
+        assertTrue(Logger("test").isDebugEnabled())
     }
 
     @Test
-    fun `fatal with correct tag length is enabled`() {
-        assertTrue(Logger("test").isFatalEnabled("XXXXX"))
+    fun `trace is enabled`() {
+        assertTrue(Logger("test").isTraceEnabled())
     }
 
     @Test
     fun `fatal with incorrect tag length is disabled`() {
-        assertFalse(Logger("test").isFatalEnabled("XXXXXXXXXX"))
-    }
-
-    @Test
-    fun `error with correct tag length is enabled`() {
-        assertTrue(Logger("test").isErrorEnabled("XXXXX"))
+        assertFalse(Logger("test").isFatalEnabled("X"))
     }
 
     @Test
     fun `error with incorrect tag length is disabled`() {
-        assertFalse(Logger("test").isErrorEnabled("XXXXXXXXXX"))
-    }
-
-    @Test
-    fun `warn with correct tag length is enabled`() {
-        assertTrue(Logger("test").isWarnEnabled("XXXX"))
+        assertFalse(Logger("test").isErrorEnabled("X"))
     }
 
     @Test
     fun `warn with incorrect tag length is disabled`() {
-        assertFalse(Logger("test").isWarnEnabled("XXXXXXXXXX"))
-    }
-
-    @Test
-    fun `info with correct tag length is enabled`() {
-        assertTrue(Logger("test").isInfoEnabled("XXX"))
+        assertFalse(Logger("test").isWarnEnabled("X"))
     }
 
     @Test
     fun `info with incorrect tag length is disabled`() {
-        assertFalse(Logger("test").isInfoEnabled("XXXXXXXXXX"))
-    }
-
-    @Test
-    fun `debug with correct tag length is enabled`() {
-        assertTrue(Logger("test").isDebugEnabled("XX"))
+        assertFalse(Logger("test").isInfoEnabled("X"))
     }
 
     @Test
     fun `debug with incorrect tag length is disabled`() {
-        assertFalse(Logger("test").isDebugEnabled("XXXXXXXXXX"))
-    }
-
-    @Test
-    fun `trace with correct tag length is enabled`() {
-        assertTrue(Logger("test").isTraceEnabled("X"))
+        assertFalse(Logger("test").isDebugEnabled("X"))
     }
 
     @Test
     fun `trace with incorrect tag length is disabled`() {
-        assertFalse(Logger("test").isTraceEnabled("XXXXXXXXXX"))
+        assertFalse(Logger("test").isTraceEnabled("X"))
     }
 
     @BeforeTest
