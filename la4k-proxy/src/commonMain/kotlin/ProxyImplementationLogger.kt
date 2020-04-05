@@ -22,9 +22,9 @@ package org.la4k.proxy
 import org.la4k.impl.Level
 import org.la4k.impl.ImplementationLogger
 
-class ProxyImplementationLogger(name: String) : ImplementationLogger(name) {
+public class ProxyImplementationLogger(name: String) : ImplementationLogger(name) {
 
-    override fun log(
+    public override fun log(
         level: Level,
         message: CharSequence,
         throwable: Throwable?,
@@ -35,5 +35,5 @@ class ProxyImplementationLogger(name: String) : ImplementationLogger(name) {
         }
     }
 
-    override fun isEnabled(level: Level, tag: String?) = isLevelEnabled(level, tag)
+    public override fun isEnabled(level: Level, tag: String?) = isLevelEnabled(level, tag)
 }

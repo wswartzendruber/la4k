@@ -21,6 +21,7 @@ package org.la4k.proxy
 
 import org.la4k.impl.Level
 
-var logMessage: (String, Level, CharSequence, Throwable?, String?) -> Unit = { _, _, _, _, _ -> }
+public var logMessage: (String, Level, CharSequence, Throwable?, String?) -> Unit =
+    { _, _, _, _, _ -> }
 
-var isLevelEnabled: (Level, String?) -> Boolean = { _, _ -> true }
+public var isLevelEnabled: (Level, String?) -> Boolean = { _, _ -> true }
