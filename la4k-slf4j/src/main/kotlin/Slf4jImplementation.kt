@@ -20,8 +20,10 @@
 package org.la4k.slf4j
 
 import org.la4k.impl.Implementation
+import org.la4k.impl.ImplementationLogger
 
 public class Slf4jImplementation() : Implementation() {
 
-    public override fun getImplementationLogger(name: String) = Slf4jImplementationLogger(name)
+    public override fun getImplementationLogger(name: String): ImplementationLogger =
+        Slf4jImplementationLogger(name)
 }

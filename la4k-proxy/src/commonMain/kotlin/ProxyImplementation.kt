@@ -20,8 +20,10 @@
 package org.la4k.proxy
 
 import org.la4k.impl.Implementation
+import org.la4k.impl.ImplementationLogger
 
 public class ProxyImplementation() : Implementation() {
 
-    public override fun getImplementationLogger(name: String) = ProxyImplementationLogger(name)
+    public override fun getImplementationLogger(name: String): ImplementationLogger =
+        ProxyImplementationLogger(name)
 }

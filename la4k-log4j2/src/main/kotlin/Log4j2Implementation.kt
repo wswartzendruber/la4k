@@ -20,8 +20,10 @@
 package org.la4k.log4j2
 
 import org.la4k.impl.Implementation
+import org.la4k.impl.ImplementationLogger
 
 public class Log4j2Implementation() : Implementation() {
 
-    public override fun getImplementationLogger(name: String) = Log4j2ImplementationLogger(name)
+    public override fun getImplementationLogger(name: String): ImplementationLogger =
+        Log4j2ImplementationLogger(name)
 }

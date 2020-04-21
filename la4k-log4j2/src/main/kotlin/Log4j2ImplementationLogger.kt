@@ -37,7 +37,7 @@ public class Log4j2ImplementationLogger(name: String) : ImplementationLogger(nam
         message: CharSequence,
         throwable: Throwable?,
         tag: String?
-    ) {
+    ): Unit {
         when {
             throwable == null && tag == null -> {
                 logger.log(level.toTargetLevel(), message)
@@ -54,7 +54,7 @@ public class Log4j2ImplementationLogger(name: String) : ImplementationLogger(nam
         }
     }
 
-    public override fun isEnabled(level: Level, tag: String?) =
+    public override fun isEnabled(level: Level, tag: String?): Boolean =
         if (tag == null)
             logger.isEnabled(level.toTargetLevel())
         else

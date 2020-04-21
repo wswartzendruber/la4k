@@ -29,11 +29,12 @@ public class ProxyImplementationLogger(name: String) : ImplementationLogger(name
         message: CharSequence,
         throwable: Throwable?,
         tag: String?
-    ) {
+    ): Unit {
         if (isEnabled(level, tag)) {
             logMessage(name, level, message, throwable, tag)
         }
     }
 
-    public override fun isEnabled(level: Level, tag: String?) = isLevelEnabled(level, tag)
+    public override fun isEnabled(level: Level, tag: String?): Boolean =
+        isLevelEnabled(level, tag)
 }

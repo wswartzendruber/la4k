@@ -95,7 +95,7 @@ public class Slf4jImplementationLogger(name: String) : ImplementationLogger(name
         }
     }
 
-    public override fun isEnabled(level: Level, tag: String?) =
+    public override fun isEnabled(level: Level, tag: String?): Boolean =
         if (tag == null) {
             when (level) {
                 Level.FATAL -> logger.isErrorEnabled()
