@@ -40,10 +40,10 @@ import org.slf4j.LoggerFactory;
 import org.slf4j.spi.LoggerFactoryBinder;
 
 /**
- * The binding of {@link LoggerFactory} class with an actual instance of
- * {@link ILoggerFactory} is performed using information returned by this class.
+ * The binding of {@link LoggerFactory} class with an actual instance of {@link ILoggerFactory}
+ * is performed using information returned by this class.
  *
- * @author Ceki G&uuml;lc&uuml;
+ * @author Ceki Gülcü
  */
 public class StaticLoggerBinder implements LoggerFactoryBinder {
 
@@ -62,18 +62,18 @@ public class StaticLoggerBinder implements LoggerFactoryBinder {
     }
 
     /**
-     * Declare the version of the SLF4J API this implementation is compiled against.
-     * The value of this field is modified with each major release.
+     * Declare the version of the SLF4J API this implementation is compiled against. The value
+     * of this field is modified with each major release.
      */
-    // to avoid constant folding by the compiler, this field must *not* be final
-    public static String REQUESTED_API_VERSION = "1.6.99"; // !final
+    // WARNING: To avoid constant folding by the compiler, this field must *not* be final!
+    public static String REQUESTED_API_VERSION = "1.6.99";
 
     // Binding specific code:
     private static final String loggerFactoryClassStr = TestLoggerFactory.class.getName();
 
     /**
-     * The ILoggerFactory instance returned by the {@link #getLoggerFactory}
-     * method should always be the same object
+     * The ILoggerFactory instance returned by the {@link #getLoggerFactory} method should
+     * always be the same object.
      */
     private final ILoggerFactory loggerFactory;
 

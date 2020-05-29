@@ -40,10 +40,10 @@ import org.slf4j.spi.MarkerFactoryBinder;
 
 /**
  *
- * The binding of {@link MarkerFactory} class with an actual instance of
- * {@link IMarkerFactory} is performed using information returned by this class.
+ * The binding of {@link MarkerFactory} class with an actual instance of {@link IMarkerFactory}
+ * is performed using information returned by this class.
  *
- * @author Ceki G&uuml;lc&uuml;
+ * @author Ceki Gülcü
  */
 public class StaticMarkerBinder implements MarkerFactoryBinder {
 
@@ -54,8 +54,7 @@ public class StaticMarkerBinder implements MarkerFactoryBinder {
 
     final IMarkerFactory markerFactory = new BasicMarkerFactory();
 
-    private StaticMarkerBinder() {
-    }
+    private StaticMarkerBinder() { }
 
     /**
      * Return the singleton of this class.
@@ -68,16 +67,14 @@ public class StaticMarkerBinder implements MarkerFactoryBinder {
     }
 
     /**
-     * Currently this method always returns an instance of
-     * {@link BasicMarkerFactory}.
+     * Currently this method always returns an instance of {@link BasicMarkerFactory}.
      */
     public IMarkerFactory getMarkerFactory() {
         return markerFactory;
     }
 
     /**
-     * Currently, this method returns the class name of
-     * {@link BasicMarkerFactory}.
+     * Currently, this method returns the class name of {@link BasicMarkerFactory}.
      */
     public String getMarkerFactoryClassStr() {
         return BasicMarkerFactory.class.getName();

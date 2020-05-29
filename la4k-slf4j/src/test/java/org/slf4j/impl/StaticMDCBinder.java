@@ -39,7 +39,7 @@ import org.slf4j.spi.MDCAdapter;
 /**
  * This implementation is bound to {@link NOPMDCAdapter}.
  *
- * @author Ceki G&uuml;lc&uuml;
+ * @author Ceki Gülcü
  */
 public class StaticMDCBinder {
 
@@ -48,8 +48,7 @@ public class StaticMDCBinder {
      */
     public static final StaticMDCBinder SINGLETON = new StaticMDCBinder();
 
-    private StaticMDCBinder() {
-    }
+    private StaticMDCBinder() { }
 
     /**
      * Return the singleton of this class.
@@ -62,8 +61,7 @@ public class StaticMDCBinder {
     }
 
     /**
-     * Currently this method always returns an instance of
-     * {@link NOPMDCAdapter}.
+     * Currently this method always returns an instance of {@link NOPMDCAdapter}.
      *
      * @return instance of NOPMDCAdapter
      * @since 1.7.14
