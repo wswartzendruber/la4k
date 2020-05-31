@@ -8,7 +8,6 @@
 
 plugins {
     kotlin("jvm")
-    id("java")
     id("maven-publish")
 }
 
