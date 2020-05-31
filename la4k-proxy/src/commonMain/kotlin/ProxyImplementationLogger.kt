@@ -20,7 +20,7 @@ public class ProxyImplementationLogger(name: String) : ImplementationLogger(name
         tag: String?
     ): Unit {
         if (isEnabled(level, tag)) {
-            logMessage(name, level, message, throwable, tag)
+            logEntry(name, level, message, throwable, tag)
         }
     }
 

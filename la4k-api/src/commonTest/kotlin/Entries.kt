@@ -6,11 +6,16 @@
  * https://mozilla.org/MPL/2.0/.
  */
 
-package org.la4k.proxy
+package org.la4k.test
 
 import org.la4k.impl.Level
 
-public var logEntry: (String, Level, CharSequence, Throwable?, String?) -> Unit =
-    { _, _, _, _, _ -> }
+val entries = mutableListOf<Entry>()
 
-public var isLevelEnabled: (Level, String?) -> Boolean = { _, _ -> true }
+data class Entry(
+    val name: String,
+    val level: Level,
+    val message: CharSequence,
+    val throwable: Throwable? = null,
+    val tag: String? = null
+)
