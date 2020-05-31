@@ -33,7 +33,7 @@ class Log4j2Tests {
             assertTrue(it.level == Level.FATAL)
             assertTrue(it.message == "test-message-1")
             assertTrue(it.throwable == null)
-            assertTrue(it.marker == null)
+            assertTrue(it.tag == null)
         }
     }
 
@@ -48,7 +48,7 @@ class Log4j2Tests {
             assertTrue(it.level == Level.FATAL)
             assertTrue(it.message == "test-message-1")
             assertTrue(it.throwable == exception)
-            assertTrue(it.marker == null)
+            assertTrue(it.tag == null)
         }
     }
 
@@ -63,7 +63,7 @@ class Log4j2Tests {
             assertTrue(it.level == Level.FATAL)
             assertTrue(it.message == "test-message-1")
             assertTrue(it.throwable == null)
-            assertTrue(it.marker == "tag-1")
+            assertTrue(it.tag == "tag-1")
         }
     }
 
@@ -78,7 +78,7 @@ class Log4j2Tests {
             assertTrue(it.level == Level.FATAL)
             assertTrue(it.message == "test-message-1")
             assertTrue(it.throwable == exception)
-            assertTrue(it.marker == "tag-1")
+            assertTrue(it.tag == "tag-1")
         }
     }
 
@@ -94,13 +94,13 @@ class Log4j2Tests {
             assertTrue(it.level == Level.FATAL)
             assertTrue(it.message == "test-message-1")
             assertTrue(it.throwable == exception)
-            assertTrue(it.marker == "tag-1")
+            assertTrue(it.tag == "tag-1")
         }
         entries[1].let {
             assertTrue(it.level == Level.ERROR)
             assertTrue(it.message == "test-message-2")
             assertTrue(it.throwable == null)
-            assertTrue(it.marker == "tag-2")
+            assertTrue(it.tag == "tag-2")
         }
     }
 
