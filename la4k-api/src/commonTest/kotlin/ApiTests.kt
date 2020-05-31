@@ -48,6 +48,7 @@ class ApiTests {
         assertTrue(entries.size == 1)
 
         entries[0].let {
+            assertTrue(it.name == "test")
             assertTrue(it.level == Level.FATAL)
             assertTrue(it.message == "test-message-1")
             assertTrue(it.throwable == null)
@@ -63,6 +64,7 @@ class ApiTests {
         assertTrue(entries.size == 1)
 
         entries[0].let {
+            assertTrue(it.name == "test")
             assertTrue(it.level == Level.FATAL)
             assertTrue(it.message == "test-message-1")
             assertTrue(it.throwable == exception)
@@ -78,6 +80,7 @@ class ApiTests {
         assertTrue(entries.size == 1)
 
         entries[0].let {
+            assertTrue(it.name == "test")
             assertTrue(it.level == Level.FATAL)
             assertTrue(it.message == "test-message-1")
             assertTrue(it.throwable == null)
@@ -93,6 +96,7 @@ class ApiTests {
         assertTrue(entries.size == 1)
 
         entries[0].let {
+            assertTrue(it.name == "test")
             assertTrue(it.level == Level.FATAL)
             assertTrue(it.message == "test-message-1")
             assertTrue(it.throwable == exception)
@@ -109,12 +113,14 @@ class ApiTests {
         assertTrue(entries.size == 2)
 
         entries[0].let {
+            assertTrue(it.name == "test-1")
             assertTrue(it.level == Level.FATAL)
             assertTrue(it.message == "test-message-1")
             assertTrue(it.throwable == exception)
             assertTrue(it.tag == "tag-1")
         }
         entries[1].let {
+            assertTrue(it.name == "test-2")
             assertTrue(it.level == Level.ERROR)
             assertTrue(it.message == "test-message-2")
             assertTrue(it.throwable == null)
