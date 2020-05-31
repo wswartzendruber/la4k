@@ -31,7 +31,11 @@ class ListAppender protected constructor(
 
     override fun append(event: LogEvent) {
         entries.add(Entry(
-            event.loggerName, event.level, event.message.formattedMessage, event.thrown, event.marker?.name
+            event.loggerName,
+            event.level,
+            event.message.formattedMessage,
+            event.thrown,
+            event.marker?.name
         ))
     }
 
