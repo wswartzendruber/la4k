@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration
+    xmlns:xi="http://www.w3.org/2001/XInclude"
+    packages="org.la4k.log4j2.test"
+    status="WARN"
+>
+    <Appenders>
+        <ListAppender name="ListAppender"/>
+    </Appenders>
+    <Loggers>
+        <Root level="INFO">
+            <AppenderRef ref="ListAppender"/>
+        </Root>
+    </Loggers>
+</Configuration>
