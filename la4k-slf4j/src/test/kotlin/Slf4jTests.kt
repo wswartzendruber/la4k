@@ -18,358 +18,88 @@ import kotlin.test.Test
 
 class Slf4jTests {
 
+    // TODO: MARKER TESTING
+
     @Test
     fun `fatal, null throwable, null tag`() {
 
-        Logger("test").fatal("test-message")
+        Logger("test").error("test-message-1")
 
-        assertTrue(messages["test"]!!.any({
-            it.level == "ERROR" &&
-            it.message == "test-message" &&
-            it.throwable == null &&
-            it.marker == null
-        }))
+        assertTrue(entries.size == 1)
+
+        entries[0].let {
+            assertTrue(it.level == "ERROR")
+            assertTrue(it.message == "test-message-1")
+            assertTrue(it.throwable == null)
+            assertTrue(it.tag == null)
+        }
     }
 
     @Test
     fun `fatal, non-null throwable, null tag`() {
 
-        val throwable = Exception("Test exception.")
+        Logger("test").error("test-message-1", exception)
 
-        Logger("test").fatal("test-message", throwable)
+        assertTrue(entries.size == 1)
 
-        assertTrue(messages["test"]!!.any({
-            it.level == "ERROR" &&
-            it.message == "test-message" &&
-            it.throwable == throwable &&
-            it.marker == null
-        }))
+        entries[0].let {
+            assertTrue(it.level == "ERROR")
+            assertTrue(it.message == "test-message-1")
+            assertTrue(it.throwable == exception)
+            assertTrue(it.tag == null)
+        }
     }
 
     @Test
     fun `fatal, null throwable, non-null tag`() {
 
-        val tag = "TEST_TAG"
+        Logger("test").error("test-message-1", null, "tag-1")
 
-        Logger("test").fatal("test-message", null, tag)
+        assertTrue(entries.size == 1)
 
-        assertTrue(messages["test"]!!.any({
-            it.level == "ERROR" &&
-            it.message == "test-message" &&
-            it.throwable == null &&
-            it.marker.toString() == tag
-        }))
+        entries[0].let {
+            assertTrue(it.level == "ERROR")
+            assertTrue(it.message == "test-message-1")
+            assertTrue(it.throwable == null)
+            assertTrue(it.tag == "tag-1")
+        }
     }
 
     @Test
     fun `fatal, non-null throwable, non-null tag`() {
 
-        val throwable = Exception("Test exception.")
-        val tag = "TEST_TAG"
+        Logger("test").error("test-message-1", exception, "tag-1")
 
-        Logger("test").fatal("test-message", throwable, tag)
+        assertTrue(entries.size == 1)
 
-        assertTrue(messages["test"]!!.any({
-            it.level == "ERROR" &&
-            it.message == "test-message" &&
-            it.throwable == throwable &&
-            it.marker.toString() == tag
-        }))
+        entries[0].let {
+            assertTrue(it.level == "ERROR")
+            assertTrue(it.message == "test-message-1")
+            assertTrue(it.throwable == exception)
+            assertTrue(it.tag == "tag-1")
+        }
     }
 
     @Test
-    fun `error, null throwable, null tag`() {
-
-        Logger("test").error("test-message")
-
-        assertTrue(messages["test"]!!.any({
-            it.level == "ERROR" &&
-            it.message == "test-message" &&
-            it.throwable == null &&
-            it.marker == null
-        }))
-    }
-
-    @Test
-    fun `error, non-null throwable, null tag`() {
-
-        val throwable = Exception("Test exception.")
-
-        Logger("test").error("test-message", throwable)
-
-        assertTrue(messages["test"]!!.any({
-            it.level == "ERROR" &&
-            it.message == "test-message" &&
-            it.throwable == throwable &&
-            it.marker == null
-        }))
-    }
-
-    @Test
-    fun `error, null throwable, non-null tag`() {
-
-        val tag = "TEST_TAG"
-
-        Logger("test").error("test-message", null, tag)
-
-        assertTrue(messages["test"]!!.any({
-            it.level == "ERROR" &&
-            it.message == "test-message" &&
-            it.throwable == null &&
-            it.marker.toString() == tag
-        }))
-    }
-
-    @Test
-    fun `error, non-null throwable, non-null tag`() {
-
-        val throwable = Exception("Test exception.")
-        val tag = "TEST_TAG"
-
-        Logger("test").error("test-message", throwable, tag)
-
-        assertTrue(messages["test"]!!.any({
-            it.level == "ERROR" &&
-            it.message == "test-message" &&
-            it.throwable == throwable &&
-            it.marker.toString() == tag
-        }))
-    }
-
-    @Test
-    fun `warn, null throwable, null tag`() {
-
-        Logger("test").warn("test-message")
-
-        assertTrue(messages["test"]!!.any({
-            it.level == "WARN" &&
-            it.message == "test-message" &&
-            it.throwable == null &&
-            it.marker == null
-        }))
-    }
-
-    @Test
-    fun `warn, non-null throwable, null tag`() {
-
-        val throwable = Exception("Test exception.")
-
-        Logger("test").warn("test-message", throwable)
-
-        assertTrue(messages["test"]!!.any({
-            it.level == "WARN" &&
-            it.message == "test-message" &&
-            it.throwable == throwable &&
-            it.marker == null
-        }))
-    }
-
-    @Test
-    fun `warn, null throwable, non-null tag`() {
-
-        val tag = "TEST_TAG"
-
-        Logger("test").warn("test-message", null, tag)
-
-        assertTrue(messages["test"]!!.any({
-            it.level == "WARN" &&
-            it.message == "test-message" &&
-            it.throwable == null &&
-            it.marker.toString() == tag
-        }))
-    }
-
-    @Test
-    fun `warn, non-null throwable, non-null tag`() {
-
-        val throwable = Exception("Test exception.")
-        val tag = "TEST_TAG"
-
-        Logger("test").warn("test-message", throwable, tag)
-
-        assertTrue(messages["test"]!!.any({
-            it.level == "WARN" &&
-            it.message == "test-message" &&
-            it.throwable == throwable &&
-            it.marker.toString() == tag
-        }))
-    }
-
-    @Test
-    fun `info, null throwable, null tag`() {
-
-        Logger("test").info("test-message")
-
-        assertTrue(messages["test"]!!.any({
-            it.level == "INFO" &&
-            it.message == "test-message" &&
-            it.throwable == null &&
-            it.marker == null
-        }))
-    }
-
-    @Test
-    fun `info, non-null throwable, null tag`() {
-
-        val throwable = Exception("Test exception.")
-
-        Logger("test").info("test-message", throwable)
-
-        assertTrue(messages["test"]!!.any({
-            it.level == "INFO" &&
-            it.message == "test-message" &&
-            it.throwable == throwable &&
-            it.marker == null
-        }))
-    }
-
-    @Test
-    fun `info, null throwable, non-null tag`() {
-
-        val tag = "TEST_TAG"
-
-        Logger("test").info("test-message", null, tag)
-
-        assertTrue(messages["test"]!!.any({
-            it.level == "INFO" &&
-            it.message == "test-message" &&
-            it.throwable == null &&
-            it.marker.toString() == tag
-        }))
-    }
-
-    @Test
-    fun `info, non-null throwable, non-null tag`() {
-
-        val throwable = Exception("Test exception.")
-        val tag = "TEST_TAG"
-
-        Logger("test").info("test-message", throwable, tag)
-
-        assertTrue(messages["test"]!!.any({
-            it.level == "INFO" &&
-            it.message == "test-message" &&
-            it.throwable == throwable &&
-            it.marker.toString() == tag
-        }))
-    }
-
-    @Test
-    fun `debug, null throwable, null tag`() {
-
-        Logger("test").debug("test-message")
-
-        assertTrue(messages["test"]!!.any({
-            it.level == "DEBUG" &&
-            it.message == "test-message" &&
-            it.throwable == null &&
-            it.marker == null
-        }))
-    }
-
-    @Test
-    fun `debug, non-null throwable, null tag`() {
-
-        val throwable = Exception("Test exception.")
-
-        Logger("test").debug("test-message", throwable)
-
-        assertTrue(messages["test"]!!.any({
-            it.level == "DEBUG" &&
-            it.message == "test-message" &&
-            it.throwable == throwable &&
-            it.marker == null
-        }))
-    }
-
-    @Test
-    fun `debug, null throwable, non-null tag`() {
-
-        val tag = "TEST_TAG"
-
-        Logger("test").debug("test-message", null, tag)
-
-        assertTrue(messages["test"]!!.any({
-            it.level == "DEBUG" &&
-            it.message == "test-message" &&
-            it.throwable == null &&
-            it.marker.toString() == tag
-        }))
-    }
-
-    @Test
-    fun `debug, non-null throwable, non-null tag`() {
-
-        val throwable = Exception("Test exception.")
-        val tag = "TEST_TAG"
-
-        Logger("test").debug("test-message", throwable, tag)
-
-        assertTrue(messages["test"]!!.any({
-            it.level == "DEBUG" &&
-            it.message == "test-message" &&
-            it.throwable == throwable &&
-            it.marker.toString() == tag
-        }))
-    }
-
-    @Test
-    fun `trace, null throwable, null tag`() {
-
-        Logger("test").trace("test-message")
-
-        assertTrue(messages["test"]!!.any({
-            it.level == "TRACE" &&
-            it.message == "test-message" &&
-            it.throwable == null &&
-            it.marker == null
-        }))
-    }
-
-    @Test
-    fun `trace, non-null throwable, null tag`() {
-
-        val throwable = Exception("Test exception.")
-
-        Logger("test").trace("test-message", throwable)
-
-        assertTrue(messages["test"]!!.any({
-            it.level == "TRACE" &&
-            it.message == "test-message" &&
-            it.throwable == throwable &&
-            it.marker == null
-        }))
-    }
-
-    @Test
-    fun `trace, null throwable, non-null tag`() {
-
-        val tag = "TEST_TAG"
-
-        Logger("test").trace("test-message", null, tag)
-
-        assertTrue(messages["test"]!!.any({
-            it.level == "TRACE" &&
-            it.message == "test-message" &&
-            it.throwable == null &&
-            it.marker.toString() == tag
-        }))
-    }
-
-    @Test
-    fun `trace, non-null throwable, non-null tag`() {
-
-        val throwable = Exception("Test exception.")
-        val tag = "TEST_TAG"
-
-        Logger("test").trace("test-message", throwable, tag)
-
-        assertTrue(messages["test"]!!.any({
-            it.level == "TRACE" &&
-            it.message == "test-message" &&
-            it.throwable == throwable &&
-            it.marker.toString() == tag
-        }))
+    fun `logger isolation`() {
+
+        Logger("test-1").error("test-message-1", exception, "tag-1")
+        Logger("test-2").warn("test-message-2", null, "tag-2")
+
+        assertTrue(entries.size == 2)
+
+        entries[0].let {
+            assertTrue(it.level == "ERROR")
+            assertTrue(it.message == "test-message-1")
+            assertTrue(it.throwable == exception)
+            assertTrue(it.tag == "tag-1")
+        }
+        entries[1].let {
+            assertTrue(it.level == "WARN")
+            assertTrue(it.message == "test-message-2")
+            assertTrue(it.throwable == null)
+            assertTrue(it.tag == "tag-2")
+        }
     }
 
     @Test
@@ -393,45 +123,20 @@ class Slf4jTests {
     }
 
     @Test
-    fun `debug is enabled`() {
-        assertTrue(Logger("test").isDebugEnabled())
+    fun `debug is disabled`() {
+        assertFalse(Logger("test").isDebugEnabled())
     }
 
     @Test
-    fun `trace is enabled`() {
-        assertTrue(Logger("test").isTraceEnabled())
-    }
-
-    @Test
-    fun `fatal with incorrect tag length is disabled`() {
-        assertFalse(Logger("test").isFatalEnabled("X"))
-    }
-
-    @Test
-    fun `error with incorrect tag length is disabled`() {
-        assertFalse(Logger("test").isErrorEnabled("X"))
-    }
-
-    @Test
-    fun `warn with incorrect tag length is disabled`() {
-        assertFalse(Logger("test").isWarnEnabled("X"))
-    }
-
-    @Test
-    fun `info with incorrect tag length is disabled`() {
-        assertFalse(Logger("test").isInfoEnabled("X"))
-    }
-
-    @Test
-    fun `debug with incorrect tag length is disabled`() {
-        assertFalse(Logger("test").isDebugEnabled("X"))
-    }
-
-    @Test
-    fun `trace with incorrect tag length is disabled`() {
-        assertFalse(Logger("test").isTraceEnabled("X"))
+    fun `trace is disabled`() {
+        assertFalse(Logger("test").isTraceEnabled())
     }
 
     @BeforeTest
-    fun prepare() = messages.clear()
+    fun prepare() = entries.clear()
+
+    companion object {
+
+        val exception = Exception("test-exception")
+    }
 }

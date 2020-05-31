@@ -8,13 +8,12 @@
 
 package org.la4k.slf4j.test
 
-import org.slf4j.Marker
+val entries = mutableListOf<Entry>()
 
-val messages = mutableMapOf<String, MutableList<Message>>()
-
-data class Message(
+data class Entry(
+    val name: String,
     val level: String,
     val message: String,
     val throwable: Throwable? = null,
-    val marker: Marker? = null
+    val tag: String? = null
 )
