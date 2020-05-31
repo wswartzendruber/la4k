@@ -8,7 +8,7 @@
 
 package org.la4k.log4j2.test
 
-import org.la4k.Logger
+import org.la4k.logger
 
 import kotlin.test.assertFalse
 import kotlin.test.assertTrue
@@ -25,7 +25,7 @@ class Log4j2Tests {
     @Test
     fun `fatal, null throwable, null tag`() {
 
-        Logger("test").fatal("test-message-1")
+        logger("test").fatal("test-message-1")
 
         assertTrue(entries.size == 1)
 
@@ -40,7 +40,7 @@ class Log4j2Tests {
     @Test
     fun `fatal, non-null throwable, null tag`() {
 
-        Logger("test").fatal("test-message-1", exception)
+        logger("test").fatal("test-message-1", exception)
 
         assertTrue(entries.size == 1)
 
@@ -55,7 +55,7 @@ class Log4j2Tests {
     @Test
     fun `fatal, null throwable, non-null tag`() {
 
-        Logger("test").fatal("test-message-1", null, "tag-1")
+        logger("test").fatal("test-message-1", null, "tag-1")
 
         assertTrue(entries.size == 1)
 
@@ -70,7 +70,7 @@ class Log4j2Tests {
     @Test
     fun `fatal, non-null throwable, non-null tag`() {
 
-        Logger("test").fatal("test-message-1", exception, "tag-1")
+        logger("test").fatal("test-message-1", exception, "tag-1")
 
         assertTrue(entries.size == 1)
 
@@ -85,8 +85,8 @@ class Log4j2Tests {
     @Test
     fun `logger isolation`() {
 
-        Logger("test-1").fatal("test-message-1", exception, "tag-1")
-        Logger("test-2").error("test-message-2", null, "tag-2")
+        logger("test-1").fatal("test-message-1", exception, "tag-1")
+        logger("test-2").error("test-message-2", null, "tag-2")
 
         assertTrue(entries.size == 2)
 
@@ -106,32 +106,32 @@ class Log4j2Tests {
 
     @Test
     fun `fatal is enabled`() {
-        assertTrue(Logger("test").isFatalEnabled())
+        assertTrue(logger("test").isFatalEnabled())
     }
 
     @Test
     fun `error is enabled`() {
-        assertTrue(Logger("test").isErrorEnabled())
+        assertTrue(logger("test").isErrorEnabled())
     }
 
     @Test
     fun `warn is enabled`() {
-        assertTrue(Logger("test").isWarnEnabled())
+        assertTrue(logger("test").isWarnEnabled())
     }
 
     @Test
     fun `info is enabled`() {
-        assertTrue(Logger("test").isInfoEnabled())
+        assertTrue(logger("test").isInfoEnabled())
     }
 
     @Test
     fun `debug is disabled`() {
-        assertFalse(Logger("test").isDebugEnabled())
+        assertFalse(logger("test").isDebugEnabled())
     }
 
     @Test
     fun `trace is disabled`() {
-        assertFalse(Logger("test").isTraceEnabled())
+        assertFalse(logger("test").isTraceEnabled())
     }
 
     @BeforeTest

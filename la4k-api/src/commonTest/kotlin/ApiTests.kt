@@ -14,7 +14,7 @@ import kotlin.test.fail
 import kotlin.test.BeforeTest
 import kotlin.test.Test
 
-import org.la4k.Logger
+import org.la4k.logger
 import org.la4k.impl.Level
 import org.la4k.proxy.isLevelEnabled
 import org.la4k.proxy.logMessage
@@ -29,7 +29,7 @@ class ApiTests {
 
     @Test
     fun `enabled message is logged`() {
-        Logger("test-1").fatal("test-message-1")
+        logger("test-1").fatal("test-message-1")
         assertTrue(messages.any({
             it.name == "test-1" &&
             it.message == "test-message-1"
@@ -39,7 +39,7 @@ class ApiTests {
     @Test
     fun `disabled message is not logged`() {
         isLevelEnabled = { _, _ -> false }
-        Logger("test-2").error("test-message-2")
+        logger("test-2").error("test-message-2")
         assertFalse(messages.any({
             it.name == "test-2" &&
             it.message == "test-message-2"
@@ -49,7 +49,7 @@ class ApiTests {
     @Test
     fun `disabled lambda is not logged`() {
         isLevelEnabled = { _, _ -> false }
-        Logger("test-3").error({ fail("Lambda was evaluated.") })
+        logger("test-3").error({ fail("Lambda was evaluated.") })
     }
 
     @BeforeTest

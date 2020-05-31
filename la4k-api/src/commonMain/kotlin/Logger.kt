@@ -13,6 +13,7 @@ import org.la4k.impl.Level
 
 /**
  * The main class of the LA4K API; libraries should use it and only it for logging via LA4K.
+ * Instances of this class can be retrieved by calling [logger].
  *
  * At any time, zero or more logging implementations are registered for use, and all instances
  * share the same registry. Any time a logging function is invoked by an instance, the registry
@@ -23,12 +24,8 @@ import org.la4k.impl.Level
  * Available implementations are discovered at some point before the first instance of this
  * class is made. Subsequent discoveries can be invoked manually via the companion's [refresh]
  * function.
- *
- * @property[name] The name of the logger.
- *
- * @constructor Initializes a new logger with the provided [name].
  */
-public class Logger(val name: String) {
+public class Logger internal constructor(val name: String) {
 
     private val loggers = mutableListOf<ImplementationLogger>()
     private var knownHashCode = 0
