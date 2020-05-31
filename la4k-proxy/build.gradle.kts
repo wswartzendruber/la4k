@@ -17,9 +17,9 @@ kotlin {
 
 dependencies {
     // COMMON
-    commonMainImplementation(project(":la4k-api"))
+    commonMainImplementation(project(":la4k"))
     commonMainImplementation(kotlin("stdlib-common"))
     // JVM
-    "jvmMainImplementation"(project(":la4k-api"))
+    "jvmMainImplementation"(project(":la4k"))
     "jvmMainImplementation"(kotlin("stdlib-jdk8"))
 }
