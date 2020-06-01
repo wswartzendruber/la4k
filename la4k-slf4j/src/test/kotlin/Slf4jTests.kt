@@ -12,7 +12,6 @@ import org.la4k.logger
 
 import kotlin.test.assertFalse
 import kotlin.test.assertTrue
-import kotlin.test.fail
 import kotlin.test.BeforeTest
 import kotlin.test.Test
 
