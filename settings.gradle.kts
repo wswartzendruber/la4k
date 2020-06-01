@@ -10,7 +10,8 @@ rootProject.name = "la4k"
 
 include(
     "la4k",
-    "la4k-proxy",
+    "la4k-jul",
     "la4k-log4j2",
+    "la4k-proxy",
     "la4k-slf4j"
 )
