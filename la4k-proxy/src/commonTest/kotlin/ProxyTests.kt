@@ -156,37 +156,79 @@ class ProxyTests {
 
     @Test
     fun `only FATAL is disabled`() {
+
         isFatalEnabled = false
+
         assertFalse(logger("test").isFatalEnabled())
+        assertTrue(logger("test").isErrorEnabled())
+        assertTrue(logger("test").isWarnEnabled())
+        assertTrue(logger("test").isInfoEnabled())
+        assertTrue(logger("test").isDebugEnabled())
+        assertTrue(logger("test").isTraceEnabled())
     }
 
     @Test
     fun `only ERROR is disabled`() {
+
         isErrorEnabled = false
+
+        assertTrue(logger("test").isFatalEnabled())
         assertFalse(logger("test").isErrorEnabled())
+        assertTrue(logger("test").isWarnEnabled())
+        assertTrue(logger("test").isInfoEnabled())
+        assertTrue(logger("test").isDebugEnabled())
+        assertTrue(logger("test").isTraceEnabled())
     }
 
     @Test
     fun `only WARN is disabled`() {
+
         isWarnEnabled = false
+
+        assertTrue(logger("test").isFatalEnabled())
+        assertTrue(logger("test").isErrorEnabled())
         assertFalse(logger("test").isWarnEnabled())
+        assertTrue(logger("test").isInfoEnabled())
+        assertTrue(logger("test").isDebugEnabled())
+        assertTrue(logger("test").isTraceEnabled())
     }
 
     @Test
     fun `only INFO is disabled`() {
+
         isInfoEnabled = false
+
+        assertTrue(logger("test").isFatalEnabled())
+        assertTrue(logger("test").isErrorEnabled())
+        assertTrue(logger("test").isWarnEnabled())
         assertFalse(logger("test").isInfoEnabled())
+        assertTrue(logger("test").isDebugEnabled())
+        assertTrue(logger("test").isTraceEnabled())
     }
 
     @Test
     fun `only DEBUG is disabled`() {
+
         isDebugEnabled = false
+
+        assertTrue(logger("test").isFatalEnabled())
+        assertTrue(logger("test").isErrorEnabled())
+        assertTrue(logger("test").isWarnEnabled())
+        assertTrue(logger("test").isInfoEnabled())
         assertFalse(logger("test").isDebugEnabled())
+        assertTrue(logger("test").isTraceEnabled())
     }
 
     @Test
     fun `only TRACE is disabled`() {
+
         isTraceEnabled = false
+
+        assertTrue(logger("test").isFatalEnabled())
+        assertTrue(logger("test").isErrorEnabled())
+        assertTrue(logger("test").isWarnEnabled())
+        assertTrue(logger("test").isInfoEnabled())
+        assertTrue(logger("test").isDebugEnabled())
         assertFalse(logger("test").isTraceEnabled())
     }
 
