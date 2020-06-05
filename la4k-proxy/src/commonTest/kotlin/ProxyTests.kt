@@ -314,15 +314,6 @@ class ProxyTests {
         var isDebugEnabled = true
         var isTraceEnabled = true
 
-        data class Entry(
-            val name: String,
-            val level: Level,
-            val message: CharSequence,
-            val throwable: Throwable? = null,
-            val tag: String? = null
-        )
-
-        val entries = mutableListOf<Entry>()
         val exception = Exception("test-exception")
     }
 }
