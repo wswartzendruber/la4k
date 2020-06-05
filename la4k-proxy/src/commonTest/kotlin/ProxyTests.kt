@@ -233,32 +233,62 @@ class ProxyTests {
     }
 
     @Test
-    fun `FATAL with any tag is disabled`() {
+    fun `FATAL with an empty tag is enabled`() {
+        assertTrue(logger("test").isFatalEnabled(""))
+    }
+
+    @Test
+    fun `ERROR with an empty tag is enabled`() {
+        assertTrue(logger("test").isFatalEnabled(""))
+    }
+
+    @Test
+    fun `WARN with an empty tag is enabled`() {
+        assertTrue(logger("test").isFatalEnabled(""))
+    }
+
+    @Test
+    fun `INFO with an empty tag is enabled`() {
+        assertTrue(logger("test").isFatalEnabled(""))
+    }
+
+    @Test
+    fun `DEBUG with an empty tag is enabled`() {
+        assertTrue(logger("test").isFatalEnabled(""))
+    }
+
+    @Test
+    fun `TRACE with an empty tag is enabled`() {
+        assertTrue(logger("test").isFatalEnabled(""))
+    }
+
+    @Test
+    fun `FATAL with a non-empty tag is disable`() {
         assertFalse(logger("test").isFatalEnabled("tag-disable"))
     }
 
     @Test
-    fun `ERROR with any tag is disabled`() {
+    fun `ERROR with a non-empty tag is disable`() {
         assertFalse(logger("test").isErrorEnabled("tag-disable"))
     }
 
     @Test
-    fun `WARN with any tag is disabled`() {
+    fun `WARN with a non-empty tag is disable`() {
         assertFalse(logger("test").isWarnEnabled("tag-disable"))
     }
 
     @Test
-    fun `INFO with any tag is disabled`() {
+    fun `INFO with a non-empty tag is disable`() {
         assertFalse(logger("test").isInfoEnabled("tag-disable"))
     }
 
     @Test
-    fun `DEBUG with any tag is disabled`() {
+    fun `DEBUG with a non-empty tag is disable`() {
         assertFalse(logger("test").isDebugEnabled("tag-disable"))
     }
 
     @Test
-    fun `TRACE with any tag is disabled`() {
+    fun `TRACE with a non-empty tag is disable`() {
         assertFalse(logger("test").isTraceEnabled("tag-disable"))
     }
 
