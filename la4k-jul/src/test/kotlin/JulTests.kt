@@ -199,7 +199,7 @@ class JulTests {
             val throwable: Throwable? = null
         )
 
-        class TestHandler : Handler() {
+        object TestHandler : Handler() {
 
             override fun close() { }
 
@@ -217,7 +217,6 @@ class JulTests {
 
         val entries = mutableListOf<Entry>()
         val exception = Exception("test-exception")
-        val handler = TestHandler()
         val offLogger = Logger.getLogger("off")
         val severeLogger = Logger.getLogger("severe")
         val warningLogger = Logger.getLogger("warning")
@@ -228,13 +227,13 @@ class JulTests {
 
         init {
 
-            offLogger.addHandler(handler)
-            severeLogger.addHandler(handler)
-            warningLogger.addHandler(handler)
-            infoLogger.addHandler(handler)
-            fineLogger.addHandler(handler)
-            finerLogger.addHandler(handler)
-            allLogger.addHandler(handler)
+            offLogger.addHandler(TestHandler)
+            severeLogger.addHandler(TestHandler)
+            warningLogger.addHandler(TestHandler)
+            infoLogger.addHandler(TestHandler)
+            fineLogger.addHandler(TestHandler)
+            finerLogger.addHandler(TestHandler)
+            allLogger.addHandler(TestHandler)
 
             offLogger.level = Level.OFF
             severeLogger.level = Level.SEVERE
