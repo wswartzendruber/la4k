@@ -8,8 +8,6 @@
 
 package org.la4k.slf4j.test
 
-val entries = mutableListOf<Entry>()
-
 data class Entry(
     val name: String,
     val level: String,
@@ -17,3 +15,5 @@ data class Entry(
     val throwable: Throwable? = null,
     val tag: String? = null
 )
+
+val entries = mutableListOf<Entry>()

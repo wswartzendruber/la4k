@@ -108,9 +108,9 @@ class TestLoggerAdapter(private val name: String) : Logger {
         }
     }
 
-    override fun isErrorEnabled() = true
+    override fun isErrorEnabled() = errorEnabled
 
-    override fun isErrorEnabled(marker: Marker) = marker.toString().length > 1
+    override fun isErrorEnabled(marker: Marker) = marker.toString().length < 1 && errorEnabled
 
     override fun warn(message: String) {
         if (isWarnEnabled) {
@@ -204,9 +204,9 @@ class TestLoggerAdapter(private val name: String) : Logger {
         }
     }
 
-    override fun isWarnEnabled() = true
+    override fun isWarnEnabled() = warnEnabled
 
-    override fun isWarnEnabled(marker: Marker) = marker.toString().length > 1
+    override fun isWarnEnabled(marker: Marker) = marker.toString().length < 1 && warnEnabled
 
     override fun info(message: String) {
         if (isInfoEnabled) {
@@ -300,9 +300,9 @@ class TestLoggerAdapter(private val name: String) : Logger {
         }
     }
 
-    override fun isInfoEnabled() = true
+    override fun isInfoEnabled() = infoEnabled
 
-    override fun isInfoEnabled(marker: Marker) = marker.toString().length > 1
+    override fun isInfoEnabled(marker: Marker) = marker.toString().length < 1 && infoEnabled
 
     override fun debug(message: String) {
         if (isDebugEnabled) {
@@ -396,9 +396,9 @@ class TestLoggerAdapter(private val name: String) : Logger {
         }
     }
 
-    override fun isDebugEnabled() = false
+    override fun isDebugEnabled() = debugEnabled
 
-    override fun isDebugEnabled(marker: Marker) = marker.toString().length > 1
+    override fun isDebugEnabled(marker: Marker) = marker.toString().length < 1 && debugEnabled
 
     override fun trace(message: String) {
         if (isTraceEnabled) {
@@ -492,7 +492,24 @@ class TestLoggerAdapter(private val name: String) : Logger {
         }
     }
 
-    override fun isTraceEnabled() = false
+    override fun isTraceEnabled() = traceEnabled
 
-    override fun isTraceEnabled(marker: Marker) = marker.toString().length > 1
+    override fun isTraceEnabled(marker: Marker) = marker.toString().length < 1 && traceEnabled
+
+    companion object {
+
+        var errorEnabled = true
+        var warnEnabled = true
+        var infoEnabled = true
+        var debugEnabled = true
+        var traceEnabled = true
+
+        fun reset() {
+            errorEnabled = true
+            warnEnabled = true
+            infoEnabled = true
+            debugEnabled = true
+            traceEnabled = true
+        }
+    }
 }
