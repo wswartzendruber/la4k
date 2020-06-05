@@ -10,10 +10,8 @@ package org.la4k.jul.test
 
 import org.la4k.logger
 
-import java.util.logging.Handler
 import java.util.logging.Level
 import java.util.logging.Logger
-import java.util.logging.LogRecord
 import kotlin.test.assertFalse
 import kotlin.test.assertTrue
 import kotlin.test.BeforeTest
@@ -192,30 +190,6 @@ class JulTests {
 
     companion object {
 
-        data class Entry(
-            val name: String,
-            val level: Level,
-            val message: String,
-            val throwable: Throwable? = null
-        )
-
-        object TestHandler : Handler() {
-
-            override fun close() { }
-
-            override fun flush() { }
-
-            override fun publish(record: LogRecord) {
-                entries.add(Entry(
-                    record.loggerName,
-                    record.level,
-                    record.message,
-                    record.thrown
-                ))
-            }
-        }
-
-        val entries = mutableListOf<Entry>()
         val exception = Exception("test-exception")
         val offLogger = Logger.getLogger("off")
         val severeLogger = Logger.getLogger("severe")
