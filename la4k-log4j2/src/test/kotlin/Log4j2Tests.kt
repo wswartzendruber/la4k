@@ -19,124 +19,272 @@ import org.apache.logging.log4j.Level
 
 class Log4j2Tests {
 
-    // TODO: MARKER TESTING
-
     @Test
-    fun `fatal, null throwable, null tag`() {
+    fun `logger separation`() {
 
-        logger("test").fatal("test-message-1")
+        logger("fatal").fatal("fatal-test-message")
+        logger("error").error("error-test-message", exception)
+        logger("warn").warn("warn-test-message", null, "tag")
+        logger("info").info("info-test-message", exception, "tag")
 
-        assertTrue(entries.size == 1)
+        assertTrue(entries.size == 4)
 
         entries[0].let {
-            assertTrue(it.name == "test")
+            assertTrue(it.name == "fatal")
             assertTrue(it.level == Level.FATAL)
-            assertTrue(it.message == "test-message-1")
+            assertTrue(it.message == "fatal-test-message")
             assertTrue(it.throwable == null)
             assertTrue(it.tag == null)
-        }
-    }
-
-    @Test
-    fun `fatal, non-null throwable, null tag`() {
-
-        logger("test").fatal("test-message-1", exception)
-
-        assertTrue(entries.size == 1)
-
-        entries[0].let {
-            assertTrue(it.name == "test")
-            assertTrue(it.level == Level.FATAL)
-            assertTrue(it.message == "test-message-1")
-            assertTrue(it.throwable == exception)
-            assertTrue(it.tag == null)
-        }
-    }
-
-    @Test
-    fun `fatal, null throwable, non-null tag`() {
-
-        logger("test").fatal("test-message-1", null, "tag-1")
-
-        assertTrue(entries.size == 1)
-
-        entries[0].let {
-            assertTrue(it.name == "test")
-            assertTrue(it.level == Level.FATAL)
-            assertTrue(it.message == "test-message-1")
-            assertTrue(it.throwable == null)
-            assertTrue(it.tag == "tag-1")
-        }
-    }
-
-    @Test
-    fun `fatal, non-null throwable, non-null tag`() {
-
-        logger("test").fatal("test-message-1", exception, "tag-1")
-
-        assertTrue(entries.size == 1)
-
-        entries[0].let {
-            assertTrue(it.name == "test")
-            assertTrue(it.level == Level.FATAL)
-            assertTrue(it.message == "test-message-1")
-            assertTrue(it.throwable == exception)
-            assertTrue(it.tag == "tag-1")
-        }
-    }
-
-    @Test
-    fun `logger isolation`() {
-
-        logger("test-1").fatal("test-message-1", exception, "tag-1")
-        logger("test-2").error("test-message-2", null, "tag-2")
-
-        assertTrue(entries.size == 2)
-
-        entries[0].let {
-            assertTrue(it.name == "test-1")
-            assertTrue(it.level == Level.FATAL)
-            assertTrue(it.message == "test-message-1")
-            assertTrue(it.throwable == exception)
-            assertTrue(it.tag == "tag-1")
         }
         entries[1].let {
-            assertTrue(it.name == "test-2")
+            assertTrue(it.name == "error")
             assertTrue(it.level == Level.ERROR)
-            assertTrue(it.message == "test-message-2")
+            assertTrue(it.message == "error-test-message")
+            assertTrue(it.throwable == exception)
+            assertTrue(it.tag == null)
+        }
+        entries[2].let {
+            assertTrue(it.name == "warn")
+            assertTrue(it.level == Level.WARN)
+            assertTrue(it.message == "warn-test-message")
             assertTrue(it.throwable == null)
-            assertTrue(it.tag == "tag-2")
+            assertTrue(it.tag == "tag")
+        }
+        entries[3].let {
+            assertTrue(it.name == "info")
+            assertTrue(it.level == Level.INFO)
+            assertTrue(it.message == "info-test-message")
+            assertTrue(it.throwable == exception)
+            assertTrue(it.tag == "tag")
         }
     }
 
     @Test
-    fun `fatal is enabled`() {
-        assertTrue(logger("test").isFatalEnabled())
+    fun `FATAL maps correctly`() {
+
+        logger("all").fatal("test-message")
+
+        assertTrue(entries.size == 1)
+
+        entries[0].let {
+            assertTrue(it.level == Level.FATAL)
+        }
     }
 
     @Test
-    fun `error is enabled`() {
-        assertTrue(logger("test").isErrorEnabled())
+    fun `ERROR maps correctly`() {
+
+        logger("all").error("test-message")
+
+        assertTrue(entries.size == 1)
+
+        entries[0].let {
+            assertTrue(it.level == Level.ERROR)
+        }
     }
 
     @Test
-    fun `warn is enabled`() {
-        assertTrue(logger("test").isWarnEnabled())
+    fun `WARN maps correctly`() {
+
+        logger("all").warn("test-message")
+
+        assertTrue(entries.size == 1)
+
+        entries[0].let {
+            assertTrue(it.level == Level.WARN)
+        }
     }
 
     @Test
-    fun `info is enabled`() {
-        assertTrue(logger("test").isInfoEnabled())
+    fun `INFO maps correctly`() {
+
+        logger("all").info("test-message")
+
+        assertTrue(entries.size == 1)
+
+        entries[0].let {
+            assertTrue(it.level == Level.INFO)
+        }
     }
 
     @Test
-    fun `debug is disabled`() {
-        assertFalse(logger("test").isDebugEnabled())
+    fun `DEBUG maps correctly`() {
+
+        logger("all").debug("test-message")
+
+        assertTrue(entries.size == 1)
+
+        entries[0].let {
+            assertTrue(it.level == Level.DEBUG)
+        }
     }
 
     @Test
-    fun `trace is disabled`() {
-        assertFalse(logger("test").isTraceEnabled())
+    fun `TRACE maps correctly`() {
+
+        logger("all").trace("test-message")
+
+        assertTrue(entries.size == 1)
+
+        entries[0].let {
+            assertTrue(it.level == Level.TRACE)
+        }
+    }
+
+    @Test
+    fun `correct OFF levels enabled`() {
+        logger("off").let {
+            assertFalse(it.isFatalEnabled())
+            assertFalse(it.isErrorEnabled())
+            assertFalse(it.isWarnEnabled())
+            assertFalse(it.isInfoEnabled())
+            assertFalse(it.isDebugEnabled())
+            assertFalse(it.isTraceEnabled())
+        }
+    }
+
+    @Test
+    fun `correct FATAL levels enabled`() {
+        logger("fatal").let {
+            assertTrue(it.isFatalEnabled())
+            assertFalse(it.isErrorEnabled())
+            assertFalse(it.isWarnEnabled())
+            assertFalse(it.isInfoEnabled())
+            assertFalse(it.isDebugEnabled())
+            assertFalse(it.isTraceEnabled())
+        }
+    }
+
+    @Test
+    fun `correct ERROR levels enabled`() {
+        logger("error").let {
+            assertTrue(it.isFatalEnabled())
+            assertTrue(it.isErrorEnabled())
+            assertFalse(it.isWarnEnabled())
+            assertFalse(it.isInfoEnabled())
+            assertFalse(it.isDebugEnabled())
+            assertFalse(it.isTraceEnabled())
+        }
+    }
+
+    @Test
+    fun `correct WARN levels enabled`() {
+        logger("warn").let {
+            assertTrue(it.isFatalEnabled())
+            assertTrue(it.isErrorEnabled())
+            assertTrue(it.isWarnEnabled())
+            assertFalse(it.isInfoEnabled())
+            assertFalse(it.isDebugEnabled())
+            assertFalse(it.isTraceEnabled())
+        }
+    }
+
+    @Test
+    fun `correct INFO levels enabled`() {
+        logger("info").let {
+            assertTrue(it.isFatalEnabled())
+            assertTrue(it.isErrorEnabled())
+            assertTrue(it.isWarnEnabled())
+            assertTrue(it.isInfoEnabled())
+            assertFalse(it.isDebugEnabled())
+            assertFalse(it.isTraceEnabled())
+        }
+    }
+
+    @Test
+    fun `correct DEBUG levels enabled`() {
+        logger("debug").let {
+            assertTrue(it.isFatalEnabled())
+            assertTrue(it.isErrorEnabled())
+            assertTrue(it.isWarnEnabled())
+            assertTrue(it.isInfoEnabled())
+            assertTrue(it.isDebugEnabled())
+            assertFalse(it.isTraceEnabled())
+        }
+    }
+
+    @Test
+    fun `correct TRACE levels enabled`() {
+        logger("trace").let {
+            assertTrue(it.isFatalEnabled())
+            assertTrue(it.isErrorEnabled())
+            assertTrue(it.isWarnEnabled())
+            assertTrue(it.isInfoEnabled())
+            assertTrue(it.isDebugEnabled())
+            assertTrue(it.isTraceEnabled())
+        }
+    }
+
+    @Test
+    fun `correct ALL levels enabled`() {
+        logger("finer").let {
+            assertTrue(it.isFatalEnabled())
+            assertTrue(it.isErrorEnabled())
+            assertTrue(it.isWarnEnabled())
+            assertTrue(it.isInfoEnabled())
+            assertTrue(it.isDebugEnabled())
+            assertTrue(it.isTraceEnabled())
+        }
+    }
+
+    @Test
+    fun `FATAL with an empty tag is enabled`() {
+        assertTrue(logger("all").isFatalEnabled(""))
+    }
+
+    @Test
+    fun `ERROR with an empty tag is enabled`() {
+        assertTrue(logger("all").isFatalEnabled(""))
+    }
+
+    @Test
+    fun `WARN with an empty tag is enabled`() {
+        assertTrue(logger("all").isFatalEnabled(""))
+    }
+
+    @Test
+    fun `INFO with an empty tag is enabled`() {
+        assertTrue(logger("all").isFatalEnabled(""))
+    }
+
+    @Test
+    fun `DEBUG with an empty tag is enabled`() {
+        assertTrue(logger("all").isFatalEnabled(""))
+    }
+
+    @Test
+    fun `TRACE with an empty tag is enabled`() {
+        assertTrue(logger("all").isFatalEnabled(""))
+    }
+
+    @Test
+    fun `FATAL with the 'MARKER_DENY' tag is disabled`() {
+        assertFalse(logger("all").isFatalEnabled("MARKER_DENY"))
+    }
+
+    @Test
+    fun `ERROR with the 'MARKER_DENY' tag is disabled`() {
+        assertFalse(logger("all").isErrorEnabled("MARKER_DENY"))
+    }
+
+    @Test
+    fun `WARN with the 'MARKER_DENY' tag is disabled`() {
+        assertFalse(logger("all").isWarnEnabled("MARKER_DENY"))
+    }
+
+    @Test
+    fun `INFO with the 'MARKER_DENY' tag is disabled`() {
+        assertFalse(logger("all").isInfoEnabled("MARKER_DENY"))
+    }
+
+    @Test
+    fun `DEBUG with the 'MARKER_DENY' tag is disabled`() {
+        assertFalse(logger("all").isDebugEnabled("MARKER_DENY"))
+    }
+
+    @Test
+    fun `TRACE with the 'MARKER_DENY' tag is disabled`() {
+        assertFalse(logger("all").isTraceEnabled("MARKER_DENY"))
     }
 
     @BeforeTest

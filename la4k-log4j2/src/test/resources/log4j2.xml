@@ -4,12 +4,37 @@
     packages="org.la4k.log4j2.test"
     status="WARN"
 >
+    <MarkerFilter marker="MARKER_DENY" onMatch="DENY" onMismatch="NEUTRAL"/>
     <Appenders>
         <ListAppender name="ListAppender"/>
     </Appenders>
     <Loggers>
-        <Root level="INFO">
+        <Root level="ALL">
             <AppenderRef ref="ListAppender"/>
         </Root>
+        <Logger name="all" level="ALL" additivity="false">
+            <AppenderRef ref="ListAppender"/>
+        </Logger>
+        <Logger name="fatal" level="FATAL" additivity="false">
+            <AppenderRef ref="ListAppender"/>
+        </Logger>
+        <Logger name="error" level="ERROR" additivity="false">
+            <AppenderRef ref="ListAppender"/>
+        </Logger>
+        <Logger name="warn" level="WARN" additivity="false">
+            <AppenderRef ref="ListAppender"/>
+        </Logger>
+        <Logger name="info" level="INFO" additivity="false">
+            <AppenderRef ref="ListAppender"/>
+        </Logger>
+        <Logger name="debug" level="DEBUG" additivity="false">
+            <AppenderRef ref="ListAppender"/>
+        </Logger>
+        <Logger name="trace" level="TRACE" additivity="false">
+            <AppenderRef ref="ListAppender"/>
+        </Logger>
+        <Logger name="off" level="OFF" additivity="false">
+            <AppenderRef ref="ListAppender"/>
+        </Logger>
     </Loggers>
 </Configuration>
