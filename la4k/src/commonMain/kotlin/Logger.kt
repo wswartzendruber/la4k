@@ -54,9 +54,9 @@ public class Logger internal constructor(val name: String) {
      * @param[tag] An arbitrary tag to apply to the message.
      */
     public fun fatal(
-        block: () -> CharSequence,
         throwable: Throwable? = null,
-        tag: String? = null
+        tag: String? = null,
+        block: () -> CharSequence
     ): Unit = log(Level.FATAL, block, throwable, tag)
 
     /**
@@ -83,9 +83,9 @@ public class Logger internal constructor(val name: String) {
      * @param[tag] An arbitrary tag to apply to the message.
      */
     public fun error(
-        block: () -> CharSequence,
         throwable: Throwable? = null,
-        tag: String? = null
+        tag: String? = null,
+        block: () -> CharSequence
     ): Unit = log(Level.ERROR, block, throwable, tag)
 
     /**
@@ -112,9 +112,9 @@ public class Logger internal constructor(val name: String) {
      * @param[tag] An arbitrary tag to apply to the message.
      */
     public fun warn(
-        block: () -> CharSequence,
         throwable: Throwable? = null,
-        tag: String? = null
+        tag: String? = null,
+        block: () -> CharSequence
     ): Unit = log(Level.WARN, block, throwable, tag)
 
     /**
@@ -141,9 +141,9 @@ public class Logger internal constructor(val name: String) {
      * @param[tag] An arbitrary tag to apply to the message.
      */
     public fun info(
-        block: () -> CharSequence,
         throwable: Throwable? = null,
-        tag: String? = null
+        tag: String? = null,
+        block: () -> CharSequence
     ): Unit = log(Level.INFO, block, throwable, tag)
 
     /**
@@ -170,9 +170,9 @@ public class Logger internal constructor(val name: String) {
      * @param[tag] An arbitrary tag to apply to the message.
      */
     public fun debug(
-        block: () -> CharSequence,
         throwable: Throwable? = null,
-        tag: String? = null
+        tag: String? = null,
+        block: () -> CharSequence
     ): Unit = log(Level.DEBUG, block, throwable, tag)
 
     /**
@@ -199,9 +199,9 @@ public class Logger internal constructor(val name: String) {
      * @param[tag] An arbitrary tag to apply to the message.
      */
     public fun trace(
-        block: () -> CharSequence,
         throwable: Throwable? = null,
-        tag: String? = null
+        tag: String? = null,
+        block: () -> CharSequence
     ): Unit = log(Level.TRACE, block, throwable, tag)
 
     /**
