@@ -17,13 +17,13 @@ kotlin {
 
 dependencies {
     // COMMON
-    commonMainImplementation(project(":la4k"))
+    commonMainImplementation(project(":la4k-api"))
     commonMainImplementation(kotlin("stdlib-common"))
     commonTestImplementation(project(":la4k-proxy"))
     commonTestImplementation(kotlin("test-common"))
     commonTestImplementation(kotlin("test-annotations-common"))
     // JVM
-    "jvmMainImplementation"(project(":la4k"))
+    "jvmMainImplementation"(project(":la4k-api"))
     "jvmMainImplementation"(kotlin("stdlib-jdk8"))
     "jvmTestImplementation"(project(":la4k-proxy"))
     "jvmTestImplementation"(kotlin("test-junit"))
