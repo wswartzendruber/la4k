@@ -1,17 +1,17 @@
 # Introduction
 
-This is a logging API for Kotlin Multiplatform. This library is only a facade and depends on one
-(or more) backing implementations being present. Logging events are sent to all present
-implementations. If no implementation is present, then the logging events are silently
-discarded.
+This is a logging API for Kotlin Multiplatform. In principle, `la4k-api` is combined with one
+or more bridges. Each bridge is responsible for forwarding logging events from the API to an
+actual logging system. Each event will be sent across any bridges that are available. If no
+bridges are present, then the event will simply be discarded.
 
 Currently, only the Kotlin/JVM target is supported. Kotlin/JS and Kotlin/Native are planned for
 future releases.
 
 # For Libraries
 
-The primary component of LA4K is `la4k-api`. Library authors should use this for making logging
-calls within their components. Libraries should **never** reference LA4K implementations.
+Library authors should use `la4k-api` and only that for dispatching logging events within their
+components. Libraries should **never** reference LA4K bridges directly.
 
 To use `la4k-api` in your library, add it to your project, and then import the `org.la4k.logger`
 function:
@@ -65,28 +65,28 @@ log.trace(aCaughtException, "AN_ARBITRARY_TAG") {
 
 # For Applications
 
-If an application has a dependency that uses LA4K, then a backing implementation needs to be
-imported into the application.
+If an application has a dependency that uses `la4k-api`, then a bridge needs to be imported into
+the application.
 
 ## Kotlin/JVM
 
-Implementations for the JVM use the Java Services API to register themselves for `la4k-api` to
-find. As such, these implementations only need to be in the classpath during runtime and no
-other configuration needs to be performed.
+Bridges for the JVM use the Java Services API to register themselves for `la4k-api` to find. As
+such, these bridges only need to be in the classpath during runtime and no other configuration
+needs to be performed for them to be activated.
 
 ### Apache Log4j
 
-The `la4k-log4j2` component connects `la4k-api` to the excellent Apache Log4j engine. Only
-version 2 is supported as version 1 has been discontinued.
+The `la4k-log4j2` bridge connects `la4k-api` to the excellent Apache Log4j engine. Only version
+2 is supported as version 1 has been discontinued.
 
 As LA4K's levels were modeled after those from Log4j, no level conversion takes place.
 
 LA4K tags become standalone Log4j markers, which are cached for each `org.la4k.Logger` instance
-by this implementation.
+by this bridge.
 
 ### Java Logging
 
-The `la4k-jul` component connects `la4k-api` to `java.util.logging`.
+The `la4k-jul` bridge connects `la4k-api` to `java.util.logging`.
 
 The following level mappings are used:
 
@@ -105,7 +105,7 @@ logger in question.
 
 ### SLF4J
 
-The `la4k-slf4j` component connects `la4k-api` to SLF4J, and therefore, to Logback (if desired).
+The `la4k-slf4j` bridge connects `la4k-api` to SLF4J, and therefore, to Logback (if desired).
 
 The following level mappings are used:
 
@@ -119,12 +119,12 @@ The following level mappings are used:
 | TRACE | TRACE |
 
 LA4K tags become SLF4J markers, which are cached for each `org.la4k.Logger` instance by this
-implementation.
+bridge.
 
 # Licensing
 
 This project is made available under version 2.0 of the Mozilla Public License. As this license
-is somewhat uncommon, it may be unfamiliar to most people. Simply put, anyone is free to use
+is somewhat uncommon, it may be unfamiliar to some people. Simply put, anyone is free to use
 this project as-is, to include static linking and even compiling this code in with proprietary
 code. Any changes to any of this project's files that are distributed outside of an organization
 must be made available under the same terms. This license is **not** viral.
