@@ -8,11 +8,11 @@
 
 package org.la4k.jul
 
-import org.la4k.impl.Implementation
-import org.la4k.impl.ImplementationLogger
+import org.la4k.impl.Bridge
+import org.la4k.impl.BridgeLogger
 
-public class JulImplementation() : Implementation() {
+public class JulBridge() : Bridge() {
 
-    public override fun getImplementationLogger(name: String): ImplementationLogger =
-        JulImplementationLogger(name)
+    public override fun getBridgeLogger(name: String): BridgeLogger =
+        JulBridgeLogger(name)
 }

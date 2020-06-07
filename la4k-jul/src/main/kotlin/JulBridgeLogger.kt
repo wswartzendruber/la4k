@@ -11,10 +11,10 @@ package org.la4k.jul
 import java.util.logging.Level as TargetLevel
 import java.util.logging.Logger as TargetLogger
 
-import org.la4k.impl.ImplementationLogger
+import org.la4k.impl.BridgeLogger
 import org.la4k.impl.Level
 
-public class JulImplementationLogger(name: String) : ImplementationLogger(name) {
+public class JulBridgeLogger(name: String) : BridgeLogger(name) {
 
     private val logger = TargetLogger.getLogger(name)
 

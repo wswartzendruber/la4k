@@ -9,9 +9,9 @@
 package org.la4k.proxy
 
 import org.la4k.impl.Level
-import org.la4k.impl.ImplementationLogger
+import org.la4k.impl.BridgeLogger
 
-public class ProxyImplementationLogger(name: String) : ImplementationLogger(name) {
+public class ProxyBridgeLogger(name: String) : BridgeLogger(name) {
 
     public override fun log(
         level: Level,

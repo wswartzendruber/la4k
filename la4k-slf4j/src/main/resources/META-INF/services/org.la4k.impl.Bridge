@@ -6,4 +6,4 @@
 # https://mozilla.org/MPL/2.0/.
 #
 
-org.la4k.jul.JulImplementation
+org.la4k.slf4j.Slf4jBridge

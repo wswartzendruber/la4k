@@ -8,11 +8,11 @@
 
 package org.la4k.proxy
 
-import org.la4k.impl.Implementation
-import org.la4k.impl.ImplementationLogger
+import org.la4k.impl.Bridge
+import org.la4k.impl.BridgeLogger
 
-public class ProxyImplementation() : Implementation() {
+public class ProxyBridge() : Bridge() {
 
-    public override fun getImplementationLogger(name: String): ImplementationLogger =
-        ProxyImplementationLogger(name)
+    public override fun getBridgeLogger(name: String): BridgeLogger =
+        ProxyBridgeLogger(name)
 }

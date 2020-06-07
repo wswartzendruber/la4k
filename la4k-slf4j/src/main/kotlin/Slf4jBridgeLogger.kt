@@ -9,13 +9,13 @@
 package org.la4k.slf4j
 
 import org.la4k.impl.Level
-import org.la4k.impl.ImplementationLogger
+import org.la4k.impl.BridgeLogger
 
 import org.slf4j.LoggerFactory as TargetLoggerFactory
 import org.slf4j.Marker as TargetMarker
 import org.slf4j.MarkerFactory as TargetMarkerFactory
 
-public class Slf4jImplementationLogger(name: String) : ImplementationLogger(name) {
+public class Slf4jBridgeLogger(name: String) : BridgeLogger(name) {
 
     private val logger = TargetLoggerFactory.getLogger(name)
     private val markers = mutableMapOf<String, TargetMarker>()

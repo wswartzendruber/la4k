@@ -8,9 +8,9 @@
 
 package org.la4k
 
-import org.la4k.impl.Implementation
+import org.la4k.impl.Bridge
 
-internal val implementations = mutableListOf<Implementation>()
+internal val bridges = mutableListOf<Bridge>()
 internal var currentHashCode = 0
 internal val loggers = mutableMapOf<String, Logger>()
 
@@ -24,17 +24,17 @@ public fun logger(name: String): Logger =
     }
 
 /**
- * Forces a reinventory of all available implementations.
+ * Forces a reinventory of all available bridges.
  *
- * This should only be done by host applications if a new logging implementation has been made
- * available since application startup. It may cause all instances of this class to have to
- * separately reinstanciate internal handles to all available implementations, which will happen
- * on each instance's next logging call.
+ * This should only be done by host applications if a new logging bridge has been made available
+ * since application startup. It may cause all instances of this class to have to separately
+ * reinstanciate internal handles to all available bridges, which will happen on each instance's
+ * next logging call.
  */
 public fun refresh(): Unit {
-    platformSynchronized(implementations) {
-        implementations.clear()
-        implementations.addAll(getImplementations())
-        currentHashCode = implementations.hashCode()
+    platformSynchronized(bridges) {
+        bridges.clear()
+        bridges.addAll(getBridges())
+        currentHashCode = bridges.hashCode()
     }
 }

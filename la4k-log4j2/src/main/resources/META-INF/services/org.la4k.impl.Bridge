@@ -6,4 +6,4 @@
 # https://mozilla.org/MPL/2.0/.
 #
 
-org.la4k.proxy.ProxyImplementation
+org.la4k.log4j2.Log4j2Bridge

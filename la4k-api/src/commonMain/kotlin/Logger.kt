@@ -8,30 +8,28 @@
 
 package org.la4k
 
-import org.la4k.impl.ImplementationLogger
+import org.la4k.impl.BridgeLogger
 import org.la4k.impl.Level
 
 /**
  * The main class of the LA4K API; libraries should use it and only it for logging via LA4K.
  * Instances of this class can be retrieved by calling [logger].
  *
- * At any time, zero or more logging implementations are registered for use, and all instances
- * share the same registry. Any time a logging function is invoked by an instance, the registry
- * is checked to see if the implementation roster has changed. If it has, the instance updates
- * its internal cache and continues.
+ * At any time, zero or more logging bridges are registered for use, and all instances share the
+ * same registry. Any time a logging function is invoked by an instance, the registry is checked
+ * to see if the bridge roster has changed. If it has, the instance updates its internal cache
+ * and continues.
  *
- * The presence of an implementation is defined by the presence of its LA4K-specific bridge.
- * Available implementations are discovered at some point before the first instance of this
- * class is made. Subsequent discoveries can be invoked manually via the companion's [refresh]
- * function.
+ * Available bridges are discovered at some point before the first instance of this class is
+ * made. Subsequent discoveries can be invoked manually via the companion's [refresh] function.
  */
 public class Logger internal constructor(val name: String) {
 
-    private val loggers = mutableListOf<ImplementationLogger>()
+    private val loggers = mutableListOf<BridgeLogger>()
     private var knownHashCode = 0
 
     /**
-     * Dispatches a [message] that an unrecoverable error has occurred to all implementations.
+     * Dispatches a [message] that an unrecoverable error has occurred to all bridges.
      *
      * @param[throwable] An exception relating to the cause of the incident.
      * @param[tag] An arbitrary tag to apply to the message.
@@ -45,9 +43,9 @@ public class Logger internal constructor(val name: String) {
     /**
      * Selectively dispatches a message that an unrecoverable error has occurred.
      *
-     * Only implementations that report being enabled for the given level and [tag] combination
-     * will receive the message. If no implementations report being enabled, then the [block]
-     * will not be evaluated at all.
+     * Only bridges that report being enabled for the given level and [tag] combination will
+     * receive the message. If no bridges report being enabled, then the [block] will not be
+     * evaluated at all.
      *
      * @param[block] The lambda to evaluate for a logging message.
      * @param[throwable] An exception relating to the cause of the incident.
@@ -60,7 +58,7 @@ public class Logger internal constructor(val name: String) {
     ): Unit = log(Level.FATAL, block, throwable, tag)
 
     /**
-     * Dispatches a [message] that a recoverable error has occurred to all implementations.
+     * Dispatches a [message] that a recoverable error has occurred to all bridges.
      *
      * @param[throwable] An exception relating to the cause of the incident.
      * @param[tag] An arbitrary tag to apply to the message.
@@ -74,9 +72,9 @@ public class Logger internal constructor(val name: String) {
     /**
      * Selectively dispatches a message that a recoverable error has occurred.
      *
-     * Only implementations that report being enabled for the given level and [tag] combination
-     * will receive the message. If no implementations report being enabled, then the [block]
-     * will not be evaluated at all.
+     * Only bridges that report being enabled for the given level and [tag] combination will
+     * receive the message. If no bridges report being enabled, then the [block] will not be
+     * evaluated at all.
      *
      * @param[block] The lambda to evaluate for a logging message.
      * @param[throwable] An exception relating to the cause of the incident.
@@ -89,7 +87,7 @@ public class Logger internal constructor(val name: String) {
     ): Unit = log(Level.ERROR, block, throwable, tag)
 
     /**
-     * Dispatches a [message] that a possible issue has arisen to all implementations.
+     * Dispatches a [message] that a possible issue has arisen to all bridges.
      *
      * @param[throwable] An exception relating to the cause of the incident.
      * @param[tag] An arbitrary tag to apply to the message.
@@ -103,9 +101,9 @@ public class Logger internal constructor(val name: String) {
     /**
      * Selectively dispatches a message that a possible issue has arisen.
      *
-     * Only implementations that report being enabled for the given level and [tag] combination
-     * will receive the message. If no implementations report being enabled, then the [block]
-     * will not be evaluated at all.
+     * Only bridges that report being enabled for the given level and [tag] combination will
+     * receive the message. If no bridges report being enabled, then the [block] will not be
+     * evaluated at all.
      *
      * @param[block] The lambda to evaluate for a logging message.
      * @param[throwable] An exception relating to the cause of the incident.
@@ -118,7 +116,7 @@ public class Logger internal constructor(val name: String) {
     ): Unit = log(Level.WARN, block, throwable, tag)
 
     /**
-     * Dispatches an arbitrary informational [message] to all implementations.
+     * Dispatches an arbitrary informational [message] to all bridges.
      *
      * @param[throwable] An exception relating to the cause of the incident.
      * @param[tag] An arbitrary tag to apply to the message.
@@ -132,9 +130,9 @@ public class Logger internal constructor(val name: String) {
     /**
      * Selectively dispatches an arbitrary informational message.
      *
-     * Only implementations that report being enabled for the given level and [tag] combination
-     * will receive the message. If no implementations report being enabled, then the [block]
-     * will not be evaluated at all.
+     * Only bridges that report being enabled for the given level and [tag] combination will
+     * receive the message. If no bridges report being enabled, then the [block] will not be
+     * evaluated at all.
      *
      * @param[block] The lambda to evaluate for a logging message.
      * @param[throwable] An exception relating to the cause of the incident.
@@ -147,7 +145,7 @@ public class Logger internal constructor(val name: String) {
     ): Unit = log(Level.INFO, block, throwable, tag)
 
     /**
-     * Dispatches a [message] containing diagnostics information to all implementations.
+     * Dispatches a [message] containing diagnostics information to all bridges.
      *
      * @param[throwable] An exception relating to the cause of the incident.
      * @param[tag] An arbitrary tag to apply to the message.
@@ -161,9 +159,9 @@ public class Logger internal constructor(val name: String) {
     /**
      * Selectively dispatches a message containing diagnostics information.
      *
-     * Only implementations that report being enabled for the given level and [tag] combination
-     * will receive the message. If no implementations report being enabled, then the [block]
-     * will not be evaluated at all.
+     * Only bridges that report being enabled for the given level and [tag] combination will
+     * receive the message. If no bridges report being enabled, then the [block] will not be
+     * evaluated at all.
      *
      * @param[block] The lambda to evaluate for a logging message.
      * @param[throwable] An exception relating to the cause of the incident.
@@ -176,7 +174,7 @@ public class Logger internal constructor(val name: String) {
     ): Unit = log(Level.DEBUG, block, throwable, tag)
 
     /**
-     * Dispatches a [message] containing internal state information to all implementations.
+     * Dispatches a [message] containing internal state information to all bridges.
      *
      * @param[throwable] An exception relating to the cause of the incident.
      * @param[tag] An arbitrary tag to apply to the message.
@@ -190,9 +188,9 @@ public class Logger internal constructor(val name: String) {
     /**
      * Selectively dispatches a message containing internal state information.
      *
-     * Only implementations that report being enabled for the given level and [tag] combination
-     * will receive the message. If no implementations report being enabled, then the [block]
-     * will not be evaluated at all.
+     * Only bridges that report being enabled for the given level and [tag] combination will
+     * receive the message. If no bridges report being enabled, then the [block] will not be
+     * evaluated at all.
      *
      * @param[block] The lambda to evaluate for a logging message.
      * @param[throwable] An exception relating to the cause of the incident.
@@ -205,35 +203,35 @@ public class Logger internal constructor(val name: String) {
     ): Unit = log(Level.TRACE, block, throwable, tag)
 
     /**
-     * Checks if any implementation is enabled to show messages about unrecoverable errors.
+     * Checks if any bridge is enabled to show messages about unrecoverable errors.
      *
      * @param[tag] A tag qualifier.
      */
     public fun isFatalEnabled(tag: String? = null): Boolean = isEnabled(Level.FATAL, tag)
 
     /**
-     * Checks if any implementation is enabled to show messages about recoverable errors.
+     * Checks if any bridge is enabled to show messages about recoverable errors.
      *
      * @param[tag] A tag qualifier.
      */
     public fun isErrorEnabled(tag: String? = null): Boolean = isEnabled(Level.ERROR, tag)
 
     /**
-     * Checks if any implementation is enabled to show messages about possible issues.
+     * Checks if any bridge is enabled to show messages about possible issues.
      *
      * @param[tag] A tag qualifier.
      */
     public fun isWarnEnabled(tag: String? = null): Boolean = isEnabled(Level.WARN, tag)
 
     /**
-     * Checks if any implementation is enabled to show arbitrary informational messages.
+     * Checks if any bridge is enabled to show arbitrary informational messages.
      *
      * @param[tag] A tag qualifier.
      */
     public fun isInfoEnabled(tag: String? = null): Boolean = isEnabled(Level.INFO, tag)
 
     /**
-     * Checks if any implementation is enabled to show messages containing diagnostics
+     * Checks if any bridge is enabled to show messages containing diagnostics
      * information.
      *
      * @param[tag] A tag qualifier.
@@ -241,7 +239,7 @@ public class Logger internal constructor(val name: String) {
     public fun isDebugEnabled(tag: String? = null): Boolean = isEnabled(Level.DEBUG, tag)
 
     /**
-     * Checks if any implementation is enabled to show messages containing internal state
+     * Checks if any bridge is enabled to show messages containing internal state
      * information.
      *
      * @param[tag] A tag qualifier.
@@ -287,9 +285,9 @@ public class Logger internal constructor(val name: String) {
 
     private fun validateLoggers() {
         if (knownHashCode != currentHashCode) {
-            platformSynchronized(implementations) {
+            platformSynchronized(bridges) {
                 loggers.clear()
-                loggers.addAll(implementations.map({ it.getImplementationLogger(name) }))
+                loggers.addAll(bridges.map({ it.getBridgeLogger(name) }))
                 knownHashCode = currentHashCode
             }
         }

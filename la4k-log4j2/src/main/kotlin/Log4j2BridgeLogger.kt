@@ -9,14 +9,14 @@
 package org.la4k.log4j2
 
 import org.la4k.impl.Level
-import org.la4k.impl.ImplementationLogger
+import org.la4k.impl.BridgeLogger
 
 import org.apache.logging.log4j.Level as TargetLevel
 import org.apache.logging.log4j.LogManager as TargetLogManager
 import org.apache.logging.log4j.Marker as TargetMarker
 import org.apache.logging.log4j.MarkerManager as TargetMarkerManager
 
-public class Log4j2ImplementationLogger(name: String) : ImplementationLogger(name) {
+public class Log4j2BridgeLogger(name: String) : BridgeLogger(name) {
 
     private val logger = TargetLogManager.getLogger(name)
     private val markers = mutableMapOf<String, TargetMarker>()

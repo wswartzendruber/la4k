@@ -8,13 +8,13 @@
 
 package org.la4k
 
-import org.la4k.impl.Implementation
+import org.la4k.impl.Bridge
 
 import java.util.ServiceLoader
 
-internal actual fun getImplementations() =
+internal actual fun getBridges() =
     ServiceLoader
-        .load(Implementation::class.java)
+        .load(Bridge::class.java)
         .apply { reload() }
         .asSequence()
         .toList()
