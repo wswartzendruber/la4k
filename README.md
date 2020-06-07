@@ -99,7 +99,9 @@ The following level mappings are used:
 | DEBUG | FINE    |
 | TRACE | FINER   |
 
-As standard Java logging has no concept of tags or markers, they are ignored.
+As standard Java logging has no concept of tags or markers, they are ignored. Any query for a
+level being enabled for a specific tag returns `true` as long as that level is enabled for the
+logger in question.
 
 ### SLF4J
 
