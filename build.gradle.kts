@@ -6,13 +6,13 @@
  * https://mozilla.org/MPL/2.0/.
  */
 
- plugins {
-    kotlin("multiplatform").version("1.3.61").apply(false)
-    kotlin("jvm").version("1.3.61").apply(false)
- }
+plugins {
+   kotlin("multiplatform").version("1.3.61").apply(false)
+   kotlin("jvm").version("1.3.61").apply(false)
+}
 
- allprojects {
-    repositories {
-        jcenter()
-    }
- }
+allprojects {
+   repositories {
+      jcenter()
+   }
+}
