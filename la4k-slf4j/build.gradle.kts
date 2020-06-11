@@ -19,3 +19,11 @@ dependencies {
     testImplementation(kotlin("test-annotations-common"))
     testImplementation(kotlin("test-junit"))
 }
+
+publishing {
+    publications {
+        create<MavenPublication>("maven") {
+            from(components["java"])
+        }
+    }
+}

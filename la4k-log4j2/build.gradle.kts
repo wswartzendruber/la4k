@@ -20,3 +20,11 @@ dependencies {
     testImplementation(kotlin("test-junit"))
     testImplementation("org.apache.logging.log4j:log4j-core:2.12.0")
 }
+
+publishing {
+    publications {
+        create<MavenPublication>("maven") {
+            from(components["java"])
+        }
+    }
+}

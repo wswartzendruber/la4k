@@ -9,6 +9,7 @@
 plugins {
     id("com.android.library")
     kotlin("android")
+    id("maven-publish")
 }
 
 repositories {
@@ -22,4 +23,14 @@ dependencies {
 
 android {
     compileSdkVersion(9)
+}
+
+afterEvaluate {
+    publishing {
+        publications {
+            create<MavenPublication>("maven") {
+                from(components["release"])
+            }
+        }
+    }
 }
