@@ -11,7 +11,7 @@ package org.la4k.android
 import org.la4k.impl.Bridge
 import org.la4k.impl.BridgeLogger
 
-public class AndroidBridge() : Bridge() {
+public class AndroidBridge : Bridge() {
 
     public override fun getBridgeLogger(name: String): BridgeLogger =
         AndroidBridgeLogger(name)

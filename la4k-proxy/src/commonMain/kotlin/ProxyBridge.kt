@@ -11,7 +11,7 @@ package org.la4k.proxy
 import org.la4k.impl.Bridge
 import org.la4k.impl.BridgeLogger
 
-public class ProxyBridge() : Bridge() {
+public class ProxyBridge : Bridge() {
 
     public override fun getBridgeLogger(name: String): BridgeLogger =
         ProxyBridgeLogger(name)

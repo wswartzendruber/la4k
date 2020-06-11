@@ -11,7 +11,7 @@ package org.la4k.log4j2
 import org.la4k.impl.Bridge
 import org.la4k.impl.BridgeLogger
 
-public class Log4j2Bridge() : Bridge() {
+public class Log4j2Bridge : Bridge() {
 
     public override fun getBridgeLogger(name: String): BridgeLogger =
         Log4j2BridgeLogger(name)
