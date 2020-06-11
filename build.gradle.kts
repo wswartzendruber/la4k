@@ -6,9 +6,20 @@
  * https://mozilla.org/MPL/2.0/.
  */
 
+buildscript {
+   repositories {
+      google()
+   }
+   dependencies {
+      classpath("com.android.tools.build:gradle:3.2.1")
+      classpath(kotlin("gradle-plugin", "1.3.72"))
+   }
+}
+
 plugins {
-   kotlin("multiplatform").version("1.3.61").apply(false)
-   kotlin("jvm").version("1.3.61").apply(false)
+   kotlin("multiplatform").version("1.3.72").apply(false)
+   kotlin("jvm").version("1.3.72").apply(false)
+   kotlin("android").version("1.3.72").apply(false)
 }
 
 allprojects {

@@ -6,13 +6,13 @@
  * https://mozilla.org/MPL/2.0/.
  */
 
-rootProject.name = "la4k"
+package org.la4k.android
 
-include(
-    "la4k-android",
-    "la4k-api",
-    "la4k-jul",
-    "la4k-log4j2",
-    "la4k-proxy",
-    "la4k-slf4j"
-)
+import org.la4k.impl.Bridge
+import org.la4k.impl.BridgeLogger
+
+public class AndroidBridge() : Bridge() {
+
+    public override fun getBridgeLogger(name: String): BridgeLogger =
+        AndroidBridgeLogger(name)
+}

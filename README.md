@@ -5,8 +5,8 @@ or more bridges. Each bridge is responsible for forwarding logging events from t
 actual logging system. Each event will be sent across any bridges that are available. If no
 bridges are present, then the event will simply be discarded.
 
-Currently, only the Kotlin/JVM target is supported. Kotlin/JS and Kotlin/Native are planned for
-future releases.
+Currently, only Kotlin/JVM (which includes Android) is supported. Kotlin/JS and Kotlin/Native
+are planned for future releases.
 
 # For Libraries
 
@@ -70,9 +70,32 @@ the application.
 
 ## Kotlin/JVM
 
-Bridges for the JVM use the Java Services API to register themselves for `la4k-api` to find. As
-such, these bridges only need to be in the classpath during runtime and no other configuration
-needs to be performed for them to be activated.
+Bridges for the JVM use the Java Service Provider Interface to register themselves for
+`la4k-api` to find. As such, these bridges only need to be in the classpath during runtime and
+no other configuration needs to be performed for them to be activated.
+
+### Android
+
+The `la4k-android` bridge connects `la4k-api` to Android's internal logging system, which can be
+viewed using Logcat.
+
+The following level mappings are used:
+
+| LA4K  | Android |
+|-------|---------|
+| FATAL | ERROR   |
+| ERROR | ERROR   |
+| WARN  | WARN    |
+| INFO  | INFO    |
+| DEBUG | DEBUG   |
+| TRACE |         |
+
+Note that all TRACE events are discarded. This is in accordance with Google's guideline that
+code outside of development not use VERBOSE logging on the Android side.
+
+As standard Android logging has no concept of tags or markers, they are ignored. Any query for a
+level being enabled for a specific tag returns `true` as long as that level is enabled for the
+logger in question.
 
 ### Apache Log4j
 

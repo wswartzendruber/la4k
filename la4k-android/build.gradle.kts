@@ -6,13 +6,20 @@
  * https://mozilla.org/MPL/2.0/.
  */
 
-rootProject.name = "la4k"
+plugins {
+    id("com.android.library")
+    kotlin("android")
+}
 
-include(
-    "la4k-android",
-    "la4k-api",
-    "la4k-jul",
-    "la4k-log4j2",
-    "la4k-proxy",
-    "la4k-slf4j"
-)
+repositories {
+    google()
+}
+
+dependencies {
+    implementation(project(":la4k-api"))
+    implementation(kotlin("stdlib-jdk8"))
+}
+
+android {
+    compileSdkVersion(9)
+}
