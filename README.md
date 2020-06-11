@@ -5,8 +5,8 @@ or more bridges. Each bridge is responsible for forwarding logging events from t
 actual logging system. Each event will be sent across any bridges that are available. If no
 bridges are present, then the event will simply be discarded.
 
-Currently, only Kotlin/JVM (which includes Android) is supported. Kotlin/JS and Kotlin/Native
-are planned for future releases.
+Currently, only the Android and JVM targets are supported. The JS and Native targets are planned
+for future releases.
 
 # For Libraries
 
@@ -65,19 +65,16 @@ log.trace(aCaughtException, "AN_ARBITRARY_TAG") {
 
 # For Applications
 
-If an application has a dependency that uses `la4k-api`, then a bridge needs to be imported into
-the application.
+If an application has a dependency that uses `la4k-api`, then a bridge can be imported into the
+application to have logging messages from the dependency properly forwarded.
 
-## Kotlin/JVM
-
-Bridges for the JVM use the Java Service Provider Interface to register themselves for
-`la4k-api` to find. As such, these bridges only need to be in the classpath during runtime and
-no other configuration needs to be performed for them to be activated.
-
-### Android
+## Android
 
 The `la4k-android` bridge connects `la4k-api` to Android's internal logging system, which can be
-viewed using Logcat.
+viewed using Logcat. This is the only bridge provided for the Android target. It uses the Java
+Service Provider Interface to register itself for `la4k-api` to find. As such, it only needs to
+be in the classpath during runtime and no other configuration needs to be performed for it to be
+activated.
 
 The following level mappings are used:
 
@@ -90,12 +87,24 @@ The following level mappings are used:
 | DEBUG | DEBUG   |
 | TRACE |         |
 
-Note that all TRACE events are discarded. This is in accordance with Google's guideline that
-code outside of development not use VERBOSE logging on the Android side.
+Note that all TRACE events are discarded by the bridge itself. This is in accordance with
+Google's guideline that code outside of development not use VERBOSE logging on the Android side.
+As such, the bridge's TRACE level always returns that it is disabled.
 
-As standard Android logging has no concept of tags or markers, they are ignored. Any query for a
-level being enabled for a specific tag returns `true` as long as that level is enabled for the
+Android logging uses what it calls tags to act as the name for whatever is sending a logging
+event. This bridge will use the name given to it by `la4k-api`, unless that name exceeds 23
+characters. In this case, the first and last ten characters of the name will be joined together
+by three periods. So `org.myproject.MyExampleClass` would become `org.myproj...ampleClass`.
+
+As standard Android logging has no concept resembling LA4K tags, they are ignored. Any query for
+a level being enabled for a specific tag returns `true` as long as that level is enabled for the
 logger in question.
+
+## JVM
+
+Bridges for the JVM use the Java Service Provider Interface to register themselves for
+`la4k-api` to find. As such, these bridges only need to be in the classpath during runtime and
+no other configuration needs to be performed for them to be activated.
 
 ### Apache Log4j
 
