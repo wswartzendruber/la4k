@@ -26,8 +26,14 @@ dependencies {
 }
 
 tasks {
+
     val dokka by getting(DokkaTask::class) {
-        outputFormat = "html"
         outputDirectory = "$buildDir/dokka"
+        outputFormat = "html"
+        multiplatform {
+            val jvm by creating {
+                targets = listOf("JVM", "Android")
+            }
+        }
     }
 }
