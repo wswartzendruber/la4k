@@ -14,8 +14,31 @@ plugins {
     id("maven-publish")
 }
 
+tasks {
+
+    val dokka by getting(DokkaTask::class) {
+        outputDirectory = "$buildDir/dokka"
+        outputFormat = "html"
+        multiplatform {
+            register("jvm") {
+                targets = listOf("JVM", "Android")
+            }
+        }
+    }
+
+    register<Jar>("dokkaJar") {
+        classifier = "dokka"
+        from(dokka)
+    }
+}
+
 kotlin {
-    jvm()
+    metadata {
+        mavenPublication {
+            artifact(tasks["dokkaJar"])
+        }
+    }
+    jvm { }
 }
 
 dependencies {
@@ -23,17 +46,4 @@ dependencies {
     commonMainImplementation(kotlin("stdlib-common"))
     // JVM
     "jvmMainImplementation"(kotlin("stdlib-jdk8"))
-}
-
-tasks {
-
-    val dokka by getting(DokkaTask::class) {
-        outputDirectory = "$buildDir/dokka"
-        outputFormat = "html"
-        multiplatform {
-            val jvm by creating {
-                targets = listOf("JVM", "Android")
-            }
-        }
-    }
 }
