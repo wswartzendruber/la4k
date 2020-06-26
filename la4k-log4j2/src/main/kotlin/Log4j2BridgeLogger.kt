@@ -21,6 +21,21 @@ public class Log4j2BridgeLogger(name: String) : BridgeLogger(name) {
     private val logger = TargetLogManager.getLogger(name)
     private val markers = mutableMapOf<String, TargetMarker>()
 
+    /**
+     * Routes an event from an `org.la4k.Logger` instance to an internal
+     * `org.apache.logging.log4j.Logger` instance.
+     *
+     * As `org.la4k.impl.Level` is modeled after `org.apache.logging.log4j.Level`, no [level]
+     * mapping needs to take place.
+     *
+     * The [message] is passed into the internal `org.apache.logging.log4j.Logger` instance as
+     * the `CharSequence` it is.
+     *
+     * The [throwable] is passed if it is not `null`.
+     *
+     * The [tag] is converted into an `org.apache.logging.log4j.Marker` and cached for later use
+     * by this instance.
+     */
     public override fun log(
         level: Level,
         message: CharSequence,
@@ -43,6 +58,16 @@ public class Log4j2BridgeLogger(name: String) : BridgeLogger(name) {
         }
     }
 
+    /**
+     * Queries an internal `org.apache.logging.log4j.Logger` instance to determine if a logging
+     * level is enabled for it and returns it.
+     *
+     * As `org.la4k.impl.Level` is modeled after `org.apache.logging.log4j.Level`, no [level]
+     * mapping needs to take place.
+     *
+     * The [tag] is converted into an `org.apache.logging.log4j.Marker` and cached for later use
+     * by this instance.
+     */
     public override fun isEnabled(level: Level, tag: String?): Boolean =
         if (tag == null)
             logger.isEnabled(level.toTargetLevel())
