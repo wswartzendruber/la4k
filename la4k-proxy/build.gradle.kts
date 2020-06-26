@@ -6,13 +6,39 @@
  * https://mozilla.org/MPL/2.0/.
  */
 
+import org.jetbrains.dokka.gradle.DokkaTask
+
 plugins {
     kotlin("multiplatform")
+    id("org.jetbrains.dokka").version("0.10.1")
     id("maven-publish")
 }
 
+tasks {
+
+    val dokka by getting(DokkaTask::class) {
+        outputDirectory = "$buildDir/dokka"
+        outputFormat = "html"
+        multiplatform {
+            register("jvm") {
+                targets = listOf("JVM", "Android")
+            }
+        }
+    }
+
+    register<Jar>("dokkaJar") {
+        classifier = "dokka"
+        from(dokka)
+    }
+}
+
 kotlin {
-    jvm()
+    metadata {
+        mavenPublication {
+            artifact(tasks["dokkaJar"])
+        }
+    }
+    jvm { }
 }
 
 dependencies {

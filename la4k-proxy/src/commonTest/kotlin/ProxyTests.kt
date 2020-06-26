@@ -11,7 +11,7 @@ package org.la4k.proxy.test
 import org.la4k.logger
 import org.la4k.impl.Level
 import org.la4k.proxy.isLevelEnabled
-import org.la4k.proxy.logEntry
+import org.la4k.proxy.logEvent
 
 import kotlin.test.assertFalse
 import kotlin.test.assertTrue
@@ -22,11 +22,11 @@ class ProxyTests {
 
     init {
 
-        logEntry = { name, level, message, throwable, tag ->
+        logEvent = { name, level, message, throwable, tag ->
             entries.add(Entry(name, level, message, throwable, tag))
         }
 
-        isLevelEnabled = { level, tag ->
+        isLevelEnabled = { _, level, tag ->
             if (tag == "tag-disable") {
                 false
             } else {

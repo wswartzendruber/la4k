@@ -9,14 +9,13 @@
 package org.la4k.impl
 
 /**
- * Extended by LA4K bridge bridges to connect the [org.la4k.Logger] class to actual logging
- * bridges.
+ * Extended by LA4K bridges to connect instances of [org.la4k.Logger] to internal,
+ * bridge-specific loggers.
  */
 public abstract class Bridge {
 
     /**
-     * Called by each instance of the [org.la4k.Logger] class to get an internal logger
-     * specific to that instance and for the extending bridge.
+     * Called by [org.la4k.Logger] instances to create an internal logger for the bridge.
      *
      * @param[name] The same name that was passed to the calling [org.la4k.Logger] class on
      *     creation.

@@ -10,7 +10,14 @@ package org.la4k.proxy
 
 import org.la4k.impl.Level
 
-public var logEntry: (String, Level, CharSequence, Throwable?, String?) -> Unit =
+/**
+ * Invoked by this bridge for every logging event it handles.
+ */
+public var logEvent: (String, Level, CharSequence, Throwable?, String?) -> Unit =
     { _, _, _, _, _ -> }
 
-public var isLevelEnabled: (Level, String?) -> Boolean = { _, _ -> true }
+/**
+ * Invoked by this bridge to determine if a name, logging level, and tag combination should be
+ * considered enabled or not.
+ */
+public var isLevelEnabled: (String, Level, String?) -> Boolean = { _, _, _ -> true }
