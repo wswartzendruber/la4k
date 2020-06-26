@@ -50,8 +50,8 @@ public class JulBridgeLogger(name: String) : BridgeLogger(name) {
     }
 
     /**
-     * Queries an internal `java.util.logging.Level` instance to determine if a logging level is
-     * enabled for it and returns it.
+     * Queries an internal `java.util.logging.Logger` instance to determine if a logging level
+     * is enabled for it and returns it.
      *
      * The [level] is mapped to a `java.util.logging.Level` in the following manner:
      *
