@@ -20,6 +20,26 @@ public class Slf4jBridgeLogger(name: String) : BridgeLogger(name) {
     private val logger = TargetLoggerFactory.getLogger(name)
     private val markers = mutableMapOf<String, TargetMarker>()
 
+    /**
+     * Routes an event from an `org.la4k.Logger` instance to an internal `org.slf4j.Logger`
+     * instance.
+     *
+     * The [level] is mapped in the following manner:
+     *
+     * * FATAL -> ERROR
+     * * ERROR -> ERROR
+     * * WARN -> WARN
+     * * INFO -> INFO
+     * * DEBUG -> FINE
+     * * TRACE -> FINER
+     *
+     * The [message] is always converted to a string via its `toString()` method.
+     *
+     * The [throwable] is passed if it is not `null`.
+     *
+     * The [tag] is converted into an `org.slf4j.Marker` and cached for later use by this
+     * instance.
+     */
     public override fun log(
         level: Level,
         message: CharSequence,
@@ -84,6 +104,22 @@ public class Slf4jBridgeLogger(name: String) : BridgeLogger(name) {
         }
     }
 
+    /**
+     * Queries an internal `org.slf4j.Logger` instance to determine if a logging level is
+     * enabled for it and returns it.
+     *
+     * The [level] is mapped in the following manner:
+     *
+     * * FATAL -> ERROR
+     * * ERROR -> ERROR
+     * * WARN -> WARN
+     * * INFO -> INFO
+     * * DEBUG -> FINE
+     * * TRACE -> FINER
+     *
+     * The [tag] is converted into an `org.slf4j.Marker` and cached for later use by this
+     * instance.
+     */
     public override fun isEnabled(level: Level, tag: String?): Boolean =
         if (tag == null) {
             when (level) {
