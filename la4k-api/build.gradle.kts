@@ -9,9 +9,14 @@
 import org.jetbrains.dokka.gradle.DokkaTask
 
 plugins {
+    id("com.android.library")
     kotlin("multiplatform")
     id("org.jetbrains.dokka").version("0.10.1")
     id("maven-publish")
+}
+
+repositories {
+    google()
 }
 
 tasks {
@@ -39,6 +44,14 @@ kotlin {
         }
     }
     jvm { }
+    android { }
+}
+
+android {
+    compileSdkVersion(9)
+    sourceSets["main"].java.srcDirs(File("src/jvmMain/kotlin"))
+    sourceSets["main"].manifest.srcFile(File("src/androidMain/AndroidManifest.xml"))
+    defaultConfig.minSdkVersion(9)
 }
 
 dependencies {
@@ -46,4 +59,6 @@ dependencies {
     commonMainImplementation(kotlin("stdlib-common"))
     // JVM
     "jvmMainImplementation"(kotlin("stdlib-jdk8"))
+    // Android
+    "androidMainImplementation"(kotlin("stdlib-jdk8"))
 }

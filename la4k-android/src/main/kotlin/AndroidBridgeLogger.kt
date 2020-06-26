@@ -21,6 +21,29 @@ public class AndroidBridgeLogger(name: String) : BridgeLogger(name) {
         else
             "${name.take(10)}...${name.takeLast(10)}"
 
+    /**
+     * Routes an event from an `org.la4k.Logger` instance to `android.util.Log`.
+     *
+     * The name of the `org.la4k.Logger` instance is used as the tag for `android.util.Log`,
+     * unless that name exceeds 23 characters. In this case, the first and last ten characters
+     * of the name will be joined together by three periods. So `org.myproject.MyExampleClass`
+     * would become `org.myproj...ampleClass`.
+     *
+     * The [level] is mapped in the following manner:
+     *
+     * * FATAL -> ERROR
+     * * ERROR -> ERROR
+     * * WARN -> ERROR
+     * * INFO -> INFO
+     * * DEBUG -> DEBUG
+     * * TRACE -> (dropped)
+     *
+     * The [message] is always converted to a string via its `toString()` method.
+     *
+     * The [throwable] is passed if it is not `null`.
+     *
+     * The [tag] is always discarded.
+     */
     public override fun log(
         level: Level,
         message: CharSequence,
@@ -48,6 +71,26 @@ public class AndroidBridgeLogger(name: String) : BridgeLogger(name) {
         }
     }
 
+    /**
+     * Queries `android.util.Log` to determine if a logging level is enabled for it and returns
+     * it.
+     *
+     * The name of the `org.la4k.Logger` instance is used as the tag for `android.util.Log`,
+     * unless that name exceeds 23 characters. In this case, the first and last ten characters
+     * of the name will be joined together by three periods. So `org.myproject.MyExampleClass`
+     * would become `org.myproj...ampleClass`.
+     *
+     * The [level] is mapped to a `java.util.logging.Level` in the following manner:
+     *
+     * * FATAL -> ERROR
+     * * ERROR -> ERROR
+     * * WARN -> ERROR
+     * * INFO -> INFO
+     * * DEBUG -> DEBUG
+     * * TRACE -> (dropped)
+     *
+     * The [tag] is always discarded.
+     */
     public override fun isEnabled(level: Level, tag: String?): Boolean =
         when (level) {
             Level.FATAL -> TargetLog.isLoggable(targetName, TargetLog.ERROR)
