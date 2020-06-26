@@ -6,9 +6,31 @@
  * https://mozilla.org/MPL/2.0/.
  */
 
+import org.jetbrains.dokka.gradle.DokkaTask
+
 plugins {
     kotlin("jvm")
+    id("org.jetbrains.dokka").version("0.10.1")
     id("maven-publish")
+}
+
+tasks {
+
+    val dokka by getting(DokkaTask::class) {
+        outputDirectory = "$buildDir/dokka"
+        outputFormat = "html"
+    }
+
+    register<Jar>("sourcesJar") {
+        classifier = "sources"
+        from(sourceSets.main.get().allSource)
+    }
+
+    register<Jar>("dokkaJar") {
+        group = JavaBasePlugin.DOCUMENTATION_GROUP
+        classifier = "dokka"
+        from(dokka)
+    }
 }
 
 dependencies {

@@ -18,6 +18,25 @@ public class JulBridgeLogger(name: String) : BridgeLogger(name) {
 
     private val logger = TargetLogger.getLogger(name)
 
+    /**
+     * Routes an event from an `org.la4k.Logger` instance to an internal
+     * `java.util.logging.Logger` instance.
+     *
+     * The [level] is mapped to a `java.util.logging.Level` in the following manner:
+     *
+     * * FATAL -> SEVERE
+     * * ERROR -> SEVERE
+     * * WARN -> WARNING
+     * * INFO -> INFO
+     * * DEBUG -> FINE
+     * * TRACE -> FINER
+     *
+     * The [message] is always converted to a string via its `toString()` method.
+     *
+     * The [throwable] is passed if it is not `null`.
+     *
+     * The [tag] is always discarded.
+     */
     public override fun log(
         level: Level,
         message: CharSequence,
@@ -30,6 +49,21 @@ public class JulBridgeLogger(name: String) : BridgeLogger(name) {
             logger.log(level.toTargetLevel(), message.toString(), throwable)
     }
 
+    /**
+     * Queries an internal `java.util.logging.Level` instance to determine if a logging level is
+     * enabled for it and returns it.
+     *
+     * The [level] is mapped to a `java.util.logging.Level` in the following manner:
+     *
+     * * FATAL -> SEVERE
+     * * ERROR -> SEVERE
+     * * WARN -> WARNING
+     * * INFO -> INFO
+     * * DEBUG -> FINE
+     * * TRACE -> FINER
+     *
+     * The [tag] is always discarded.
+     */
     public override fun isEnabled(level: Level, tag: String?): Boolean =
         logger.isLoggable(level.toTargetLevel())
 
