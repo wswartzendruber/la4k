@@ -23,7 +23,7 @@ tasks {
 
     register<Jar>("sourcesJar") {
         classifier = "sources"
-        from(sourceSets.main.get().allSource)
+        from(sourceSets["main"].allSource)
     }
 
     register<Jar>("dokkaJar") {
@@ -46,6 +46,8 @@ publishing {
     publications {
         create<MavenPublication>("maven") {
             from(components["java"])
+            artifact(tasks["sourcesJar"])
+            artifact(tasks["dokkaJar"])
         }
     }
 }

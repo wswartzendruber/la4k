@@ -6,7 +6,7 @@
  * https://mozilla.org/MPL/2.0/.
  */
 
-package org.la4k.proxy.test
+package org.la4k.test
 
 import org.la4k.impl.Level
 

@@ -57,8 +57,11 @@ android {
 dependencies {
     // COMMON
     commonMainImplementation(kotlin("stdlib-common"))
+    commonTestImplementation(kotlin("test-common"))
+    commonTestImplementation(kotlin("test-annotations-common"))
     // JVM
     "jvmMainImplementation"(kotlin("stdlib-jdk8"))
+    "jvmTestImplementation"(kotlin("test-junit"))
     // Android
     "androidMainImplementation"(kotlin("stdlib-jdk8"))
 }

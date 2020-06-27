@@ -6,4 +6,4 @@
 # https://mozilla.org/MPL/2.0/.
 #
 
-org.la4k.proxy.ProxyBridge
+org.la4k.test.TestBridge

@@ -6,19 +6,19 @@
  * https://mozilla.org/MPL/2.0/.
  */
 
-package org.la4k.proxy.test
+package org.la4k.test
 
 import org.la4k.logger
 import org.la4k.impl.Level
-import org.la4k.proxy.isLevelEnabled
-import org.la4k.proxy.logEvent
+import org.la4k.test.isLevelEnabled
+import org.la4k.test.logEvent
 
 import kotlin.test.assertFalse
 import kotlin.test.assertTrue
 import kotlin.test.BeforeTest
 import kotlin.test.Test
 
-class ProxyTests {
+class ApiTests {
 
     init {
 

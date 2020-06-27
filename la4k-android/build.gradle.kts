@@ -28,7 +28,7 @@ tasks {
 
     register<Jar>("sourcesJar") {
         classifier = "sources"
-        from("src/main")
+        from("src/main/kotlin")
     }
 
     register<Jar>("dokkaJar") {
@@ -52,6 +52,8 @@ afterEvaluate {
         publications {
             create<MavenPublication>("maven") {
                 from(components["release"])
+                artifact(tasks["sourcesJar"])
+                artifact(tasks["dokkaJar"])
             }
         }
     }

@@ -6,13 +6,11 @@
  * https://mozilla.org/MPL/2.0/.
  */
 
-package org.la4k.proxy
+package org.la4k.test
 
-import org.la4k.impl.Bridge
-import org.la4k.impl.BridgeLogger
+import org.la4k.impl.Level
 
-public class ProxyBridge : Bridge() {
+var logEvent: (String, Level, CharSequence, Throwable?, String?) -> Unit =
+    { _, _, _, _, _ -> }
 
-    public override fun getBridgeLogger(name: String): BridgeLogger =
-        ProxyBridgeLogger(name)
-}
+var isLevelEnabled: (String, Level, String?) -> Boolean = { _, _, _ -> true }
