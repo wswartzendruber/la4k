@@ -6,7 +6,13 @@
  * https://mozilla.org/MPL/2.0/.
  */
 
+import java.net.URI
+
 import org.jetbrains.dokka.gradle.DokkaTask
+
+val mavenUrlBase: String? by project
+val mavenUsername: String? by project
+val mavenPassword: String? by project
 
 plugins {
     kotlin("jvm")
@@ -47,6 +53,15 @@ publishing {
             from(components["java"])
             artifact(tasks["sourcesJar"])
             artifact(tasks["dokkaJar"])
+        }
+    }
+    repositories {
+        maven {
+            url = URI("$mavenUrlBase/la4k-jul;publish=1")
+            credentials {
+                username = mavenUsername
+                password = mavenPassword
+            }
         }
     }
 }

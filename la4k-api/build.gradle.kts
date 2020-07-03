@@ -6,7 +6,13 @@
  * https://mozilla.org/MPL/2.0/.
  */
 
+import java.net.URI
+
 import org.jetbrains.dokka.gradle.DokkaTask
+
+val mavenUrlBase: String? by project
+val mavenUsername: String? by project
+val mavenPassword: String? by project
 
 plugins {
     id("com.android.library")
@@ -64,4 +70,16 @@ dependencies {
     "jvmTestImplementation"(kotlin("test-junit"))
     // Android
     "androidMainImplementation"(kotlin("stdlib-jdk8"))
+}
+
+publishing {
+    repositories {
+        maven {
+            url = URI("$mavenUrlBase/la4k-api;publish=1")
+            credentials {
+                username = mavenUsername
+                password = mavenPassword
+            }
+        }
+    }
 }
