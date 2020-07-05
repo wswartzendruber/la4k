@@ -195,7 +195,7 @@ Additionally, this project may, in addition to MPLv2, be distributed under the t
 following licenses **when done as part of a larger work**:
 
 * GPLv2 or later
-* LPGLv2.1 or later
+* LGPLv2.1 or later
 * AGPLv3 or later
 
 Please see [LICENSE](LICENSE) and [MPL 2.0 FAQ](https://www.mozilla.org/en-US/MPL/2.0/FAQ/) for
