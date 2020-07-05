@@ -1,34 +1,63 @@
 # Introduction
 
-This is a logging API for Kotlin Multiplatform. In principle, `la4k-api` is combined with one
-or more bridges. Each bridge is responsible for forwarding logging events from the API to an
-actual logging system. Each event will be sent across any bridges that are available. If no
-bridges are present, then the event will simply be discarded.
+This is a from-scratch logging API for Kotlin Multiplatform. In principle, `la4k-api` is
+combined with one or more bridges. Each bridge is responsible for forwarding logging events from
+the API to an actual logging system. Each event will be sent across any bridges that are
+available. If no bridges are present, then the event will simply be discarded.
 
-Currently, only the Android and JVM targets are supported. The JS and Native targets are planned
-for future releases.
+Currently, only the Android and JVM targets are supported. The JS and various Native targets are
+planned for future releases.
 
 # For Libraries
 
 Library authors should use `la4k-api` and only that for dispatching logging events within their
 components. Libraries should **never** reference LA4K bridges directly.
 
-To use `la4k-api` in your library, add it to your project, and then import the `org.la4k.logger`
-function:
+To use `la4k-api` in your library, add it to your project. It is currently hosted on Bintray, so
+a new Maven repository will need to be added:
+
+`build.gradle.kts`
+```kotlin
+repositories {
+    maven {
+        url = uri("https://dl.bintray.com/wswartzendruber/la4k")
+    }
+}
+
+dependencies {
+    implementation("org.la4k:la4k-api:0.1.0")
+}
+```
+
+`build.gradle`
+```groovy
+repositories {
+    maven {
+        url "https://dl.bintray.com/wswartzendruber/la4k"
+    }
+}
+
+dependencies {
+    implementation("org.la4k:la4k-api:0.1.0")
+}
+```
+
+And then import the `org.la4k.logger` function:
 
 ```kotlin
 import org.la4k.logger
 ```
 
-Instanciate your loggers like so:
+Instansiate your loggers like so:
 
 ```kotlin
 val log = logger("my.logger.name")
 ```
 
-There are six logging levels: FATAL, ERROR, WARN, INFO, DEBUG, and TRACE. Each logging statement
-must include a message and may optionally include an exception and/or a tag of some kind. If a
-message takes a long amount of time to evaluate, it may be passed in as a lambda instead.
+There are six logging levels: **FATAL**, **ERROR**, **WARN**, **INFO**, **DEBUG**, and
+**TRACE**. Each logging statement must include a message and may optionally include an exception
+and/or a tag of some kind. If a message takes a long amount of time to evaluate, it may be
+passed in as a lambda instead.
 
 ```kotlin
 log.fatal("This is a simple message.")
@@ -66,7 +95,8 @@ log.trace(aCaughtException, "AN_ARBITRARY_TAG") {
 # For Applications
 
 If an application has a dependency that uses `la4k-api`, then a bridge can be imported into the
-application to have logging messages from the dependency properly forwarded.
+application to have logging messages from the dependency properly forwarded. Bridges are
+currently hosted in the same Bintray repo as `la4k-api` and with matching version numbers.
 
 ## Android
 
@@ -155,8 +185,18 @@ bridge.
 
 # Licensing
 
-This project is made available under version 2.0 of the Mozilla Public License. As this license
-is somewhat uncommon, it may be unfamiliar to some people. Simply put, anyone is free to use
-this project as-is, to include static linking and even compiling this code in with proprietary
-code. Any changes to any of this project's files that are distributed outside of an organization
-must be made available under the same terms. This license is **not** viral.
+This project is made available under version 2.0 of the Mozilla Public License. Simply put,
+anyone is free to use this project as-is, to include static linking and even compiling this code
+in with proprietary code. Any changes to any of this project's files that are distributed
+outside of an organization must be made available under the same terms. This license is **not**
+viral.
+
+Additionally, this project may, in addition to MPLv2, be distributed under the terms of the
+following licenses **when done as part of a larger work**:
+
+* GPLv2 or later
+* LPGLv2.1 or later
+* AGPLv3 or later
+
+Please see [LICENSE](LICENSE) and [MPL 2.0 FAQ](https://www.mozilla.org/en-US/MPL/2.0/FAQ/) for
+more information.
