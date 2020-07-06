@@ -46,7 +46,7 @@ public class AndroidBridgeLogger(name: String) : BridgeLogger(name) {
      */
     public override fun log(
         level: Level,
-        message: CharSequence,
+        message: Any?,
         throwable: Throwable?,
         tag: String?
     ): Unit {

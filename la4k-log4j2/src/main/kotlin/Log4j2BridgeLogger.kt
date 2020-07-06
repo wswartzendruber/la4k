@@ -29,7 +29,8 @@ public class Log4j2BridgeLogger(name: String) : BridgeLogger(name) {
      * mapping needs to take place.
      *
      * The [message] is passed into the internal `org.apache.logging.log4j.Logger` instance as
-     * the `CharSequence` it is.
+     * either a `String`, a `CharSequence`, or `Any?` depending on its underlying type, and by
+     * checking in that order.
      *
      * The [throwable] is passed if it is not `null`.
      *
@@ -38,22 +39,98 @@ public class Log4j2BridgeLogger(name: String) : BridgeLogger(name) {
      */
     public override fun log(
         level: Level,
-        message: CharSequence,
+        message: Any?,
         throwable: Throwable?,
         tag: String?
     ): Unit {
         when {
             throwable == null && tag == null -> {
-                logger.log(level.toTargetLevel(), message)
+                when (message) {
+                    is String ->
+                        logger.log(
+                            level.toTargetLevel(),
+                            message
+                        )
+                    is CharSequence ->
+                        logger.log(
+                            level.toTargetLevel(),
+                            message
+                        )
+                    else ->
+                        logger.log(
+                            level.toTargetLevel(),
+                            message
+                        )
+                }
             }
             throwable == null && tag != null -> {
-                logger.log(level.toTargetLevel(), tag.toTargetMarker(), message)
+                when (message) {
+                    is String ->
+                        logger.log(
+                            level.toTargetLevel(),
+                            tag.toTargetMarker(),
+                            message
+                        )
+                    is CharSequence ->
+                        logger.log(
+                            level.toTargetLevel(),
+                            tag.toTargetMarker(),
+                            message
+                        )
+                    else ->
+                        logger.log(
+                            level.toTargetLevel(),
+                            tag.toTargetMarker(),
+                            message
+                        )
+                }
             }
             throwable != null && tag == null -> {
-                logger.log(level.toTargetLevel(), message, throwable)
+                when (message) {
+                    is String ->
+                        logger.log(
+                            level.toTargetLevel(),
+                            message,
+                            throwable
+                        )
+                    is CharSequence ->
+                        logger.log(
+                            level.toTargetLevel(),
+                            message,
+                            throwable
+                        )
+                    else ->
+                        logger.log(
+                            level.toTargetLevel(),
+                            message,
+                            throwable
+                        )
+                }
             }
             throwable != null && tag != null -> {
-                logger.log(level.toTargetLevel(), tag.toTargetMarker(), message, throwable)
+                when (message) {
+                    is String ->
+                        logger.log(
+                            level.toTargetLevel(),
+                            tag.toTargetMarker(),
+                            message,
+                            throwable
+                        )
+                    is CharSequence ->
+                        logger.log(
+                            level.toTargetLevel(),
+                            tag.toTargetMarker(),
+                            message,
+                            throwable
+                        )
+                    else ->
+                        logger.log(
+                            level.toTargetLevel(),
+                            tag.toTargetMarker(),
+                            message,
+                            throwable
+                        )
+                }
             }
         }
     }

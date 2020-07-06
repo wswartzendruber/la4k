@@ -10,7 +10,7 @@ package org.la4k.test
 
 import org.la4k.impl.Level
 
-var logEvent: (String, Level, CharSequence, Throwable?, String?) -> Unit =
+var logEvent: (String, Level, Any?, Throwable?, String?) -> Unit =
     { _, _, _, _, _ -> }
 
 var isLevelEnabled: (String, Level, String?) -> Boolean = { _, _, _ -> true }

@@ -15,7 +15,7 @@ class TestBridgeLogger(name: String) : BridgeLogger(name) {
 
     override fun log(
         level: Level,
-        message: CharSequence,
+        message: Any?,
         throwable: Throwable?,
         tag: String?
     ): Unit {

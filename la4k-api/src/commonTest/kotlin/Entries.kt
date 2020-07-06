@@ -15,7 +15,7 @@ val entries = mutableListOf<Entry>()
 data class Entry(
     val name: String,
     val level: Level,
-    val message: CharSequence,
+    val message: Any?,
     val throwable: Throwable? = null,
     val tag: String? = null
 )

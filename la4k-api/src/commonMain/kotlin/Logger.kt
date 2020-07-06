@@ -35,7 +35,7 @@ public class Logger internal constructor(val name: String) {
      * @param[tag] An arbitrary tag to apply to the message.
      */
     public fun fatal(
-        message: CharSequence,
+        message: Any?,
         throwable: Throwable? = null,
         tag: String? = null
     ): Unit = log(Level.FATAL, message, throwable, tag)
@@ -54,7 +54,7 @@ public class Logger internal constructor(val name: String) {
     public fun fatal(
         throwable: Throwable? = null,
         tag: String? = null,
-        block: () -> CharSequence
+        block: () -> Any?
     ): Unit = log(Level.FATAL, block, throwable, tag)
 
     /**
@@ -64,7 +64,7 @@ public class Logger internal constructor(val name: String) {
      * @param[tag] An arbitrary tag to apply to the message.
      */
     public fun error(
-        message: CharSequence,
+        message: Any?,
         throwable: Throwable? = null,
         tag: String? = null
     ): Unit = log(Level.ERROR, message, throwable, tag)
@@ -83,7 +83,7 @@ public class Logger internal constructor(val name: String) {
     public fun error(
         throwable: Throwable? = null,
         tag: String? = null,
-        block: () -> CharSequence
+        block: () -> Any?
     ): Unit = log(Level.ERROR, block, throwable, tag)
 
     /**
@@ -93,7 +93,7 @@ public class Logger internal constructor(val name: String) {
      * @param[tag] An arbitrary tag to apply to the message.
      */
     public fun warn(
-        message: CharSequence,
+        message: Any?,
         throwable: Throwable? = null,
         tag: String? = null
     ): Unit = log(Level.WARN, message, throwable, tag)
@@ -112,7 +112,7 @@ public class Logger internal constructor(val name: String) {
     public fun warn(
         throwable: Throwable? = null,
         tag: String? = null,
-        block: () -> CharSequence
+        block: () -> Any?
     ): Unit = log(Level.WARN, block, throwable, tag)
 
     /**
@@ -122,7 +122,7 @@ public class Logger internal constructor(val name: String) {
      * @param[tag] An arbitrary tag to apply to the message.
      */
     public fun info(
-        message: CharSequence,
+        message: Any?,
         throwable: Throwable? = null,
         tag: String? = null
     ): Unit = log(Level.INFO, message, throwable, tag)
@@ -141,7 +141,7 @@ public class Logger internal constructor(val name: String) {
     public fun info(
         throwable: Throwable? = null,
         tag: String? = null,
-        block: () -> CharSequence
+        block: () -> Any?
     ): Unit = log(Level.INFO, block, throwable, tag)
 
     /**
@@ -151,7 +151,7 @@ public class Logger internal constructor(val name: String) {
      * @param[tag] An arbitrary tag to apply to the message.
      */
     public fun debug(
-        message: CharSequence,
+        message: Any?,
         throwable: Throwable? = null,
         tag: String? = null
     ): Unit = log(Level.DEBUG, message, throwable, tag)
@@ -170,7 +170,7 @@ public class Logger internal constructor(val name: String) {
     public fun debug(
         throwable: Throwable? = null,
         tag: String? = null,
-        block: () -> CharSequence
+        block: () -> Any?
     ): Unit = log(Level.DEBUG, block, throwable, tag)
 
     /**
@@ -180,7 +180,7 @@ public class Logger internal constructor(val name: String) {
      * @param[tag] An arbitrary tag to apply to the message.
      */
     public fun trace(
-        message: CharSequence,
+        message: Any?,
         throwable: Throwable? = null,
         tag: String? = null
     ): Unit = log(Level.TRACE, message, throwable, tag)
@@ -199,7 +199,7 @@ public class Logger internal constructor(val name: String) {
     public fun trace(
         throwable: Throwable? = null,
         tag: String? = null,
-        block: () -> CharSequence
+        block: () -> Any?
     ): Unit = log(Level.TRACE, block, throwable, tag)
 
     /**
@@ -248,7 +248,7 @@ public class Logger internal constructor(val name: String) {
 
     private fun log(
         level: Level,
-        message: CharSequence,
+        message: Any?,
         throwable: Throwable?,
         tag: String?
     ) {
@@ -259,13 +259,13 @@ public class Logger internal constructor(val name: String) {
 
     private fun log(
         level: Level,
-        block: () -> CharSequence,
+        block: () -> Any?,
         throwable: Throwable?,
         tag: String?
     ) {
         validateLoggers()
 
-        var value: CharSequence? = null
+        var value: Any? = null
 
         for (logger in loggers) {
             if (logger.isEnabled(level, tag)) {

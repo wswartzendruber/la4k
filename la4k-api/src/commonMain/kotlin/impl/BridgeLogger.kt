@@ -23,7 +23,7 @@ public abstract class BridgeLogger protected constructor(val name: String) {
      */
     public abstract fun log(
         level: Level,
-        message: CharSequence,
+        message: Any?,
         throwable: Throwable?,
         tag: String?
     ): Unit
