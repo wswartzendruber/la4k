@@ -21,7 +21,7 @@ public abstract class Logger protected constructor(public val name: String) {
      * @param[throwable] An exception relating to the cause of the incident.
      * @param[tag] An arbitrary tag to apply to the message.
      */
-    public fun fatal(
+    public inline fun fatal(
         throwable: Throwable? = null,
         tag: String? = null,
         block: () -> Any?
@@ -49,7 +49,7 @@ public abstract class Logger protected constructor(public val name: String) {
      * @param[throwable] An exception relating to the cause of the incident.
      * @param[tag] An arbitrary tag to apply to the message.
      */
-    public fun error(
+    public inline fun error(
         throwable: Throwable? = null,
         tag: String? = null,
         block: () -> Any?
@@ -77,7 +77,7 @@ public abstract class Logger protected constructor(public val name: String) {
      * @param[throwable] An exception relating to the cause of the incident.
      * @param[tag] An arbitrary tag to apply to the message.
      */
-    public fun warn(
+    public inline fun warn(
         throwable: Throwable? = null,
         tag: String? = null,
         block: () -> Any?
@@ -105,7 +105,7 @@ public abstract class Logger protected constructor(public val name: String) {
      * @param[throwable] An exception relating to the cause of the incident.
      * @param[tag] An arbitrary tag to apply to the message.
      */
-    public fun info(
+    public inline fun info(
         throwable: Throwable? = null,
         tag: String? = null,
         block: () -> Any?
@@ -133,7 +133,7 @@ public abstract class Logger protected constructor(public val name: String) {
      * @param[throwable] An exception relating to the cause of the incident.
      * @param[tag] An arbitrary tag to apply to the message.
      */
-    public fun debug(
+    public inline fun debug(
         throwable: Throwable? = null,
         tag: String? = null,
         block: () -> Any?
@@ -161,7 +161,7 @@ public abstract class Logger protected constructor(public val name: String) {
      * @param[throwable] An exception relating to the cause of the incident.
      * @param[tag] An arbitrary tag to apply to the message.
      */
-    public fun trace(
+    public inline fun trace(
         throwable: Throwable? = null,
         tag: String? = null,
         block: () -> Any?
