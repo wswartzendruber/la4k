@@ -31,7 +31,7 @@ public abstract class Logger protected constructor(public val name: String) {
     }
 
     /**
-     * Dispatches a [message] that an unrecoverable error has occurred to all bridges.
+     * Dispatches a [message] that an unrecoverable error has occurred.
      *
      * @param[throwable] An exception relating to the cause of the incident.
      * @param[tag] An arbitrary tag to apply to the message.
@@ -59,7 +59,7 @@ public abstract class Logger protected constructor(public val name: String) {
     }
 
     /**
-     * Dispatches a [message] that a recoverable error has occurred to all bridges.
+     * Dispatches a [message] that a recoverable error has occurred.
      *
      * @param[throwable] An exception relating to the cause of the incident.
      * @param[tag] An arbitrary tag to apply to the message.
@@ -87,7 +87,7 @@ public abstract class Logger protected constructor(public val name: String) {
     }
 
     /**
-     * Dispatches a [message] that a possible issue has arisen to all bridges.
+     * Dispatches a [message] that a possible issue has arisen.
      *
      * @param[throwable] An exception relating to the cause of the incident.
      * @param[tag] An arbitrary tag to apply to the message.
@@ -115,7 +115,7 @@ public abstract class Logger protected constructor(public val name: String) {
     }
 
     /**
-     * Dispatches an arbitrary informational [message] to all bridges.
+     * Dispatches an arbitrary informational [message].
      *
      * @param[throwable] An exception relating to the cause of the incident.
      * @param[tag] An arbitrary tag to apply to the message.
@@ -143,7 +143,7 @@ public abstract class Logger protected constructor(public val name: String) {
     }
 
     /**
-     * Dispatches a [message] containing diagnostics information to all bridges.
+     * Dispatches a [message] containing diagnostics information.
      *
      * @param[throwable] An exception relating to the cause of the incident.
      * @param[tag] An arbitrary tag to apply to the message.
@@ -171,7 +171,7 @@ public abstract class Logger protected constructor(public val name: String) {
     }
 
     /**
-     * Dispatches a [message] containing internal state information to all bridges.
+     * Dispatches a [message] containing internal state information.
      *
      * @param[throwable] An exception relating to the cause of the incident.
      * @param[tag] An arbitrary tag to apply to the message.
