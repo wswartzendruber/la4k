@@ -8,9 +8,32 @@
 
 package org.la4k.test
 
-import org.la4k.impl.Level
+var logFatal: (String, Any?, Throwable?, String?) -> Unit =
+    { _, _, _, _ -> }
 
-var logEvent: (String, Level, Any?, Throwable?, String?) -> Unit =
-    { _, _, _, _, _ -> }
+var logError: (String, Any?, Throwable?, String?) -> Unit =
+    { _, _, _, _ -> }
 
-var isLevelEnabled: (String, Level, String?) -> Boolean = { _, _, _ -> true }
+var logWarn: (String, Any?, Throwable?, String?) -> Unit =
+    { _, _, _, _ -> }
+
+var logInfo: (String, Any?, Throwable?, String?) -> Unit =
+    { _, _, _, _ -> }
+
+var logDebug: (String, Any?, Throwable?, String?) -> Unit =
+    { _, _, _, _ -> }
+
+var logTrace: (String, Any?, Throwable?, String?) -> Unit =
+    { _, _, _, _ -> }
+
+var isFatalEnabled: (String, String?) -> Boolean = { _, _ -> true }
+
+var isErrorEnabled: (String, String?) -> Boolean = { _, _ -> true }
+
+var isWarnEnabled: (String, String?) -> Boolean = { _, _ -> true }
+
+var isInfoEnabled: (String, String?) -> Boolean = { _, _ -> true }
+
+var isDebugEnabled: (String, String?) -> Boolean = { _, _ -> true }
+
+var isTraceEnabled: (String, String?) -> Boolean = { _, _ -> true }

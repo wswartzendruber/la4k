@@ -12,12 +12,12 @@ import org.la4k.impl.Bridge
 
 import java.util.ServiceLoader
 
-internal actual fun getBridges() =
+internal actual fun getBridge() =
     ServiceLoader
         .load(Bridge::class.java)
-        .apply { reload() }
         .asSequence()
         .toList()
+        .lastOrNull()
 
 internal actual fun <R> platformSynchronized(lock: Any, block: () -> R) =
     synchronized(lock, block)

@@ -8,10 +8,10 @@
 
 package org.la4k
 
-import org.la4k.impl.Bridge
+import org.la4k.impl.NullBridge
 
-internal val bridges = mutableListOf<Bridge>()
-internal var currentHashCode = 0
+internal val bridge = getBridge() ?: NullBridge()
+
 internal val loggers = mutableMapOf<String, Logger>()
 
 /**
@@ -20,21 +20,5 @@ internal val loggers = mutableMapOf<String, Logger>()
  */
 public fun logger(name: String): Logger =
     platformSynchronized(loggers) {
-        loggers.getOrPut(name, { Logger(name) })
+        loggers.getOrPut(name, { bridge.getLogger(name) })
     }
-
-/**
- * Forces a reinventory of all available bridges.
- *
- * This should only be done by host applications if a new logging bridge has been made available
- * since application startup. It may cause all instances of this class to have to separately
- * reinstanciate internal handles to all available bridges, which will happen on each instance's
- * next logging call.
- */
-public fun refresh(): Unit {
-    platformSynchronized(bridges) {
-        bridges.clear()
-        bridges.addAll(getBridges())
-        currentHashCode = bridges.hashCode()
-    }
-}

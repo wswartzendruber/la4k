@@ -6,12 +6,14 @@
  * https://mozilla.org/MPL/2.0/.
  */
 
-package org.la4k.log4j2
+package org.la4k.impl
 
 import org.la4k.Logger
-import org.la4k.impl.Bridge
 
-public class Log4j2Bridge : Bridge() {
+/**
+ * Used when no other bridge has been configured for use.
+ */
+public class NullBridge : Bridge() {
 
-    public override fun getLogger(name: String): Logger = Log4j2Logger(name)
+    public override fun getLogger(name: String): Logger = NullLogger(name)
 }

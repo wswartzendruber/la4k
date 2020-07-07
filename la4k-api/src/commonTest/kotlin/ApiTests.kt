@@ -9,9 +9,7 @@
 package org.la4k.test
 
 import org.la4k.logger
-import org.la4k.impl.Level
-import org.la4k.test.isLevelEnabled
-import org.la4k.test.logEvent
+import org.la4k.test.*
 
 import kotlin.test.assertFalse
 import kotlin.test.assertTrue
@@ -22,23 +20,65 @@ class ApiTests {
 
     init {
 
-        logEvent = { name, level, message, throwable, tag ->
-            entries.add(Entry(name, level, message, throwable, tag))
+        logFatal = { name, message, throwable, tag ->
+            fatalEntries.add(Entry(name, message, throwable, tag))
+        }
+        logError = { name, message, throwable, tag ->
+            errorEntries.add(Entry(name, message, throwable, tag))
+        }
+        logWarn = { name, message, throwable, tag ->
+            warnEntries.add(Entry(name, message, throwable, tag))
+        }
+        logInfo = { name, message, throwable, tag ->
+            infoEntries.add(Entry(name, message, throwable, tag))
+        }
+        logDebug = { name, message, throwable, tag ->
+            debugEntries.add(Entry(name, message, throwable, tag))
+        }
+        logTrace = { name, message, throwable, tag ->
+            traceEntries.add(Entry(name, message, throwable, tag))
         }
 
-        isLevelEnabled = { _, level, tag ->
-            if (tag == "tag-disable") {
+        isFatalEnabled = { _, tag ->
+            if (tag == "tag-disable")
                 false
-            } else {
-                when (level) {
-                    Level.FATAL -> isFatalEnabled
-                    Level.ERROR -> isErrorEnabled
-                    Level.WARN -> isWarnEnabled
-                    Level.INFO -> isInfoEnabled
-                    Level.DEBUG -> isDebugEnabled
-                    Level.TRACE -> isTraceEnabled
-                }
-            }
+            else
+                isFatalLevelEnabled
+        }
+
+        isErrorEnabled = { _, tag ->
+            if (tag == "tag-disable")
+                false
+            else
+                isErrorLevelEnabled
+        }
+
+        isWarnEnabled = { _, tag ->
+            if (tag == "tag-disable")
+                false
+            else
+                isWarnLevelEnabled
+        }
+
+        isInfoEnabled = { _, tag ->
+            if (tag == "tag-disable")
+                false
+            else
+                isInfoLevelEnabled
+        }
+
+        isDebugEnabled = { _, tag ->
+            if (tag == "tag-disable")
+                false
+            else
+                isDebugLevelEnabled
+        }
+
+        isTraceEnabled = { _, tag ->
+            if (tag == "tag-disable")
+                false
+            else
+                isTraceLevelEnabled
         }
     }
 
@@ -50,32 +90,31 @@ class ApiTests {
         logger("warn").warn("warn-test-message", null, "tag")
         logger("info").info("info-test-message", exception, "tag")
 
-        assertTrue(entries.size == 4)
+        assertTrue(fatalEntries.size == 1)
+        assertTrue(errorEntries.size == 1)
+        assertTrue(warnEntries.size == 1)
+        assertTrue(infoEntries.size == 1)
 
-        entries[0].let {
+        fatalEntries[0].let {
             assertTrue(it.name == "fatal")
-            assertTrue(it.level == Level.FATAL)
             assertTrue(it.message == "fatal-test-message")
             assertTrue(it.throwable == null)
             assertTrue(it.tag == null)
         }
-        entries[1].let {
+        errorEntries[0].let {
             assertTrue(it.name == "error")
-            assertTrue(it.level == Level.ERROR)
             assertTrue(it.message == "error-test-message")
             assertTrue(it.throwable == exception)
             assertTrue(it.tag == null)
         }
-        entries[2].let {
+        warnEntries[0].let {
             assertTrue(it.name == "warn")
-            assertTrue(it.level == Level.WARN)
             assertTrue(it.message == "warn-test-message")
             assertTrue(it.throwable == null)
             assertTrue(it.tag == "tag")
         }
-        entries[3].let {
+        infoEntries[0].let {
             assertTrue(it.name == "info")
-            assertTrue(it.level == Level.INFO)
             assertTrue(it.message == "info-test-message")
             assertTrue(it.throwable == exception)
             assertTrue(it.tag == "tag")
@@ -87,11 +126,7 @@ class ApiTests {
 
         logger("all").fatal("test-message")
 
-        assertTrue(entries.size == 1)
-
-        entries[0].let {
-            assertTrue(it.level == Level.FATAL)
-        }
+        assertTrue(fatalEntries.size == 1)
     }
 
     @Test
@@ -99,11 +134,7 @@ class ApiTests {
 
         logger("all").error("test-message")
 
-        assertTrue(entries.size == 1)
-
-        entries[0].let {
-            assertTrue(it.level == Level.ERROR)
-        }
+        assertTrue(errorEntries.size == 1)
     }
 
     @Test
@@ -111,11 +142,7 @@ class ApiTests {
 
         logger("all").warn("test-message")
 
-        assertTrue(entries.size == 1)
-
-        entries[0].let {
-            assertTrue(it.level == Level.WARN)
-        }
+        assertTrue(warnEntries.size == 1)
     }
 
     @Test
@@ -123,11 +150,7 @@ class ApiTests {
 
         logger("all").info("test-message")
 
-        assertTrue(entries.size == 1)
-
-        entries[0].let {
-            assertTrue(it.level == Level.INFO)
-        }
+        assertTrue(infoEntries.size == 1)
     }
 
     @Test
@@ -135,11 +158,7 @@ class ApiTests {
 
         logger("all").debug("test-message")
 
-        assertTrue(entries.size == 1)
-
-        entries[0].let {
-            assertTrue(it.level == Level.DEBUG)
-        }
+        assertTrue(debugEntries.size == 1)
     }
 
     @Test
@@ -147,17 +166,13 @@ class ApiTests {
 
         logger("all").trace("test-message")
 
-        assertTrue(entries.size == 1)
-
-        entries[0].let {
-            assertTrue(it.level == Level.TRACE)
-        }
+        assertTrue(traceEntries.size == 1)
     }
 
     @Test
     fun `only FATAL is disabled`() {
 
-        isFatalEnabled = false
+        isFatalLevelEnabled = false
 
         assertFalse(logger("test").isFatalEnabled())
         assertTrue(logger("test").isErrorEnabled())
@@ -170,7 +185,7 @@ class ApiTests {
     @Test
     fun `only ERROR is disabled`() {
 
-        isErrorEnabled = false
+        isErrorLevelEnabled = false
 
         assertTrue(logger("test").isFatalEnabled())
         assertFalse(logger("test").isErrorEnabled())
@@ -183,7 +198,7 @@ class ApiTests {
     @Test
     fun `only WARN is disabled`() {
 
-        isWarnEnabled = false
+        isWarnLevelEnabled = false
 
         assertTrue(logger("test").isFatalEnabled())
         assertTrue(logger("test").isErrorEnabled())
@@ -196,7 +211,7 @@ class ApiTests {
     @Test
     fun `only INFO is disabled`() {
 
-        isInfoEnabled = false
+        isInfoLevelEnabled = false
 
         assertTrue(logger("test").isFatalEnabled())
         assertTrue(logger("test").isErrorEnabled())
@@ -209,7 +224,7 @@ class ApiTests {
     @Test
     fun `only DEBUG is disabled`() {
 
-        isDebugEnabled = false
+        isDebugLevelEnabled = false
 
         assertTrue(logger("test").isFatalEnabled())
         assertTrue(logger("test").isErrorEnabled())
@@ -222,7 +237,7 @@ class ApiTests {
     @Test
     fun `only TRACE is disabled`() {
 
-        isTraceEnabled = false
+        isTraceLevelEnabled = false
 
         assertTrue(logger("test").isFatalEnabled())
         assertTrue(logger("test").isErrorEnabled())
@@ -295,24 +310,29 @@ class ApiTests {
     @BeforeTest
     fun prepare() {
 
-        entries.clear()
+        fatalEntries.clear()
+        errorEntries.clear()
+        warnEntries.clear()
+        infoEntries.clear()
+        debugEntries.clear()
+        traceEntries.clear()
 
-        isFatalEnabled = true
-        isErrorEnabled = true
-        isWarnEnabled = true
-        isInfoEnabled = true
-        isDebugEnabled = true
-        isTraceEnabled = true
+        isFatalLevelEnabled = true
+        isErrorLevelEnabled = true
+        isWarnLevelEnabled = true
+        isInfoLevelEnabled = true
+        isDebugLevelEnabled = true
+        isTraceLevelEnabled = true
     }
 
     companion object {
 
-        var isFatalEnabled = true
-        var isErrorEnabled = true
-        var isWarnEnabled = true
-        var isInfoEnabled = true
-        var isDebugEnabled = true
-        var isTraceEnabled = true
+        var isFatalLevelEnabled = true
+        var isErrorLevelEnabled = true
+        var isWarnLevelEnabled = true
+        var isInfoLevelEnabled = true
+        var isDebugLevelEnabled = true
+        var isTraceLevelEnabled = true
 
         val exception = Exception("test-exception")
     }

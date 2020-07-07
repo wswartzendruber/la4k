@@ -8,13 +8,20 @@
 
 package org.la4k.test
 
-import org.la4k.impl.Level
+val fatalEntries = mutableListOf<Entry>()
 
-val entries = mutableListOf<Entry>()
+val errorEntries = mutableListOf<Entry>()
+
+val warnEntries = mutableListOf<Entry>()
+
+val infoEntries = mutableListOf<Entry>()
+
+val debugEntries = mutableListOf<Entry>()
+
+val traceEntries = mutableListOf<Entry>()
 
 data class Entry(
     val name: String,
-    val level: Level,
     val message: Any?,
     val throwable: Throwable? = null,
     val tag: String? = null

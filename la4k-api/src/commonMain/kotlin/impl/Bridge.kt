@@ -8,6 +8,8 @@
 
 package org.la4k.impl
 
+import org.la4k.Logger
+
 /**
  * Extended by LA4K bridges to connect instances of [org.la4k.Logger] to internal,
  * bridge-specific loggers.
@@ -20,5 +22,5 @@ public abstract class Bridge {
      * @param[name] The same name that was passed to the calling [org.la4k.Logger] class on
      *     creation.
      */
-    public abstract fun getBridgeLogger(name: String): BridgeLogger
+    public abstract fun getLogger(name: String): Logger
 }
