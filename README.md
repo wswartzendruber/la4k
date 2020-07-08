@@ -1,9 +1,9 @@
 # Introduction
 
 This is a from-scratch logging API for Kotlin Multiplatform. In principle, `la4k-api` is
-combined with one or more bridges. Each bridge is responsible for forwarding logging events from
-the API to an actual logging system. Each event will be sent across any bridges that are
-available. If no bridges are present, then the event will simply be discarded.
+combined with a single bridge which is responsible for forwarding logging events from the API to
+an actual logging backend. If more than one bridge is present, then the one that appears last
+will be used. If no bridge is present, then logging events will simply be discarded.
 
 Currently, only the Android and JVM targets are supported. The JS and various Native targets are
 planned for future releases.
@@ -11,7 +11,7 @@ planned for future releases.
 # For Libraries
 
 Library authors should use `la4k-api` and only that for dispatching logging events within their
-components. Libraries should **never** reference LA4K bridges directly.
+components. Libraries should **never** reference any LA4K bridge directly.
 
 To use `la4k-api` in your library, add it to your project. It is currently hosted on Bintray, so
 a new Maven repository will need to be added:
@@ -185,18 +185,20 @@ bridge.
 
 # Licensing
 
-This project is made available under version 2.0 of the Mozilla Public License. Simply put,
+This project is made available under the **Mozilla Public License 2.0** (MPLv2). Simply put,
 anyone is free to use this project as-is, to include static linking and even compiling this code
-in with proprietary code. Any changes to any of this project's files that are distributed
-outside of an organization must be made available under the same terms. This license is **not**
-viral.
+in with code covered by a *different license*. Any changes made to any of this project's files
+that are distributed outside of an organization must also be made available under the MPLv2
+license. It is **not** viral, though, and will **never** spread across files.
 
-Additionally, this project may, in addition to MPLv2, be distributed under the terms of the
-following licenses **when done as part of a larger work**:
+Note that the phrase *different license* refers to even the following FSF licenses:
 
-* GPLv2 or later
-* LGPLv2.1 or later
-* AGPLv3 or later
+* GPLv2 and later
+* LGPLv2.1 and later
+* AGPLv3 and later
+
+In this case, any changes made to any of this project's files must still be made available
+under the MPLv2 license.
 
 Please see [LICENSE](LICENSE) and [MPL 2.0 FAQ](https://www.mozilla.org/en-US/MPL/2.0/FAQ/) for
 more information.
