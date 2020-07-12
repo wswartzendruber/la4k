@@ -25,7 +25,7 @@ repositories {
 }
 
 dependencies {
-    implementation("org.la4k:la4k-api:0.1.0")
+    implementation("org.la4k:la4k-api:0.2.0")
 }
 ```
 
@@ -38,7 +38,7 @@ repositories {
 }
 
 dependencies {
-    implementation("org.la4k:la4k-api:0.1.0")
+    implementation("org.la4k:la4k-api:0.2.0")
 }
 ```
 
