@@ -54,10 +54,11 @@ kotlin {
 }
 
 android {
-    compileSdkVersion(9)
+    compileSdkVersion(23)
+    defaultConfig.minSdkVersion(9)
     sourceSets["main"].java.srcDirs(File("src/jvmMain/kotlin"))
     sourceSets["main"].manifest.srcFile(File("src/androidMain/AndroidManifest.xml"))
-    defaultConfig.minSdkVersion(9)
+    sourceSets["test"].resources.srcDirs(File("src/jvmTest/resources"))
 }
 
 dependencies {
@@ -70,6 +71,7 @@ dependencies {
     "jvmTestImplementation"(kotlin("test-junit"))
     // Android
     "androidMainImplementation"(kotlin("stdlib-jdk8"))
+    "androidTestImplementation"(kotlin("test-junit"))
 }
 
 publishing {
