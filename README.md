@@ -199,12 +199,12 @@ import org.la4k.test.Event
 import org.la4k.test.Level
 
 val log = logger("aLogger")
-val expectedEvent("aLogger", Level.FATAL, "something critical happened", caughtException, "TAG")
+val expectedEvent = Event("aLogger", Level.FATAL, "something critical", caughtException, "TAG")
 
 // Clear the memory store of any existing events.
 clear()
 
-log.fatal("something critical happened", caughtException, "TAG")
+log.fatal("something critical", caughtException, "TAG")
 
 // This passes because an event exactly like this was just logged exactly once.
 assertTrue(count(expectedEvent) == 1)
