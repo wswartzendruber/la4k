@@ -102,9 +102,9 @@ currently hosted in the same Bintray repo as `la4k-api` and with matching versio
 
 The `la4k-android` bridge connects `la4k-api` to Android's internal logging system, which can be
 viewed using Logcat. This is the only bridge provided for the Android target, in addition to the
-Test bridge below. It uses the Java Service Provider Interface to register itself for `la4k-api`
-to find. As such, it only needs to be in the classpath during runtime and no other configuration
-needs to be performed for it to be activated.
+Testing bridge below. It uses the Java Service Provider Interface to register itself for
+`la4k-api` to find. As such, it only needs to be in the classpath during runtime and no other
+configuration needs to be performed for it to be activated.
 
 The following level mappings are used:
 
