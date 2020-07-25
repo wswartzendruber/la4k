@@ -15,7 +15,7 @@ package org.la4k
 public abstract class Logger protected constructor(public val name: String) {
 
     /**
-     * Selectively dispatches a message that an unrecoverable error has occurred.
+     * Selectively dispatches an event indicating that an unrecoverable error has occurred.
      *
      * @param[block] The lambda to evaluate for a logging message.
      * @param[throwable] An exception relating to the cause of the incident.
@@ -31,10 +31,11 @@ public abstract class Logger protected constructor(public val name: String) {
     }
 
     /**
-     * Dispatches a [message] that an unrecoverable error has occurred.
+     * Dispatches an event indicating that an unrecoverable error has occurred.
      *
-     * @param[throwable] An exception relating to the cause of the incident.
-     * @param[tag] An arbitrary tag to apply to the message.
+     * @param[message] The logging message to dispatch.
+     * @param[throwable] An exception relating to the cause of the event.
+     * @param[tag] An arbitrary tag to apply to the event.
      */
     public abstract fun fatal(
         message: Any?,
@@ -43,7 +44,7 @@ public abstract class Logger protected constructor(public val name: String) {
     ): Unit
 
     /**
-     * Selectively dispatches a message that a recoverable error has occurred.
+     * Selectively dispatches an event indicating that a recoverable error has occurred.
      *
      * @param[block] The lambda to evaluate for a logging message.
      * @param[throwable] An exception relating to the cause of the incident.
@@ -59,8 +60,9 @@ public abstract class Logger protected constructor(public val name: String) {
     }
 
     /**
-     * Dispatches a [message] that a recoverable error has occurred.
+     * Dispatches an event indicating that a recoverable error has occurred.
      *
+     * @param[message] The logging message to dispatch.
      * @param[throwable] An exception relating to the cause of the incident.
      * @param[tag] An arbitrary tag to apply to the message.
      */
@@ -71,7 +73,7 @@ public abstract class Logger protected constructor(public val name: String) {
     ): Unit
 
     /**
-     * Selectively dispatches a message that a possible issue has arisen.
+     * Selectively dispatches an event indicating that a possible issue has arisen.
      *
      * @param[block] The lambda to evaluate for a logging message.
      * @param[throwable] An exception relating to the cause of the incident.
@@ -87,8 +89,9 @@ public abstract class Logger protected constructor(public val name: String) {
     }
 
     /**
-     * Dispatches a [message] that a possible issue has arisen.
+     * Dispatches an event indicating that a possible issue has arisen.
      *
+     * @param[message] The logging message to dispatch.
      * @param[throwable] An exception relating to the cause of the incident.
      * @param[tag] An arbitrary tag to apply to the message.
      */
@@ -117,6 +120,7 @@ public abstract class Logger protected constructor(public val name: String) {
     /**
      * Dispatches an arbitrary informational [message].
      *
+     * @param[message] The logging message to dispatch.
      * @param[throwable] An exception relating to the cause of the incident.
      * @param[tag] An arbitrary tag to apply to the message.
      */
@@ -127,7 +131,7 @@ public abstract class Logger protected constructor(public val name: String) {
     ): Unit
 
     /**
-     * Selectively dispatches a message containing diagnostics information.
+     * Selectively dispatches an event containing diagnostics information.
      *
      * @param[block] The lambda to evaluate for a logging message.
      * @param[throwable] An exception relating to the cause of the incident.
@@ -143,8 +147,9 @@ public abstract class Logger protected constructor(public val name: String) {
     }
 
     /**
-     * Dispatches a [message] containing diagnostics information.
+     * Dispatches an event containing diagnostics information.
      *
+     * @param[message] The logging message to dispatch.
      * @param[throwable] An exception relating to the cause of the incident.
      * @param[tag] An arbitrary tag to apply to the message.
      */
@@ -155,7 +160,7 @@ public abstract class Logger protected constructor(public val name: String) {
     ): Unit
 
     /**
-     * Selectively dispatches a message containing internal state information.
+     * Selectively dispatches an event containing internal state information.
      *
      * @param[block] The lambda to evaluate for a logging message.
      * @param[throwable] An exception relating to the cause of the incident.
@@ -171,8 +176,9 @@ public abstract class Logger protected constructor(public val name: String) {
     }
 
     /**
-     * Dispatches a [message] containing internal state information.
+     * Dispatches an event containing internal state information.
      *
+     * @param[message] The logging message to dispatch.
      * @param[throwable] An exception relating to the cause of the incident.
      * @param[tag] An arbitrary tag to apply to the message.
      */
@@ -183,21 +189,21 @@ public abstract class Logger protected constructor(public val name: String) {
     ): Unit
 
     /**
-     * Checks if messages about unrecoverable errors will be logged.
+     * Checks if events about unrecoverable errors will be logged.
      *
      * @param[tag] A tag qualifier.
      */
     public abstract fun isFatalEnabled(tag: String? = null): Boolean
 
     /**
-     * Checks if messages about recoverable errors will be logged.
+     * Checks if events about recoverable errors will be logged.
      *
      * @param[tag] A tag qualifier.
      */
     public abstract fun isErrorEnabled(tag: String? = null): Boolean
 
     /**
-     * Checks if messages about possible issues will be logged.
+     * Checks if events about possible issues will be logged.
      *
      * @param[tag] A tag qualifier.
      */
@@ -211,14 +217,14 @@ public abstract class Logger protected constructor(public val name: String) {
     public abstract fun isInfoEnabled(tag: String? = null): Boolean
 
     /**
-     * Checks if messages containing diagnostics information will be logged.
+     * Checks if events containing diagnostics information will be logged.
      *
      * @param[tag] A tag qualifier.
      */
     public abstract fun isDebugEnabled(tag: String? = null): Boolean
 
     /**
-     * Checks if messages containing internal state information will be logged.
+     * Checks if events containing internal state information will be logged.
      *
      * @param[tag] A tag qualifier.
      */
