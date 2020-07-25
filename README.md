@@ -210,6 +210,8 @@ log.fatal("something critical", caughtException, "TAG")
 assertTrue(count(expectedEvent) == 1)
 ```
 
+All levels for all loggers and tags will always return that they are enabled.
+
 # Licensing
 
 This project is made available under the **Mozilla Public License 2.0** (MPLv2). Simply put,
