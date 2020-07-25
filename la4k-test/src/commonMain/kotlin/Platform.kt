@@ -6,13 +6,6 @@
  * https://mozilla.org/MPL/2.0/.
  */
 
-rootProject.name = "la4k"
+package org.la4k.test
 
-include(
-    "la4k-android",
-    "la4k-api",
-    "la4k-jul",
-    "la4k-log4j2",
-    "la4k-slf4j",
-    "la4k-test"
-)
+internal expect fun <R> platformSynchronized(lock: Any, block: () -> R): R

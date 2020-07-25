@@ -58,21 +58,27 @@ android {
     defaultConfig.minSdkVersion(9)
     sourceSets["main"].java.srcDirs(File("src/jvmMain/kotlin"))
     sourceSets["main"].manifest.srcFile(File("src/androidMain/AndroidManifest.xml"))
+    sourceSets["main"].resources.srcDirs(File("src/jvmMain/resources"))
 }
 
 dependencies {
     // COMMON
+    commonMainImplementation(project(":la4k-api"))
     commonMainImplementation(kotlin("stdlib-common"))
+    commonTestImplementation(kotlin("test-common"))
+    commonTestImplementation(kotlin("test-annotations-common"))
     // JVM
     "jvmMainImplementation"(kotlin("stdlib-jdk8"))
+    "jvmTestImplementation"(kotlin("test-junit"))
     // Android
     "androidMainImplementation"(kotlin("stdlib-jdk8"))
+    "androidTestImplementation"(kotlin("test-junit"))
 }
 
 publishing {
     repositories {
         maven {
-            url = URI("$mavenUrlBase/la4k-api;publish=1")
+            url = URI("$mavenUrlBase/la4k-test;publish=1")
             credentials {
                 username = mavenUsername
                 password = mavenPassword

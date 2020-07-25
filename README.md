@@ -101,10 +101,10 @@ currently hosted in the same Bintray repo as `la4k-api` and with matching versio
 ## Android
 
 The `la4k-android` bridge connects `la4k-api` to Android's internal logging system, which can be
-viewed using Logcat. This is the only bridge provided for the Android target. It uses the Java
-Service Provider Interface to register itself for `la4k-api` to find. As such, it only needs to
-be in the classpath during runtime and no other configuration needs to be performed for it to be
-activated.
+viewed using Logcat. This is the only bridge provided for the Android target, in addition to the
+Test bridge below. It uses the Java Service Provider Interface to register itself for `la4k-api`
+to find. As such, it only needs to be in the classpath during runtime and no other configuration
+needs to be performed for it to be activated.
 
 The following level mappings are used:
 
@@ -182,6 +182,33 @@ The following level mappings are used:
 
 LA4K tags become SLF4J markers, which are cached for each `org.la4k.Logger` instance by this
 bridge.
+
+## Testing
+
+`la4k-test` is a bridge available for all targets that stores all events in memory. This allows
+library authors to ensure that their components are logging expected events, thereby validating
+that the desired paths within their code are being taken. This bridge should only be referenced
+by a library's unit tests, and never by the library itself.
+
+```kotlin
+import org.la4k.logger
+
+import org.la4k.test.clear
+import org.la4k.test.count
+import org.la4k.test.Event
+import org.la4k.test.Level
+
+val log = logger("aLogger")
+val expectedEvent("aLogger", Level.FATAL, "something critical happened", caughtException, "TAG")
+
+// Clear the memory store of any existing events.
+clear()
+
+log.fatal("something critical happened", caughtException, "TAG")
+
+// This passes because an event exactly like this was just logged exactly once.
+assertTrue(count(expectedEvent) == 1)
+```
 
 # Licensing
 
