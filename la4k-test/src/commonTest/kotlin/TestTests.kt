@@ -23,26 +23,120 @@ class TestTests {
     @Test
     fun `logger separation`() {
 
-        assertTrue(count(fatalEvent) == 0)
-        assertTrue(count(errorEvent) == 0)
-        assertTrue(count(warnEvent) == 0)
-        assertTrue(count(infoEvent) == 0)
-        assertTrue(count(debugEvent) == 0)
-        assertTrue(count(traceEvent) == 0)
+        assertTrue(count({ it == fatalEvent }) == 0)
+        assertTrue(count({ it == errorEvent }) == 0)
+        assertTrue(count({ it == warnEvent }) == 0)
+        assertTrue(count({ it == infoEvent }) == 0)
+        assertTrue(count({ it == debugEvent }) == 0)
+        assertTrue(count({ it == traceEvent }) == 0)
 
         logger("fatal").fatal("fatal message", exception, tag)
+
+        assertTrue(count({ it == fatalEvent }) == 1)
+        assertTrue(count({ it == errorEvent }) == 0)
+        assertTrue(count({ it == warnEvent }) == 0)
+        assertTrue(count({ it == infoEvent }) == 0)
+        assertTrue(count({ it == debugEvent }) == 0)
+        assertTrue(count({ it == traceEvent }) == 0)
+
         logger("error").error("error message", exception, tag)
+
+        assertTrue(count({ it == fatalEvent }) == 1)
+        assertTrue(count({ it == errorEvent }) == 1)
+        assertTrue(count({ it == warnEvent }) == 0)
+        assertTrue(count({ it == infoEvent }) == 0)
+        assertTrue(count({ it == debugEvent }) == 0)
+        assertTrue(count({ it == traceEvent }) == 0)
+
         logger("warn").warn("warn message", exception, tag)
+
+        assertTrue(count({ it == fatalEvent }) == 1)
+        assertTrue(count({ it == errorEvent }) == 1)
+        assertTrue(count({ it == warnEvent }) == 1)
+        assertTrue(count({ it == infoEvent }) == 0)
+        assertTrue(count({ it == debugEvent }) == 0)
+        assertTrue(count({ it == traceEvent }) == 0)
+
         logger("info").info("info message", exception, tag)
+
+        assertTrue(count({ it == fatalEvent }) == 1)
+        assertTrue(count({ it == errorEvent }) == 1)
+        assertTrue(count({ it == warnEvent }) == 1)
+        assertTrue(count({ it == infoEvent }) == 1)
+        assertTrue(count({ it == debugEvent }) == 0)
+        assertTrue(count({ it == traceEvent }) == 0)
+
         logger("debug").debug("debug message", exception, tag)
+
+        assertTrue(count({ it == fatalEvent }) == 1)
+        assertTrue(count({ it == errorEvent }) == 1)
+        assertTrue(count({ it == warnEvent }) == 1)
+        assertTrue(count({ it == infoEvent }) == 1)
+        assertTrue(count({ it == debugEvent }) == 1)
+        assertTrue(count({ it == traceEvent }) == 0)
+
         logger("trace").trace("trace message", exception, tag)
 
-        assertTrue(count(fatalEvent) == 1)
-        assertTrue(count(errorEvent) == 1)
-        assertTrue(count(warnEvent) == 1)
-        assertTrue(count(infoEvent) == 1)
-        assertTrue(count(debugEvent) == 1)
-        assertTrue(count(traceEvent) == 1)
+        assertTrue(count({ it == fatalEvent }) == 1)
+        assertTrue(count({ it == errorEvent }) == 1)
+        assertTrue(count({ it == warnEvent }) == 1)
+        assertTrue(count({ it == infoEvent }) == 1)
+        assertTrue(count({ it == debugEvent }) == 1)
+        assertTrue(count({ it == traceEvent }) == 1)
+
+        logger("fatal").fatal("fatal message", exception, tag)
+
+        assertTrue(count({ it == fatalEvent }) == 2)
+        assertTrue(count({ it == errorEvent }) == 1)
+        assertTrue(count({ it == warnEvent }) == 1)
+        assertTrue(count({ it == infoEvent }) == 1)
+        assertTrue(count({ it == debugEvent }) == 1)
+        assertTrue(count({ it == traceEvent }) == 1)
+
+        logger("error").error("error message", exception, tag)
+
+        assertTrue(count({ it == fatalEvent }) == 2)
+        assertTrue(count({ it == errorEvent }) == 2)
+        assertTrue(count({ it == warnEvent }) == 1)
+        assertTrue(count({ it == infoEvent }) == 1)
+        assertTrue(count({ it == debugEvent }) == 1)
+        assertTrue(count({ it == traceEvent }) == 1)
+
+        logger("warn").warn("warn message", exception, tag)
+
+        assertTrue(count({ it == fatalEvent }) == 2)
+        assertTrue(count({ it == errorEvent }) == 2)
+        assertTrue(count({ it == warnEvent }) == 2)
+        assertTrue(count({ it == infoEvent }) == 1)
+        assertTrue(count({ it == debugEvent }) == 1)
+        assertTrue(count({ it == traceEvent }) == 1)
+
+        logger("info").info("info message", exception, tag)
+
+        assertTrue(count({ it == fatalEvent }) == 2)
+        assertTrue(count({ it == errorEvent }) == 2)
+        assertTrue(count({ it == warnEvent }) == 2)
+        assertTrue(count({ it == infoEvent }) == 2)
+        assertTrue(count({ it == debugEvent }) == 1)
+        assertTrue(count({ it == traceEvent }) == 1)
+
+        logger("debug").debug("debug message", exception, tag)
+
+        assertTrue(count({ it == fatalEvent }) == 2)
+        assertTrue(count({ it == errorEvent }) == 2)
+        assertTrue(count({ it == warnEvent }) == 2)
+        assertTrue(count({ it == infoEvent }) == 2)
+        assertTrue(count({ it == debugEvent }) == 2)
+        assertTrue(count({ it == traceEvent }) == 1)
+
+        logger("trace").trace("trace message", exception, tag)
+
+        assertTrue(count({ it == fatalEvent }) == 2)
+        assertTrue(count({ it == errorEvent }) == 2)
+        assertTrue(count({ it == warnEvent }) == 2)
+        assertTrue(count({ it == infoEvent }) == 2)
+        assertTrue(count({ it == debugEvent }) == 2)
+        assertTrue(count({ it == traceEvent }) == 2)
     }
 
     @Test

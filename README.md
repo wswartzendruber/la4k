@@ -25,7 +25,7 @@ repositories {
 }
 
 dependencies {
-    implementation("org.la4k:la4k-api:0.3.0")
+    implementation("org.la4k:la4k-api:0.4.0")
 }
 ```
 
@@ -38,7 +38,7 @@ repositories {
 }
 
 dependencies {
-    implementation("org.la4k:la4k-api:0.3.0")
+    implementation("org.la4k:la4k-api:0.4.0")
 }
 ```
 
@@ -186,9 +186,10 @@ bridge.
 ## Testing
 
 `la4k-test` is a bridge available for all targets that stores all events in memory. This allows
-library authors to ensure that their components are logging expected events, thereby validating
-that the desired paths within their code are being taken. This bridge should only be referenced
-by a library's unit tests, and never by the library itself.
+library authors to ensure that their components are logging events as expected, thereby
+validating that the desired code paths are being taken.
+
+This bridge should only be referenced by a library's unit tests and never by the library itself.
 
 ```kotlin
 import org.la4k.logger
@@ -207,7 +208,9 @@ clear()
 log.fatal("something critical", caughtException, "TAG")
 
 // This passes because an event exactly like this was just logged exactly once.
-assertTrue(count(expectedEvent) == 1)
+assertTrue(
+    count({ it == expectedEvent }) == 1
+)
 ```
 
 All levels for all loggers and tags will always return that they are enabled.

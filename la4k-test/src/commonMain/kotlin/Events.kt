@@ -11,11 +11,6 @@ package org.la4k.test
 internal val events = mutableListOf<Event>()
 
 /**
- * Represents the six logging levels supported by LA4K.
- */
-public enum class Level { FATAL, ERROR, WARN, INFO, DEBUG, TRACE }
-
-/**
  * Represents a single test event that has been logged.
  *
  * @param[name] The name of the logger that dispatched the event.
@@ -28,9 +23,14 @@ public data class Event(
     val name: String,
     val level: Level,
     val message: Any?,
-    val throwable: Throwable? = null,
-    val tag: String? = null
+    val throwable: Throwable?,
+    val tag: String?
 )
+
+/**
+ * Represents the six logging levels supported by LA4K.
+ */
+public enum class Level { FATAL, ERROR, WARN, INFO, DEBUG, TRACE }
 
 /**
  * Clears the store of all test events.
@@ -40,8 +40,8 @@ public fun clear(): Unit = platformSynchronized(events) {
 }
 
 /**
- * Returns the number of test events in the store that match the provided [event].
+ * Returns the number of test events that match the given [predicate].
  */
-public fun count(event: Event): Int = platformSynchronized(events) {
-    events.count { it == event }
+public fun count(predicate: (Event) -> Boolean): Int = platformSynchronized(events) {
+    events.map({ predicate(it) }).count({ it == true })
 }
