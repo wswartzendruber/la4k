@@ -15,37 +15,37 @@ public class NullLogger(name: String) : Logger(name) {
     public override fun fatal(
         message: Any?,
         throwable: Throwable?,
-        tag: String?
+        tag: String?,
     ): Unit { }
 
     public override fun error(
         message: Any?,
         throwable: Throwable?,
-        tag: String?
+        tag: String?,
     ): Unit { }
 
     public override fun warn(
         message: Any?,
         throwable: Throwable?,
-        tag: String?
+        tag: String?,
     ): Unit { }
 
     public override fun info(
         message: Any?,
         throwable: Throwable?,
-        tag: String?
+        tag: String?,
     ): Unit { }
 
     public override fun debug(
         message: Any?,
         throwable: Throwable?,
-        tag: String?
+        tag: String?,
     ): Unit { }
 
     public override fun trace(
         message: Any?,
         throwable: Throwable?,
-        tag: String?
+        tag: String?,
     ): Unit { }
 
     public override fun isFatalEnabled(tag: String?): Boolean = false

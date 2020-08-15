@@ -15,7 +15,7 @@ class TestLogger(name: String) : Logger(name) {
     override fun fatal(
         message: Any?,
         throwable: Throwable?,
-        tag: String?
+        tag: String?,
     ): Unit = platformSynchronized(events) {
         events.add(Event(name, Level.FATAL, message, throwable, tag))
     }
@@ -23,7 +23,7 @@ class TestLogger(name: String) : Logger(name) {
     override fun error(
         message: Any?,
         throwable: Throwable?,
-        tag: String?
+        tag: String?,
     ): Unit = platformSynchronized(events) {
         events.add(Event(name, Level.ERROR, message, throwable, tag))
     }
@@ -31,7 +31,7 @@ class TestLogger(name: String) : Logger(name) {
     override fun warn(
         message: Any?,
         throwable: Throwable?,
-        tag: String?
+        tag: String?,
     ): Unit = platformSynchronized(events) {
         events.add(Event(name, Level.WARN, message, throwable, tag))
     }
@@ -39,7 +39,7 @@ class TestLogger(name: String) : Logger(name) {
     override fun info(
         message: Any?,
         throwable: Throwable?,
-        tag: String?
+        tag: String?,
     ): Unit = platformSynchronized(events) {
         events.add(Event(name, Level.INFO, message, throwable, tag))
     }
@@ -47,7 +47,7 @@ class TestLogger(name: String) : Logger(name) {
     override fun debug(
         message: Any?,
         throwable: Throwable?,
-        tag: String?
+        tag: String?,
     ): Unit = platformSynchronized(events) {
         events.add(Event(name, Level.DEBUG, message, throwable, tag))
     }
@@ -55,7 +55,7 @@ class TestLogger(name: String) : Logger(name) {
     override fun trace(
         message: Any?,
         throwable: Throwable?,
-        tag: String?
+        tag: String?,
     ): Unit = platformSynchronized(events) {
         events.add(Event(name, Level.TRACE, message, throwable, tag))
     }

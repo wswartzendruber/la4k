@@ -23,7 +23,7 @@ public class AndroidLogger(name: String) : Logger(name) {
     public override fun fatal(
         message: Any?,
         throwable: Throwable?,
-        tag: String?
+        tag: String?,
     ): Unit {
         if (throwable == null)
             Log.e(targetName, message.toString())
@@ -34,7 +34,7 @@ public class AndroidLogger(name: String) : Logger(name) {
     public override fun error(
         message: Any?,
         throwable: Throwable?,
-        tag: String?
+        tag: String?,
     ): Unit {
         if (throwable == null)
             Log.e(targetName, message.toString())
@@ -45,7 +45,7 @@ public class AndroidLogger(name: String) : Logger(name) {
     public override fun warn(
         message: Any?,
         throwable: Throwable?,
-        tag: String?
+        tag: String?,
     ): Unit {
         if (throwable == null)
             Log.w(targetName, message.toString())
@@ -56,7 +56,7 @@ public class AndroidLogger(name: String) : Logger(name) {
     public override fun info(
         message: Any?,
         throwable: Throwable?,
-        tag: String?
+        tag: String?,
     ) {
         if (throwable == null)
             Log.i(targetName, message.toString())
@@ -67,7 +67,7 @@ public class AndroidLogger(name: String) : Logger(name) {
     public override fun debug(
         message: Any?,
         throwable: Throwable?,
-        tag: String?
+        tag: String?,
     ): Unit {
         if (throwable == null)
             Log.d(targetName, message.toString())
@@ -78,7 +78,7 @@ public class AndroidLogger(name: String) : Logger(name) {
     public override fun trace(
         message: Any?,
         throwable: Throwable?,
-        tag: String?
+        tag: String?,
     ): Unit { }
 
     public override fun isFatalEnabled(tag: String?): Boolean =

@@ -14,5 +14,5 @@ data class Entry(
     val level: Level,
     val message: String,
     val throwable: Throwable? = null,
-    val tag: String? = null
+    val tag: String? = null,
 )

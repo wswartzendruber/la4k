@@ -18,11 +18,11 @@ import org.apache.logging.log4j.core.config.plugins.PluginFactory
 @Plugin(
     name = "ListAppender",
     category = Core.CATEGORY_NAME,
-    elementType = Appender.ELEMENT_TYPE
+    elementType = Appender.ELEMENT_TYPE,
 )
 class ListAppender protected constructor(
     name: String,
-    filter: Filter?
+    filter: Filter?,
 ) : AbstractAppender(name, filter, null, false, null) {
 
     override fun append(event: LogEvent) {
@@ -31,7 +31,7 @@ class ListAppender protected constructor(
             event.level,
             event.message.formattedMessage,
             event.thrown,
-            event.marker?.name
+            event.marker?.name,
         ))
     }
 
@@ -41,7 +41,7 @@ class ListAppender protected constructor(
         @PluginFactory
         fun createAppender(
             @PluginAttribute("name") name: String,
-            @PluginElement("Filter") filter: Filter?
+            @PluginElement("Filter") filter: Filter?,
         ) = ListAppender(name, filter)
     }
 }

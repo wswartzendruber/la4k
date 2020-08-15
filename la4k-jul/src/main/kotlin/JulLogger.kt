@@ -20,7 +20,7 @@ public class JulLogger(name: String) : Logger(name) {
     public override fun fatal(
         message: Any?,
         throwable: Throwable?,
-        tag: String?
+        tag: String?,
     ): Unit {
         if (throwable == null)
             logger.log(Level.SEVERE, message.toString())
@@ -31,7 +31,7 @@ public class JulLogger(name: String) : Logger(name) {
     public override fun error(
         message: Any?,
         throwable: Throwable?,
-        tag: String?
+        tag: String?,
     ): Unit {
         if (throwable == null)
             logger.log(Level.SEVERE, message.toString())
@@ -42,7 +42,7 @@ public class JulLogger(name: String) : Logger(name) {
     public override fun warn(
         message: Any?,
         throwable: Throwable?,
-        tag: String?
+        tag: String?,
     ): Unit {
         if (throwable == null)
             logger.log(Level.WARNING, message.toString())
@@ -53,7 +53,7 @@ public class JulLogger(name: String) : Logger(name) {
     public override fun info(
         message: Any?,
         throwable: Throwable?,
-        tag: String?
+        tag: String?,
     ): Unit {
         if (throwable == null)
             logger.log(Level.INFO, message.toString())
@@ -64,7 +64,7 @@ public class JulLogger(name: String) : Logger(name) {
     public override fun debug(
         message: Any?,
         throwable: Throwable?,
-        tag: String?
+        tag: String?,
     ): Unit {
         if (throwable == null)
             logger.log(Level.FINE, message.toString())
@@ -75,7 +75,7 @@ public class JulLogger(name: String) : Logger(name) {
     public override fun trace(
         message: Any?,
         throwable: Throwable?,
-        tag: String?
+        tag: String?,
     ): Unit {
         if (throwable == null)
             logger.log(Level.FINER, message.toString())

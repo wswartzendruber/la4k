@@ -24,7 +24,7 @@ public abstract class Logger protected constructor(public val name: String) {
     public inline fun fatal(
         throwable: Throwable? = null,
         tag: String? = null,
-        block: () -> Any?
+        block: () -> Any?,
     ): Unit {
         if (isFatalEnabled(tag))
             fatal(block(), throwable, tag)
@@ -40,7 +40,7 @@ public abstract class Logger protected constructor(public val name: String) {
     public abstract fun fatal(
         message: Any?,
         throwable: Throwable? = null,
-        tag: String? = null
+        tag: String? = null,
     ): Unit
 
     /**
@@ -53,7 +53,7 @@ public abstract class Logger protected constructor(public val name: String) {
     public inline fun error(
         throwable: Throwable? = null,
         tag: String? = null,
-        block: () -> Any?
+        block: () -> Any?,
     ): Unit {
         if (isErrorEnabled(tag))
             error(block(), throwable, tag)
@@ -69,7 +69,7 @@ public abstract class Logger protected constructor(public val name: String) {
     public abstract fun error(
         message: Any?,
         throwable: Throwable? = null,
-        tag: String? = null
+        tag: String? = null,
     ): Unit
 
     /**
@@ -82,7 +82,7 @@ public abstract class Logger protected constructor(public val name: String) {
     public inline fun warn(
         throwable: Throwable? = null,
         tag: String? = null,
-        block: () -> Any?
+        block: () -> Any?,
     ): Unit {
         if (isWarnEnabled(tag))
             warn(block(), throwable, tag)
@@ -98,7 +98,7 @@ public abstract class Logger protected constructor(public val name: String) {
     public abstract fun warn(
         message: Any?,
         throwable: Throwable? = null,
-        tag: String? = null
+        tag: String? = null,
     ): Unit
 
     /**
@@ -111,7 +111,7 @@ public abstract class Logger protected constructor(public val name: String) {
     public inline fun info(
         throwable: Throwable? = null,
         tag: String? = null,
-        block: () -> Any?
+        block: () -> Any?,
     ): Unit {
         if (isInfoEnabled(tag))
             info(block(), throwable, tag)
@@ -127,7 +127,7 @@ public abstract class Logger protected constructor(public val name: String) {
     public abstract fun info(
         message: Any?,
         throwable: Throwable? = null,
-        tag: String? = null
+        tag: String? = null,
     ): Unit
 
     /**
@@ -140,7 +140,7 @@ public abstract class Logger protected constructor(public val name: String) {
     public inline fun debug(
         throwable: Throwable? = null,
         tag: String? = null,
-        block: () -> Any?
+        block: () -> Any?,
     ): Unit {
         if (isDebugEnabled(tag))
             debug(block(), throwable, tag)
@@ -156,7 +156,7 @@ public abstract class Logger protected constructor(public val name: String) {
     public abstract fun debug(
         message: Any?,
         throwable: Throwable? = null,
-        tag: String? = null
+        tag: String? = null,
     ): Unit
 
     /**
@@ -169,7 +169,7 @@ public abstract class Logger protected constructor(public val name: String) {
     public inline fun trace(
         throwable: Throwable? = null,
         tag: String? = null,
-        block: () -> Any?
+        block: () -> Any?,
     ): Unit {
         if (isTraceEnabled(tag))
             trace(block(), throwable, tag)
@@ -185,7 +185,7 @@ public abstract class Logger protected constructor(public val name: String) {
     public abstract fun trace(
         message: Any?,
         throwable: Throwable? = null,
-        tag: String? = null
+        tag: String? = null,
     ): Unit
 
     /**

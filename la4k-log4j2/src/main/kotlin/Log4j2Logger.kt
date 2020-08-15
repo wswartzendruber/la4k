@@ -22,7 +22,7 @@ public class Log4j2Logger(name: String) : Logger(name) {
     public override fun fatal(
         message: Any?,
         throwable: Throwable?,
-        tag: String?
+        tag: String?,
     ): Unit {
         if (throwable == null) {
             if (tag == null) {
@@ -58,7 +58,7 @@ public class Log4j2Logger(name: String) : Logger(name) {
     public override fun error(
         message: Any?,
         throwable: Throwable?,
-        tag: String?
+        tag: String?,
     ): Unit {
         if (throwable == null) {
             if (tag == null) {
@@ -94,7 +94,7 @@ public class Log4j2Logger(name: String) : Logger(name) {
     public override fun warn(
         message: Any?,
         throwable: Throwable?,
-        tag: String?
+        tag: String?,
     ): Unit {
         if (throwable == null) {
             if (tag == null) {
@@ -130,7 +130,7 @@ public class Log4j2Logger(name: String) : Logger(name) {
     public override fun info(
         message: Any?,
         throwable: Throwable?,
-        tag: String?
+        tag: String?,
     ): Unit {
         if (throwable == null) {
             if (tag == null) {
@@ -166,7 +166,7 @@ public class Log4j2Logger(name: String) : Logger(name) {
     public override fun debug(
         message: Any?,
         throwable: Throwable?,
-        tag: String?
+        tag: String?,
     ): Unit {
         if (throwable == null) {
             if (tag == null) {
@@ -202,7 +202,7 @@ public class Log4j2Logger(name: String) : Logger(name) {
     public override fun trace(
         message: Any?,
         throwable: Throwable?,
-        tag: String?
+        tag: String?,
     ): Unit {
         if (throwable == null) {
             if (tag == null) {

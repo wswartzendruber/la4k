@@ -24,7 +24,7 @@ public data class Event(
     val level: Level,
     val message: Any?,
     val throwable: Throwable?,
-    val tag: String?
+    val tag: String?,
 )
 
 /**
