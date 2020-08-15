@@ -41,6 +41,7 @@ tasks {
 }
 
 kotlin {
+    explicitApi()
     metadata {
         mavenPublication {
             artifact(tasks["dokkaJar"])

@@ -11,7 +11,7 @@ package org.la4k.test
 import org.la4k.Logger
 import org.la4k.impl.Bridge
 
-class TestBridge : Bridge() {
+public class TestBridge : Bridge() {
 
-    override fun getLogger(name: String): Logger = TestLogger(name)
+    public override fun getLogger(name: String): Logger = TestLogger(name)
 }
