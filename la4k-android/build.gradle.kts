@@ -47,7 +47,6 @@ kotlin {
 
 dependencies {
     implementation(project(":la4k-api"))
-    implementation(kotlin("stdlib-jdk8"))
 }
 
 android {

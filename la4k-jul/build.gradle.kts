@@ -42,7 +42,6 @@ kotlin {
 
 dependencies {
     implementation(project(":la4k-api"))
-    implementation(kotlin("stdlib-jdk8"))
     testImplementation(kotlin("test"))
     testImplementation(kotlin("test-annotations-common"))
     testImplementation(kotlin("test-junit"))

@@ -42,7 +42,6 @@ kotlin {
 
 dependencies {
     implementation(project(":la4k-api"))
-    implementation(kotlin("stdlib-jdk8"))
     implementation("org.slf4j:slf4j-api:1.7.26")
     testImplementation(kotlin("test"))
     testImplementation(kotlin("test-annotations-common"))

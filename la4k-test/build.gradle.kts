@@ -62,14 +62,11 @@ android {
 dependencies {
     // COMMON
     commonMainImplementation(project(":la4k-api"))
-    commonMainImplementation(kotlin("stdlib-common"))
     commonTestImplementation(kotlin("test-common"))
     commonTestImplementation(kotlin("test-annotations-common"))
     // JVM
-    "jvmMainImplementation"(kotlin("stdlib-jdk8"))
     "jvmTestImplementation"(kotlin("test-junit"))
     // Android
-    "androidMainImplementation"(kotlin("stdlib-jdk8"))
     "androidTestImplementation"(kotlin("test-junit"))
 }
 

@@ -42,7 +42,6 @@ kotlin {
 
 dependencies {
     implementation(project(":la4k-api"))
-    implementation(kotlin("stdlib-jdk8"))
     implementation("org.apache.logging.log4j:log4j-api:2.12.0")
     testImplementation(kotlin("test"))
     testImplementation(kotlin("test-annotations-common"))

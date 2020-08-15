@@ -58,15 +58,6 @@ android {
     sourceSets["main"].manifest.srcFile(File("src/androidMain/AndroidManifest.xml"))
 }
 
-dependencies {
-    // COMMON
-    commonMainImplementation(kotlin("stdlib-common"))
-    // JVM
-    "jvmMainImplementation"(kotlin("stdlib-jdk8"))
-    // Android
-    "androidMainImplementation"(kotlin("stdlib-jdk8"))
-}
-
 publishing {
     repositories {
         maven {
