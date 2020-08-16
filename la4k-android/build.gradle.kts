@@ -14,7 +14,7 @@ val mavenPassword: String? by project
 plugins {
     id("com.android.library")
     kotlin("android")
-    id("org.jetbrains.dokka").version("0.10.1")
+    id("org.jetbrains.dokka").version("1.4.0-rc")
     id("maven-publish")
 }
 
@@ -24,11 +24,6 @@ repositories {
 
 tasks {
 
-    val dokka by getting(DokkaTask::class) {
-        outputDirectory = "$buildDir/dokka"
-        outputFormat = "html"
-    }
-
     register<Jar>("sourcesJar") {
         classifier = "sources"
         from("src/main/kotlin")
@@ -37,7 +32,7 @@ tasks {
     register<Jar>("dokkaJar") {
         group = JavaBasePlugin.DOCUMENTATION_GROUP
         classifier = "dokka"
-        from(dokka)
+        from(dokkaHtml)
     }
 }
 

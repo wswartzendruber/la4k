@@ -14,7 +14,7 @@ val mavenPassword: String? by project
 plugins {
     id("com.android.library")
     kotlin("multiplatform")
-    id("org.jetbrains.dokka").version("0.10.1")
+    id("org.jetbrains.dokka").version("1.4.0-rc")
     id("maven-publish")
 }
 
@@ -24,19 +24,18 @@ repositories {
 
 tasks {
 
-    val dokka by getting(DokkaTask::class) {
-        outputDirectory = "$buildDir/dokka"
-        outputFormat = "html"
-        multiplatform {
-            register("jvm") {
-                targets = listOf("JVM", "Android")
+    dokkaHtml {
+        dokkaSourceSets {
+            register("commonMain") {
+                displayName = "Common"
+                platform = "common"
             }
         }
     }
 
     register<Jar>("dokkaJar") {
         classifier = "dokka"
-        from(dokka)
+        from(dokkaHtml)
     }
 }
 
