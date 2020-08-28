@@ -6,11 +6,9 @@
  * https://mozilla.org/MPL/2.0/.
  */
 
-package org.la4k.impl
+package org.la4k
 
-import org.la4k.Logger
-
-public class NullLogger(name: String) : Logger(name) {
+internal class NullLogger(name: String) : Logger(name) {
 
     public override fun fatal(
         message: Any?,

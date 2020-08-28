@@ -8,10 +8,10 @@
 
 package org.la4k.android
 
+import org.la4k.Bridge
 import org.la4k.Logger
-import org.la4k.impl.Bridge
 
 public class AndroidBridge : Bridge() {
 
-    public override fun getLogger(name: String): Logger = AndroidLogger(name)
+    public override fun createLogger(name: String): Logger = AndroidLogger(name)
 }

@@ -8,8 +8,6 @@
 
 package org.la4k
 
-import org.la4k.impl.Bridge
-
 internal expect fun getBridge(): Bridge?
 
 internal expect fun <R> platformSynchronized(lock: Any, block: () -> R): R

@@ -6,14 +6,9 @@
  * https://mozilla.org/MPL/2.0/.
  */
 
-package org.la4k.impl
+package org.la4k
 
-import org.la4k.Logger
+internal class NullBridge : Bridge() {
 
-/**
- * Used when no other bridge has been configured for use.
- */
-public class NullBridge : Bridge() {
-
-    public override fun getLogger(name: String): Logger = NullLogger(name)
+    public override fun createLogger(name: String): Logger = NullLogger(name)
 }

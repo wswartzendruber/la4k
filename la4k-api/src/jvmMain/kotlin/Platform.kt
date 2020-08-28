@@ -8,8 +8,6 @@
 
 package org.la4k
 
-import org.la4k.impl.Bridge
-
 import java.util.ServiceLoader
 
 internal actual fun getBridge() =

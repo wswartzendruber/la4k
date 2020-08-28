@@ -8,10 +8,10 @@
 
 package org.la4k.test
 
+import org.la4k.Bridge
 import org.la4k.Logger
-import org.la4k.impl.Bridge
 
 public class TestBridge : Bridge() {
 
-    public override fun getLogger(name: String): Logger = TestLogger(name)
+    public override fun createLogger(name: String): Logger = TestLogger(name)
 }

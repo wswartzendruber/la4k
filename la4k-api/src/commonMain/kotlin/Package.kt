@@ -8,8 +8,6 @@
 
 package org.la4k
 
-import org.la4k.impl.NullBridge
-
 internal val bridge = getBridge() ?: NullBridge()
 
 internal val loggers = mutableMapOf<String, Logger>()
@@ -20,5 +18,5 @@ internal val loggers = mutableMapOf<String, Logger>()
  */
 public fun logger(name: String): Logger =
     platformSynchronized(loggers) {
-        loggers.getOrPut(name, { bridge.getLogger(name) })
+        loggers.getOrPut(name, { bridge.createLogger(name) })
     }

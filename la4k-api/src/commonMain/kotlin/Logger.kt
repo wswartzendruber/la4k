@@ -11,6 +11,8 @@ package org.la4k
 /**
  * The main class of the LA4K API; libraries should use it and only it for logging via LA4K.
  * Instances of this class can be retrieved by calling [logger].
+ *
+ * Bridges extend this class directly.
  */
 public abstract class Logger protected constructor(public val name: String) {
 

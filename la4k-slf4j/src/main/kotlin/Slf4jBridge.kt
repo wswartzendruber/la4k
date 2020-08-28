@@ -8,10 +8,10 @@
 
 package org.la4k.slf4j
 
+import org.la4k.Bridge
 import org.la4k.Logger
-import org.la4k.impl.Bridge
 
 public class Slf4jBridge : Bridge() {
 
-    public override fun getLogger(name: String): Logger = Slf4jLogger(name)
+    public override fun createLogger(name: String): Logger = Slf4jLogger(name)
 }
