@@ -214,23 +214,3 @@ assertTrue(
 ```
 
 All levels for all loggers and tags will always return that they are enabled.
-
-# Licensing
-
-This project is made available under the **Mozilla Public License 2.0** (MPLv2). Simply put,
-anyone is free to use this project as-is, to include static linking and even compiling this code
-in with code covered by a *different license*. Any changes made to any of this project's files
-that are distributed outside of an organization must also be made available under the MPLv2
-license. It is **not** viral, though, and will **never** spread across files.
-
-Note that the phrase *different license* refers to even the following FSF licenses:
-
-* GPLv2 and later
-* LGPLv2.1 and later
-* AGPLv3 and later
-
-In this case, any changes made to any of this project's files must still be made available
-under the MPLv2 license.
-
-Please see [LICENSE](LICENSE) and [MPL 2.0 FAQ](https://www.mozilla.org/en-US/MPL/2.0/FAQ/) for
-more information.
