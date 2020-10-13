@@ -5,6 +5,7 @@
 
 import java.net.URI
 
+import org.jetbrains.dokka.Platform
 import org.jetbrains.dokka.gradle.DokkaTask
 
 val mavenUrlBase: String? by project
@@ -14,7 +15,7 @@ val mavenPassword: String? by project
 plugins {
     id("com.android.library")
     kotlin("multiplatform")
-    id("org.jetbrains.dokka").version("1.4.0-rc")
+    id("org.jetbrains.dokka").version("1.4.10")
     id("maven-publish")
 }
 
@@ -26,9 +27,9 @@ tasks {
 
     dokkaHtml {
         dokkaSourceSets {
-            register("commonMain") {
-                displayName = "Common"
-                platform = "common"
+            named("commonMain") {
+                displayName.set("Common")
+                platform.set(Platform.common)
             }
         }
     }

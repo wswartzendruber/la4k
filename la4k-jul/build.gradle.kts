@@ -13,7 +13,7 @@ val mavenPassword: String? by project
 
 plugins {
     kotlin("jvm")
-    id("org.jetbrains.dokka").version("1.4.0-rc")
+    id("org.jetbrains.dokka").version("1.4.10")
     id("maven-publish")
 }
 
