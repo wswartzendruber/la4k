@@ -5,15 +5,15 @@
 
 package org.la4k.test.test
 
+import kotlin.test.assertTrue
+import kotlin.test.BeforeTest
+import kotlin.test.Test
+
 import org.la4k.logger
 import org.la4k.test.clear
 import org.la4k.test.count
 import org.la4k.test.Event
 import org.la4k.test.Level
-
-import kotlin.test.assertTrue
-import kotlin.test.BeforeTest
-import kotlin.test.Test
 
 class TestTests {
 

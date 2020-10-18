@@ -5,12 +5,12 @@
 
 package org.la4k.slf4j.test
 
-import org.la4k.logger
-
 import kotlin.test.assertFalse
 import kotlin.test.assertTrue
 import kotlin.test.BeforeTest
 import kotlin.test.Test
+
+import org.la4k.logger
 
 class Slf4jTests {
 

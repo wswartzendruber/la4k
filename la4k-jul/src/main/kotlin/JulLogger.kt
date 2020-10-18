@@ -14,10 +14,10 @@
 
 package org.la4k.jul
 
-import org.la4k.Logger
-
 import java.util.logging.Level as Level
 import java.util.logging.Logger as JulLogger
+
+import org.la4k.Logger
 
 public class JulLogger(name: String) : Logger(name) {
 

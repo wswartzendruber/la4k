@@ -5,14 +5,14 @@
 
 package org.la4k.jul.test
 
-import org.la4k.logger
-
 import java.util.logging.Level
 import java.util.logging.Logger
 import kotlin.test.assertFalse
 import kotlin.test.assertTrue
 import kotlin.test.BeforeTest
 import kotlin.test.Test
+
+import org.la4k.logger
 
 class JulTests {
 

@@ -14,9 +14,9 @@
 
 package org.la4k.android
 
-import org.la4k.Logger
-
 import android.util.Log
+
+import org.la4k.Logger
 
 public class AndroidLogger(name: String) : Logger(name) {
 
