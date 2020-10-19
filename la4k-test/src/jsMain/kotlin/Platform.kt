@@ -12,8 +12,7 @@
  * and limitations under the License.
  */
 
-package org.la4k
+package org.la4k.test
 
-internal expect fun getBridge(): Bridge?
-
-internal expect fun <R> platformSynchronized(lock: Any, block: () -> R): R
+internal actual fun <R> platformSynchronized(lock: Any, block: () -> R) =
+    synchronized(lock, block)

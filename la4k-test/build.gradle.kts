@@ -49,6 +49,16 @@ kotlin {
     }
     jvm { }
     android { }
+    js {
+        browser {
+            testTask {
+                useKarma {
+                    useFirefox()
+                }
+            }
+        }
+        nodejs { }
+    }
 }
 
 android {
@@ -68,6 +78,8 @@ dependencies {
     "jvmTestImplementation"(kotlin("test-junit"))
     // Android
     "androidTestImplementation"(kotlin("test-junit"))
+    // JS
+    "jsTestImplementation"(kotlin("test-js"))
 }
 
 publishing {

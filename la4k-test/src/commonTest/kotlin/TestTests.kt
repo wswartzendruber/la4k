@@ -18,7 +18,7 @@ import org.la4k.test.Level
 class TestTests {
 
     @Test
-    fun `logger separation`() {
+    fun logger_separation() {
 
         assertTrue(count({ it == fatalEvent }) == 0)
         assertTrue(count({ it == errorEvent }) == 0)
@@ -137,32 +137,32 @@ class TestTests {
     }
 
     @Test
-    fun `FATAL is always enabled`() {
+    fun FATAL_is_always_enabled() {
         assertTrue(logger("test").isFatalEnabled())
     }
 
     @Test
-    fun `ERROR is always enabled`() {
+    fun ERROR_is_always_enabled() {
         assertTrue(logger("test").isErrorEnabled())
     }
 
     @Test
-    fun `WARN is always enabled`() {
+    fun WARN_is_always_enabled() {
         assertTrue(logger("test").isWarnEnabled())
     }
 
     @Test
-    fun `INFO is always enabled`() {
+    fun INFO_is_always_enabled() {
         assertTrue(logger("test").isInfoEnabled())
     }
 
     @Test
-    fun `DEBUG is always enabled`() {
+    fun DEBUG_is_always_enabled() {
         assertTrue(logger("test").isDebugEnabled())
     }
 
     @Test
-    fun `TRACE is always enabled`() {
+    fun TRACE_is_always_enabled() {
         assertTrue(logger("test").isTraceEnabled())
     }
 
@@ -181,5 +181,9 @@ class TestTests {
         val infoEvent = Event("info", Level.INFO, "info message", exception, tag)
         val debugEvent = Event("debug", Level.DEBUG, "debug message", exception, tag)
         val traceEvent = Event("trace", Level.TRACE, "trace message", exception, tag)
+
+        init {
+            initialize()
+        }
     }
 }

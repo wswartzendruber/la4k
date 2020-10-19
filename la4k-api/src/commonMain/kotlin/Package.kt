@@ -14,9 +14,11 @@
 
 package org.la4k
 
-internal val bridge = getBridge() ?: NullBridge()
+internal expect fun <R> platformSynchronized(lock: Any, block: () -> R): R
 
-internal val loggers = mutableMapOf<String, Logger>()
+internal expect val bridge: Bridge
+
+private val loggers = mutableMapOf<String, Logger>()
 
 /**
  * Returns a [Logger] instance with the specified name. If an instance with that name does not

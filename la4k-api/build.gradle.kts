@@ -49,6 +49,16 @@ kotlin {
     }
     jvm { }
     android { }
+    js {
+        browser {
+            testTask {
+                useKarma {
+                    useFirefox()
+                }
+            }
+        }
+        nodejs { }
+    }
 }
 
 android {
