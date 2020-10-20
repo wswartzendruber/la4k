@@ -31,6 +31,10 @@ tasks {
                 displayName.set("Common")
                 platform.set(Platform.common)
             }
+            named("jsMain") {
+                displayName.set("JS")
+                platform.set(Platform.js)
+            }
         }
     }
 
