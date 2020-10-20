@@ -15,7 +15,7 @@ val mavenPassword: String? by project
 plugins {
     id("com.android.library")
     kotlin("multiplatform")
-    id("org.jetbrains.dokka").version("1.4.10")
+    id("org.jetbrains.dokka")
     id("maven-publish")
 }
 
