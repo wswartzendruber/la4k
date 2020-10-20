@@ -57,7 +57,7 @@ kotlin {
         browser {
             testTask {
                 useKarma {
-                    useFirefox()
+                    usePhantomJS()
                 }
             }
         }
