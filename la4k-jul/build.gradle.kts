@@ -20,12 +20,15 @@ plugins {
 tasks {
 
     register<Jar>("sourcesJar") {
+        group = "Build"
+        description = "Packages all sources into a JAR."
         classifier = "sources"
         from(sourceSets["main"].allSource)
     }
 
-    register<Jar>("dokkaJar") {
-        group = JavaBasePlugin.DOCUMENTATION_GROUP
+    register<Jar>("dokkaHtmlJar") {
+        group = "Build"
+        description = "Packages dokkaHtml output into a JAR."
         classifier = "dokka"
         from(dokkaHtml)
     }
@@ -45,9 +48,9 @@ dependencies {
 publishing {
     publications {
         create<MavenPublication>("maven") {
-            from(components["java"])
+            from(components["kotlin"])
             artifact(tasks["sourcesJar"])
-            artifact(tasks["dokkaJar"])
+            artifact(tasks["dokkaHtmlJar"])
         }
     }
     repositories {

@@ -38,7 +38,9 @@ tasks {
         }
     }
 
-    register<Jar>("dokkaJar") {
+    register<Jar>("dokkaHtmlJar") {
+        group = "Build"
+        description = "Packages dokkaHtml output into a JAR."
         classifier = "dokka"
         from(dokkaHtml)
     }
@@ -48,7 +50,7 @@ kotlin {
     explicitApi()
     metadata {
         mavenPublication {
-            artifact(tasks["dokkaJar"])
+            artifact(tasks["dokkaHtmlJar"])
         }
     }
     jvm { }

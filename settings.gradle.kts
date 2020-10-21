@@ -10,6 +10,5 @@ include(
     "la4k-api",
     "la4k-jul",
     "la4k-log4j2",
-    "la4k-slf4j",
-    "la4k-test"
+    "la4k-slf4j"
 )
