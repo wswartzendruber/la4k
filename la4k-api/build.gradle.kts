@@ -56,13 +56,7 @@ kotlin {
     jvm { }
     android { }
     js {
-        browser {
-            testTask {
-                useKarma {
-                    usePhantomJS()
-                }
-            }
-        }
+        browser { }
         nodejs { }
     }
 }
@@ -72,6 +66,13 @@ android {
     defaultConfig.minSdkVersion(9)
     sourceSets["main"].java.srcDirs(File("src/jvmMain/kotlin"))
     sourceSets["main"].manifest.srcFile(File("src/androidMain/AndroidManifest.xml"))
+}
+
+dependencies {
+    // JVM
+    "jvmTestImplementation"(kotlin("test-common"))
+    "jvmTestImplementation"(kotlin("test-annotations-common"))
+    "jvmTestImplementation"(kotlin("test-junit"))
 }
 
 publishing {

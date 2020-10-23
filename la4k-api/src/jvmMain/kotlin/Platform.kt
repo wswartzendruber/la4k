@@ -27,3 +27,21 @@ internal actual val bridge by lazy {
         .lastOrNull()
         ?: NullBridge()
 }
+
+/**
+ * Returns a [Logger] instance with the name of the calling class. If an instance with that name
+ * does not exist, then it will be created and stored for future use.
+ */
+public fun logger(): Logger {
+
+    val name = Thread
+		.currentThread()
+        .stackTrace
+		.map { it.className }
+        .firstOrNull { it != "java.lang.Thread" && it != className }
+        ?: throw IllegalStateException("The calling class name could not be determined.")
+
+    return logger(name)
+}
+
+private val className = object {}::class.java.enclosingClass.name
