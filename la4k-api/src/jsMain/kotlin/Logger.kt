@@ -14,17 +14,7 @@
 
 package org.la4k
 
-internal expect fun <R> platformSynchronized(lock: Any, block: () -> R): R
-
-internal expect val bridge: Bridge
-
 private val loggers = mutableMapOf<String, Logger>()
 
-/**
- * Returns a [Logger] instance with the specified name. If an instance with that name does not
- * exist, then it will be created and stored for future use.
- */
-public fun logger(name: String): Logger =
-    platformSynchronized(loggers) {
-        loggers.getOrPut(name, { bridge.createLogger(name) })
-    }
+public actual fun logger(name: String): Logger =
+    loggers.getOrPut(name, { bridge.createLogger(name) })

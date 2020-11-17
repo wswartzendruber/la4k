@@ -15,6 +15,12 @@
 package org.la4k
 
 /**
+ * Returns a [Logger] instance with the specified name. If an instance with that name does not
+ * exist, then it will be created and stored for future use.
+ */
+public expect fun logger(name: String): Logger
+
+/**
  * The main class of the LA4K API; libraries should use it and only it for logging via LA4K.
  * Instances of this class can be retrieved by calling [logger].
  *

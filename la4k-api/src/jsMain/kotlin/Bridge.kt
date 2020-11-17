@@ -14,27 +14,19 @@
 
 package org.la4k
 
-internal actual fun <R> platformSynchronized(lock: Any, block: () -> R) =
-    synchronized(lock, block)
-
-internal actual val bridge by lazy {
-    synchronized(bridgeLock) {
-        if (activeBridge == null)
-            activeBridge = NullBridge()
-        activeBridge!!
-    }
-}
-
-private val bridgeLock = 0
 private var activeBridge: Bridge? = null
 
+internal val bridge by lazy {
+    if (activeBridge == null)
+        activeBridge = NullBridge()
+    activeBridge!!
+}
+
 public fun activateBridge(value: Bridge): Unit {
-    synchronized(bridgeLock) {
-        if (activeBridge == null)
-            activeBridge = value
-        else
-            throw BridgeActivationException()
-    }
+    if (activeBridge == null)
+        activeBridge = value
+    else
+        throw BridgeActivationException()
 }
 
 public class BridgeActivationException : Exception("A bridge has already been activated.")

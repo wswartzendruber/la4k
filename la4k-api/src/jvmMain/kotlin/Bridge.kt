@@ -16,32 +16,10 @@ package org.la4k
 
 import java.util.ServiceLoader
 
-internal actual fun <R> platformSynchronized(lock: Any, block: () -> R) =
-    synchronized(lock, block)
-
-internal actual val bridge by lazy {
+internal val bridge =
     ServiceLoader
         .load(Bridge::class.java)
         .asSequence()
         .toList()
         .lastOrNull()
         ?: NullBridge()
-}
-
-/**
- * Returns a [Logger] instance with the name of the calling class. If an instance with that name
- * does not exist, then it will be created and stored for future use.
- */
-public fun logger(): Logger {
-
-    val name = Thread
-		.currentThread()
-        .stackTrace
-		.map { it.className }
-        .firstOrNull { it != "java.lang.Thread" && it != className }
-        ?: throw IllegalStateException("The calling class name could not be determined.")
-
-    return logger(name)
-}
-
-private val className = object {}::class.java.enclosingClass.name
