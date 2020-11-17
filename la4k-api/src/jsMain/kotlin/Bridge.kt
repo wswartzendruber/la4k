@@ -22,6 +22,11 @@ internal val bridge by lazy {
     activeBridge!!
 }
 
+/**
+ * Activates the specified bridge. This function can only be called once and must be called
+ * before [logger] is called. Otherwise, the [NullBridge] will be used for the duration of the
+ * application.
+ */
 public fun activateBridge(value: Bridge): Unit {
     if (activeBridge == null)
         activeBridge = value
@@ -29,4 +34,7 @@ public fun activateBridge(value: Bridge): Unit {
         throw BridgeActivationException()
 }
 
+/**
+ * Thrown by [activateBridge] when a bridge has already been selected.
+ */
 public class BridgeActivationException : Exception("A bridge has already been activated.")
