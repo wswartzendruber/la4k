@@ -16,11 +16,7 @@ package org.la4k
 
 private var activeBridge: Bridge? = null
 
-internal val bridge by lazy {
-    if (activeBridge == null)
-        activeBridge = NullBridge()
-    activeBridge!!
-}
+internal val bridge by lazy { activeBridge ?: NullBridge() }
 
 /**
  * Activates the specified bridge. This function can only be called once and must be called
