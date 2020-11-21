@@ -43,6 +43,7 @@ kotlin {
 
 dependencies {
     implementation(project(":la4k-api"))
+    implementation(npm("winston", ">=3.0.0"))
     testImplementation(kotlin("test-common"))
     testImplementation(kotlin("test-annotations-common"))
     testImplementation(kotlin("test-js"))

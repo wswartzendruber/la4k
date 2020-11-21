@@ -16,13 +16,42 @@ package org.la4k.winston
 
 import org.la4k.Logger
 
+private val loggers = mutableMapOf<String, dynamic>()
+
+/**
+ * Causes the logging output from the LA4K logger with the specified [name] to be forwarded to
+ * the provided Winston [logger]. This can only be called once per [name] and must be called
+ * before any logger with that [name] is initialized.
+ */
+public fun registerLogger(name: String, logger: dynamic): Unit {
+
+    if (name in loggers.keys)
+        throw WinstonLoggerException()
+
+    loggers[name] = logger
+}
+
+/**
+ * Thrown by [registerLogger] to indicate that it is too late to register a logger.
+ */
+public class WinstonLoggerException() : Exception("Cannot bind LA4K logger to Winston logger.")
+
 public class WinstonLogger(name: String) : Logger(name) {
+
+    val logger = loggers.getOrPut(name, { null })
 
     public override fun fatal(
         message: Any?,
         throwable: Throwable?,
         tag: String?,
-    ): Unit { }
+    ): Unit {
+
+        if (logger != null) {
+            logger.error(message)
+            if (throwable != null)
+                logger.error(throwable)
+        }
+    }
 
     public override fun error(
         message: Any?,
@@ -54,15 +83,15 @@ public class WinstonLogger(name: String) : Logger(name) {
         tag: String?,
     ): Unit { }
 
-    public override fun isFatalEnabled(tag: String?): Boolean = false
+    public override fun isFatalEnabled(tag: String?): Boolean = false // TODO
 
-    public override fun isErrorEnabled(tag: String?): Boolean = false
+    public override fun isErrorEnabled(tag: String?): Boolean = false // TODO
 
-    public override fun isWarnEnabled(tag: String?): Boolean = false
+    public override fun isWarnEnabled(tag: String?): Boolean = false // TODO
 
-    public override fun isInfoEnabled(tag: String?): Boolean = false
+    public override fun isInfoEnabled(tag: String?): Boolean = false // TODO
 
-    public override fun isDebugEnabled(tag: String?): Boolean = false
+    public override fun isDebugEnabled(tag: String?): Boolean = false // TODO
 
-    public override fun isTraceEnabled(tag: String?): Boolean = false
+    public override fun isTraceEnabled(tag: String?): Boolean = false // TODO
 }
