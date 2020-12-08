@@ -38,7 +38,7 @@ public class WinstonLoggerException : Exception("Cannot bind LA4K logger to Wins
 
 public class WinstonLogger(name: String) : Logger(name) {
 
-    val logger = loggers.getOrPut(name, { null })
+    private val logger = loggers.getOrPut(name, { null })
 
     public override fun fatal(
         message: Any?,
