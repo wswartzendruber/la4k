@@ -6,6 +6,8 @@
 package org.la4k.winston.test
 
 import kotlin.test.assertFailsWith
+import kotlin.test.assertFalse
+import kotlin.test.assertTrue
 import kotlin.test.Test
 
 import org.la4k.activateBridge
@@ -17,6 +19,66 @@ import org.la4k.winston.WinstonLoggerException
 external fun require(module: String): dynamic
 
 class WinstonTests {
+
+    @Test
+    fun fatal_is_enabled_initialized() {
+        assertTrue(logger("initialized-test-logger").isFatalEnabled())
+    }
+
+    @Test
+    fun error_is_enabled_initialized() {
+        assertTrue(logger("initialized-test-logger").isErrorEnabled())
+    }
+
+    @Test
+    fun warn_is_enabled_initialized() {
+        assertTrue(logger("initialized-test-logger").isWarnEnabled())
+    }
+
+    @Test
+    fun info_is_enabled_initialized() {
+        assertTrue(logger("initialized-test-logger").isInfoEnabled())
+    }
+
+    @Test
+    fun debug_is_enabled_initialized() {
+        assertFalse(logger("initialized-test-logger").isDebugEnabled())
+    }
+
+    @Test
+    fun trace_is_enabled_initialized() {
+        assertFalse(logger("initialized-test-logger").isTraceEnabled())
+    }
+
+    @Test
+    fun fatal_is_enabled_uninitialized() {
+        assertFalse(logger("uninitialized-test-logger").isFatalEnabled())
+    }
+
+    @Test
+    fun error_is_enabled_uninitialized() {
+        assertFalse(logger("uninitialized-test-logger").isErrorEnabled())
+    }
+
+    @Test
+    fun warn_is_enabled_uninitialized() {
+        assertFalse(logger("uninitialized-test-logger").isWarnEnabled())
+    }
+
+    @Test
+    fun info_is_enabled_uninitialized() {
+        assertFalse(logger("uninitialized-test-logger").isInfoEnabled())
+    }
+
+    @Test
+    fun debug_is_enabled_uninitialized() {
+        assertFalse(logger("uninitialized-test-logger").isDebugEnabled())
+    }
+
+    @Test
+    fun trace_is_enabled_uninitialized() {
+        assertFalse(logger("uninitialized-test-logger").isTraceEnabled())
+    }
 
     @Test
     fun forbid_post_logger_registration() {
@@ -31,16 +93,17 @@ class WinstonTests {
         init {
 
             val winston = require("winston")
-            val winstonLogger = js("""
-                winston.createLogger({
-                    transports: [
-                        new winston.transports.Console()
-                    ]
-                });
-            """)
 
             activateBridge(WinstonBridge())
-            registerLogger("test-logger", winstonLogger)
+            registerLogger("initialized-test-logger", js("""
+                winston.createLogger({
+                    level: 'info',
+                    transports: [
+                        new winston.transports.Console()
+                    ],
+                });
+            """))
+            logger("uninitialized-test-logger")
         }
     }
 }

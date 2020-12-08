@@ -34,7 +34,7 @@ public fun registerLogger(name: String, logger: dynamic): Unit {
 /**
  * Thrown by [registerLogger] to indicate that it is too late to register a logger.
  */
-public class WinstonLoggerException() : Exception("Cannot bind LA4K logger to Winston logger.")
+public class WinstonLoggerException : Exception("Cannot bind LA4K logger to Winston logger.")
 
 public class WinstonLogger(name: String) : Logger(name) {
 
@@ -45,7 +45,6 @@ public class WinstonLogger(name: String) : Logger(name) {
         throwable: Throwable?,
         tag: String?,
     ): Unit {
-
         if (logger != null) {
             logger.error(message)
             if (throwable != null)
@@ -81,17 +80,47 @@ public class WinstonLogger(name: String) : Logger(name) {
         message: Any?,
         throwable: Throwable?,
         tag: String?,
-    ): Unit { }
+    ): Unit {
+        if (logger != null) {
+            logger.silly(message)
+            if (throwable != null)
+                logger.silly(throwable)
+        }
+    }
 
-    public override fun isFatalEnabled(tag: String?): Boolean = false // TODO
+    public override fun isFatalEnabled(tag: String?): Boolean =
+        if (logger != null)
+            logger.levels[logger.level] >= logger.levels["error"]
+        else
+            false
 
-    public override fun isErrorEnabled(tag: String?): Boolean = false // TODO
+    public override fun isErrorEnabled(tag: String?): Boolean =
+        if (logger != null)
+            logger.levels[logger.level] >= logger.levels["error"]
+        else
+            false
 
-    public override fun isWarnEnabled(tag: String?): Boolean = false // TODO
+    public override fun isWarnEnabled(tag: String?): Boolean =
+        if (logger != null)
+            logger.levels[logger.level] >= logger.levels["warn"]
+        else
+            false
 
-    public override fun isInfoEnabled(tag: String?): Boolean = false // TODO
+    public override fun isInfoEnabled(tag: String?): Boolean =
+        if (logger != null)
+            logger.levels[logger.level] >= logger.levels["info"]
+        else
+            false
 
-    public override fun isDebugEnabled(tag: String?): Boolean = false // TODO
+    public override fun isDebugEnabled(tag: String?): Boolean =
+        if (logger != null)
+            logger.levels[logger.level] >= logger.levels["debug"]
+        else
+            false
 
-    public override fun isTraceEnabled(tag: String?): Boolean = false // TODO
+    public override fun isTraceEnabled(tag: String?): Boolean =
+        if (logger != null)
+            logger.levels[logger.level] >= logger.levels["silly"]
+        else
+            false
 }
