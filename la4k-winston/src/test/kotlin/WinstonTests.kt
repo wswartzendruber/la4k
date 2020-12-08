@@ -41,42 +41,42 @@ class WinstonTests {
     }
 
     @Test
-    fun debug_is_enabled_initialized() {
+    fun debug_is_disabled_initialized() {
         assertFalse(logger("initialized-test-logger").isDebugEnabled())
     }
 
     @Test
-    fun trace_is_enabled_initialized() {
+    fun trace_is_disabled_initialized() {
         assertFalse(logger("initialized-test-logger").isTraceEnabled())
     }
 
     @Test
-    fun fatal_is_enabled_uninitialized() {
+    fun fatal_is_disabled_uninitialized() {
         assertFalse(logger("uninitialized-test-logger").isFatalEnabled())
     }
 
     @Test
-    fun error_is_enabled_uninitialized() {
+    fun error_is_disabled_uninitialized() {
         assertFalse(logger("uninitialized-test-logger").isErrorEnabled())
     }
 
     @Test
-    fun warn_is_enabled_uninitialized() {
+    fun warn_is_disabled_uninitialized() {
         assertFalse(logger("uninitialized-test-logger").isWarnEnabled())
     }
 
     @Test
-    fun info_is_enabled_uninitialized() {
+    fun info_is_disabled_uninitialized() {
         assertFalse(logger("uninitialized-test-logger").isInfoEnabled())
     }
 
     @Test
-    fun debug_is_enabled_uninitialized() {
+    fun debug_is_disabled_uninitialized() {
         assertFalse(logger("uninitialized-test-logger").isDebugEnabled())
     }
 
     @Test
-    fun trace_is_enabled_uninitialized() {
+    fun trace_is_disabled_uninitialized() {
         assertFalse(logger("uninitialized-test-logger").isTraceEnabled())
     }
 
