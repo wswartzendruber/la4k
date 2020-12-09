@@ -5,8 +5,6 @@
 
 import java.net.URI
 
-import org.jetbrains.dokka.gradle.DokkaTask
-
 val mavenUrlBase: String? by project
 val mavenUsername: String? by project
 val mavenPassword: String? by project
