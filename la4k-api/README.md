@@ -35,6 +35,8 @@ val log = logger(this::class.qualifiedName)
 As Kotlin/JS gains better reflection support, the need to pass the name in explicitly may be
 removed.
 
+Both of these functions cache `org.la4k.Logger` instances for immediate future retrieval.
+
 ### Usage
 
 There are six logging levels: **FATAL**, **ERROR**, **WARN**, **INFO**, **DEBUG**, and
@@ -54,7 +56,7 @@ log.warn("This has a message, an exception, and a tag.", aCaughtException, "AN_A
 ```
 
 If a message takes a long amount of time to evaluate, it may be passed in as a lambda for
-conditional evaluation:
+conditional execution:
 
 ```kotlin
 log.info {
@@ -76,3 +78,8 @@ log.trace(aCaughtException, "AN_ARBITRARY_TAG") {
     "Like above, but is only evaluated if TRACE is enabled for the provided tag."
 }
 ```
+
+Note that the message may be of any type. This affords each bridge the opportunity to handle
+each message in a manner most appropriate for it.
+
+See `org.la4k.Logger` for more information.
