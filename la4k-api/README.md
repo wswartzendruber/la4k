@@ -23,7 +23,7 @@ val log = logger()
 ```
 
 This will return an instance of `org.la4k.Logger` with the fully qualified name of the calling
-class.
+class. Note that this approach **does not** depend on Kotlin/JVM reflection.
 
 If anything other than the JVM or Android targets are being used, or if a component is a part of
 the common source set, the name of the logger must be passed in as the only parameter:
