@@ -86,7 +86,7 @@ The following bridge is available for the browser:
 
 ### NodeJS
 
-The following bridges are available for NodeJS:
+The following bridge is available for NodeJS:
 
 | Module                           | Gradle Syntax                                | Activation                                   |
 |----------------------------------|----------------------------------------------|----------------------------------------------|

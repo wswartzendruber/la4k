@@ -39,8 +39,7 @@ removed.
 
 There are six logging levels: **FATAL**, **ERROR**, **WARN**, **INFO**, **DEBUG**, and
 **TRACE**. Each logging statement must include a message and may optionally include an exception
-and/or a tag of some kind. If a message takes a long amount of time to evaluate, it may be
-passed in as a lambda instead for conditional evaluation.
+and/or a tag of some kind:
 
 ```kotlin
 log.fatal("This is a simple message.")
@@ -53,6 +52,9 @@ log.error("This has a message with a caught exception.", aCaughtException)
 ```kotlin
 log.warn("This has a message, an exception, and a tag.", aCaughtException, "AN_ARBITRARY_TAG")
 ```
+
+If a message takes a long amount of time to evaluate, it may be passed in as a lambda for
+conditional evaluation:
 
 ```kotlin
 log.info {
