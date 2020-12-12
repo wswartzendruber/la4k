@@ -14,11 +14,16 @@
 
 package org.la4k
 
+private val loggers = mutableMapOf<String, Logger>()
+
 /**
  * Returns a [Logger] instance with the specified name. If an instance with that name does not
  * exist, then it will be created and stored for future use.
  */
-public expect fun logger(name: String): Logger
+public fun logger(name: String): Logger =
+    platformSynchronized(loggers) {
+        loggers.getOrPut(name, { bridge.createLogger(name) })
+    }
 
 /**
  * The main class of the LA4K API; libraries should use it and only it for logging via LA4K.
@@ -26,7 +31,7 @@ public expect fun logger(name: String): Logger
  *
  * Bridges extend this class directly.
  */
-public abstract class Logger protected constructor(public val name: String) {
+public abstract class Logger(public val name: String) {
 
     /**
      * Selectively dispatches an event indicating that an unrecoverable error has occurred.

@@ -26,17 +26,12 @@ private val loggers = mutableMapOf<String, dynamic>()
 public fun registerLogger(name: String, logger: dynamic): Unit {
 
     if (name in loggers.keys)
-        throw WinstonLoggerException()
+        throw WinstonLoggerException("Cannot bind LA4K logger to Winston logger.")
 
     loggers[name] = logger
 }
 
-/**
- * Thrown by [registerLogger] to indicate that it is too late to register a logger.
- */
-public class WinstonLoggerException : Exception("Cannot bind LA4K logger to Winston logger.")
-
-public class WinstonLogger(name: String) : Logger(name) {
+public class WinstonLogger internal constructor(name: String) : Logger(name) {
 
     private val logger = loggers.getOrPut(name, { null })
 

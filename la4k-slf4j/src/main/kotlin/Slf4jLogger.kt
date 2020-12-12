@@ -20,7 +20,7 @@ import org.slf4j.LoggerFactory
 import org.slf4j.Marker
 import org.slf4j.MarkerFactory
 
-public class Slf4jLogger(name: String) : Logger(name) {
+public class Slf4jLogger internal constructor(name: String) : Logger(name) {
 
     private val logger = LoggerFactory.getLogger(name)
     private val markers = mutableMapOf<String, Marker>()

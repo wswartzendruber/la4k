@@ -20,7 +20,7 @@ import org.apache.logging.log4j.LogManager
 import org.apache.logging.log4j.Marker
 import org.apache.logging.log4j.MarkerManager
 
-public class Log4j2Logger(name: String) : Logger(name) {
+public class Log4j2Logger internal constructor(name: String) : Logger(name) {
 
     private val logger = LogManager.getLogger(name)
     private val markers = mutableMapOf<String, Marker>()

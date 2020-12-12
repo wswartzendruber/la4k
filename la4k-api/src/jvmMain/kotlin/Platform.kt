@@ -14,12 +14,5 @@
 
 package org.la4k
 
-import java.util.ServiceLoader
-
-internal actual val bridge =
-    ServiceLoader
-        .load(Bridge::class.java)
-        .asSequence()
-        .toList()
-        .lastOrNull()
-        ?: NullBridge()
+internal actual fun <R> platformSynchronized(lock: Any, block: () -> R) =
+    synchronized(lock, block)

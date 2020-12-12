@@ -19,7 +19,7 @@ import java.util.logging.Logger as JulLogger
 
 import org.la4k.Logger
 
-public class JulLogger(name: String) : Logger(name) {
+public class JulLogger internal constructor(name: String) : Logger(name) {
 
     private val logger = JulLogger.getLogger(name)
 

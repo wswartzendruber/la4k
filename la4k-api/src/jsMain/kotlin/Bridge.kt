@@ -16,21 +16,16 @@ package org.la4k
 
 private var activeBridge: Bridge? = null
 
-internal val bridge by lazy { activeBridge ?: NullBridge() }
+internal actual val bridge by lazy { activeBridge ?: NullBridge() }
 
 /**
- * Activates the specified bridge. This function can only be called once and must be called
- * before [logger] is called. Otherwise, the [NullBridge] will be used for the duration of the
- * application.
+ * Called by applications to activate a bridge. This function can only be called once and must
+ * be called before [logger] is called. Otherwise, the [NullBridge] will be used for the
+ * duration of the application.
  */
 public fun activateBridge(value: Bridge): Unit {
     if (activeBridge == null)
         activeBridge = value
     else
-        throw BridgeActivationException()
+        throw BridgeActivationException("A bridge has already been activated.")
 }
-
-/**
- * Thrown by [activateBridge] when a bridge has already been selected.
- */
-public class BridgeActivationException : Exception("A bridge has already been activated.")

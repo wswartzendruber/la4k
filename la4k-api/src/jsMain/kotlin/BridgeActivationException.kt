@@ -14,12 +14,12 @@
 
 package org.la4k
 
-import java.util.ServiceLoader
-
-internal actual val bridge =
-    ServiceLoader
-        .load(Bridge::class.java)
-        .asSequence()
-        .toList()
-        .lastOrNull()
-        ?: NullBridge()
+/**
+ * Indicates a problem during activation of a bridge.
+ */
+public open class BridgeActivationException : Exception {
+    public constructor() : super()
+    public constructor(message: String?) : super(message)
+    public constructor(cause: Throwable?) : super(cause)
+    public constructor(message: String?, cause: Throwable?) : super(message,cause)
+}

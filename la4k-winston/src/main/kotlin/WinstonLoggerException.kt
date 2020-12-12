@@ -12,14 +12,14 @@
  * and limitations under the License.
  */
 
-package org.la4k
+package org.la4k.winston
 
-import java.util.ServiceLoader
-
-internal actual val bridge =
-    ServiceLoader
-        .load(Bridge::class.java)
-        .asSequence()
-        .toList()
-        .lastOrNull()
-        ?: NullBridge()
+/**
+ * Indicates a problem with binding a LA4K logger to a Winston logger.
+ */
+public open class WinstonLoggerException : Exception {
+    public constructor() : super()
+    public constructor(message: String?) : super(message)
+    public constructor(cause: Throwable?) : super(cause)
+    public constructor(message: String?, cause: Throwable?) : super(message,cause)
+}

@@ -16,7 +16,7 @@ package org.la4k.test
 
 import org.la4k.Logger
 
-public class TestLogger(name: String) : Logger(name) {
+public class TestLogger internal constructor(name: String) : Logger(name) {
 
     public override fun fatal(
         message: Any?,

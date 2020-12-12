@@ -14,7 +14,6 @@
 
 package org.la4k
 
-private val loggers = mutableMapOf<String, Logger>()
 private val className = object {}::class.java.enclosingClass.name
 
 /**
@@ -32,8 +31,3 @@ public fun logger(): Logger {
 
     return logger(name)
 }
-
-public actual fun logger(name: String): Logger =
-    synchronized(loggers) {
-        loggers.getOrPut(name, { bridge.createLogger(name) })
-    }

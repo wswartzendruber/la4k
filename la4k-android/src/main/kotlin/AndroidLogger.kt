@@ -18,7 +18,7 @@ import android.util.Log
 
 import org.la4k.Logger
 
-public class AndroidLogger(name: String) : Logger(name) {
+public class AndroidLogger internal constructor(name: String) : Logger(name) {
 
     val targetName =
         if (name.length <= 23)

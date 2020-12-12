@@ -14,7 +14,4 @@
 
 package org.la4k
 
-private val loggers = mutableMapOf<String, Logger>()
-
-public actual fun logger(name: String): Logger =
-    loggers.getOrPut(name, { bridge.createLogger(name) })
+internal expect fun <R> platformSynchronized(lock: Any, block: () -> R): R
