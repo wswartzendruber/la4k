@@ -48,9 +48,16 @@ dependencies {
 }
 
 publishing {
+    publications {
+        create<MavenPublication>("maven") {
+            from(components["kotlin"])
+            artifact(tasks["sourcesJar"])
+            artifact(tasks["dokkaHtmlJar"])
+        }
+    }
     repositories {
         maven {
-            url = URI("$mavenUrlBase/la4k-test;publish=1")
+            url = URI("$mavenUrlBase/la4k-winston;publish=1")
             credentials {
                 username = mavenUsername
                 password = mavenPassword
