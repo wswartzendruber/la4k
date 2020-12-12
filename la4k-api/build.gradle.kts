@@ -59,7 +59,13 @@ kotlin {
     jvm { }
     android { }
     js {
-        browser { }
+        browser {
+            testTask {
+                useKarma {
+                    usePhantomJS()
+                }
+            }
+        }
         nodejs { }
     }
 }
@@ -72,10 +78,13 @@ android {
 }
 
 dependencies {
+    // Common
+    commonTestImplementation(kotlin("test-common"))
+    commonTestImplementation(kotlin("test-annotations-common"))
     // JVM
-    "jvmTestImplementation"(kotlin("test-common"))
-    "jvmTestImplementation"(kotlin("test-annotations-common"))
     "jvmTestImplementation"(kotlin("test-junit"))
+    // JS
+    "jsTestImplementation"(kotlin("test-js"))
 }
 
 publishing {

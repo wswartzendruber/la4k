@@ -75,7 +75,7 @@ android {
 }
 
 dependencies {
-    // COMMON
+    // Common
     commonMainImplementation(project(":la4k-api"))
     commonTestImplementation(kotlin("test-common"))
     commonTestImplementation(kotlin("test-annotations-common"))

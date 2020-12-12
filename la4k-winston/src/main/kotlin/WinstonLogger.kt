@@ -26,7 +26,7 @@ private val loggers = mutableMapOf<String, dynamic>()
 public fun registerLogger(name: String, logger: dynamic): Unit {
 
     if (name in loggers.keys)
-        throw WinstonLoggerException("Cannot bind LA4K logger to Winston logger.")
+        throw WinstonLoggerException("LA4K logger is already bound to a Winston logger.")
 
     loggers[name] = logger
 }
@@ -51,25 +51,49 @@ public class WinstonLogger internal constructor(name: String) : Logger(name) {
         message: Any?,
         throwable: Throwable?,
         tag: String?,
-    ): Unit { }
+    ): Unit {
+        if (logger != null) {
+            logger.error(message)
+            if (throwable != null)
+                logger.error(throwable)
+        }
+    }
 
     public override fun warn(
         message: Any?,
         throwable: Throwable?,
         tag: String?,
-    ): Unit { }
+    ): Unit {
+        if (logger != null) {
+            logger.warn(message)
+            if (throwable != null)
+                logger.warn(throwable)
+        }
+    }
 
     public override fun info(
         message: Any?,
         throwable: Throwable?,
         tag: String?,
-    ): Unit { }
+    ): Unit {
+        if (logger != null) {
+            logger.info(message)
+            if (throwable != null)
+                logger.info(throwable)
+        }
+    }
 
     public override fun debug(
         message: Any?,
         throwable: Throwable?,
         tag: String?,
-    ): Unit { }
+    ): Unit {
+        if (logger != null) {
+            logger.debug(message)
+            if (throwable != null)
+                logger.debug(throwable)
+        }
+    }
 
     public override fun trace(
         message: Any?,
