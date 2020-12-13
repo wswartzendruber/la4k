@@ -88,6 +88,7 @@ The following bridge is available for the browser:
 
 The following bridge is available for NodeJS:
 
-| Module                           | Gradle Syntax                                | Activation                                   |
-|----------------------------------|----------------------------------------------|----------------------------------------------|
-| [la4k-test](la4k-test/README.md) | `implementation("org.la4k:la4k-test:0.5.0")` | `activateBridge(org.la4k.test.TestBridge())` |
+| Module                                 | Gradle Syntax                                   | Activation                                      |
+|----------------------------------------|-------------------------------------------------|-------------------------------------------------|
+| [la4k-test](la4k-test/README.md)       | `implementation("org.la4k:la4k-test:0.5.0")`    | `activateBridge(org.la4k.test.TestBridge())`    |
+| [la4k-winston](la4k-winston/README.md) | `implementation("org.la4k:la4k-winston:0.5.0")` | `activateBridge(org.la4k.test.WinstonBridge())` |
