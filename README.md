@@ -1,10 +1,12 @@
 # Introduction
 
-LA4K is a from-scratch logging API for Kotlin Multiplatform. It decouples the API that libraries
-use to log events from the bridges that applications include to forward those events to actual
-logging implementations.
+LA4K is a from-scratch logging API for Kotlin Multiplatform. It contains two main parts:
 
-# Libraries
+1. `la4k-api`, which **libraries** use to log events in an agnostic manner.
+2. Any one of the bridges which **applications** use to forward those events to a logging
+   implementation.
+
+# For Libraries
 
 Libraries reference `la4k-api` in the same manner regardless of what Kotlin backend they target:
 
@@ -37,11 +39,13 @@ dependencies {
 With the module added to your project, you can continue on to the
 [la4k-api module documentation](la4k-api/README.md).
 
-# Applications
+# For Applications
 
 If an application has a dependency that uses `la4k-api`, then a bridge can be imported into the
 application to have logging messages from the dependency properly forwarded. Bridges are
 currently hosted in the same Bintray repo as `la4k-api` and with matching version numbers.
+
+Note that if no bridge has been activated then logging events will simply be discarded.
 
 ## JVM
 
@@ -86,7 +90,7 @@ The following bridge is available for the browser:
 
 ### NodeJS
 
-The following bridge is available for NodeJS:
+The following bridges are available for NodeJS:
 
 | Module                                 | Gradle Syntax                                   | Activation                                      |
 |----------------------------------------|-------------------------------------------------|-------------------------------------------------|

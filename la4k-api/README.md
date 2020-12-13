@@ -5,9 +5,9 @@ library should not have to take any specific logging implementation into conside
 
 The single `org.la4k` package in this module contains all necessary functionality.
 
-## Package org.la4k
+# Package org.la4k
 
-### Initialization
+## Initialization
 
 To use this library, import the `org.la4k.logger` function:
 
@@ -37,7 +37,7 @@ removed.
 
 Both of these functions cache `org.la4k.Logger` instances for immediate future retrieval.
 
-### Usage
+## Usage
 
 There are six logging levels: **FATAL**, **ERROR**, **WARN**, **INFO**, **DEBUG**, and
 **TRACE**. Each logging statement must include a message and may optionally include an exception

@@ -53,4 +53,5 @@ The following level mappings are used:
 
 ## Tags
 
-LA4K tags are discarded by the bridge.
+LA4K tags are discarded by the bridge. Any query for a level being enabled for a specific tag
+returns `true` as long as that level is enabled for the logger in question.
