@@ -10,10 +10,10 @@ import kotlin.test.BeforeTest
 import kotlin.test.Test
 
 import org.la4k.logger
+import org.la4k.Level
 import org.la4k.test.clear
 import org.la4k.test.count
 import org.la4k.test.Event
-import org.la4k.test.Level
 
 class TestTests {
 

@@ -14,6 +14,7 @@
 
 package org.la4k.test
 
+import org.la4k.Level
 import org.la4k.Logger
 
 public class TestLogger internal constructor(name: String) : Logger(name) {

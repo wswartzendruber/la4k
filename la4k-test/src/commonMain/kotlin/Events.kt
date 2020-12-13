@@ -14,6 +14,8 @@
 
 package org.la4k.test
 
+import org.la4k.Level
+
 internal val events = mutableListOf<Event>()
 
 /**
@@ -32,11 +34,6 @@ public data class Event(
     val throwable: Throwable?,
     val tag: String?,
 )
-
-/**
- * Represents the six logging levels supported by LA4K.
- */
-public enum class Level { FATAL, ERROR, WARN, INFO, DEBUG, TRACE }
 
 /**
  * Clears the store of all test events.
