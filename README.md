@@ -36,8 +36,8 @@ dependencies {
 }
 ```
 
-With the module added to your project, you can continue on to the
-[la4k-api module documentation](la4k-api/README.md).
+With the module added to your project, you can continue on to the [la4k-api module](la4k-api)
+documentation.
 
 # For Applications
 
@@ -55,13 +55,13 @@ than one bridge is present, the last one discovered will be used.
 
 The following bridges are available for the JVM:
 
-| Module                                 | Gradle Syntax                                   |
-|----------------------------------------|-------------------------------------------------|
-| [la4k-console](la4k-console/README.md) | `implementation("org.la4k:la4k-console:0.5.0")` |
-| [la4k-jul](la4k-jul/README.md)         | `implementation("org.la4k:la4k-jul:0.5.0")`     |
-| [la4k-log4j2](la4k-log4j2/README.md)   | `implementation("org.la4k:la4k-log4j2:0.5.0")`  |
-| [la4k-slf4j](la4k-slf4j/README.md)     | `implementation("org.la4k:la4k-slf4j:0.5.0")`   |
-| [la4k-test](la4k-test/README.md)       | `implementation("org.la4k:la4k-test:0.5.0")`    |
+| Module                       | Gradle Syntax                                   |
+|------------------------------|-------------------------------------------------|
+| [la4k-console](la4k-console) | `implementation("org.la4k:la4k-console:0.5.0")` |
+| [la4k-jul](la4k-jul)         | `implementation("org.la4k:la4k-jul:0.5.0")`     |
+| [la4k-log4j2](la4k-log4j2)   | `implementation("org.la4k:la4k-log4j2:0.5.0")`  |
+| [la4k-slf4j](la4k-slf4j)     | `implementation("org.la4k:la4k-slf4j:0.5.0")`   |
+| [la4k-test](la4k-test)       | `implementation("org.la4k:la4k-test:0.5.0")`    |
 
 ## Android
 
@@ -71,9 +71,9 @@ than one bridge is present, the last one discovered will be used.
 
 The following bridge is available for Android:
 
-| Module                                 | Gradle Syntax                                   |
-|----------------------------------------|-------------------------------------------------|
-| [la4k-android](la4k-android/README.md) | `implementation("org.la4k:la4k-android:0.5.0")` |
+| Module                       | Gradle Syntax                                   |
+|------------------------------|-------------------------------------------------|
+| [la4k-android](la4k-android) | `implementation("org.la4k:la4k-android:0.5.0")` |
 
 ## JS
 
@@ -85,17 +85,17 @@ statement is made by `la4k-api`.
 
 The following bridge is available for the browser:
 
-| Module                                 | Gradle Syntax                                   | Activation
-|----------------------------------------|-------------------------------------------------|-------------------------------------------------|
-| [la4k-console](la4k-console/README.md) | `implementation("org.la4k:la4k-console:0.5.0")` | `activateBridge(org.la4k.test.ConsoleBridge())` |
-| [la4k-test](la4k-test/README.md)       | `implementation("org.la4k:la4k-test:0.5.0")`    | `activateBridge(org.la4k.test.TestBridge())`    |
+| Module                       | Gradle Syntax                                   | Activation
+|------------------------------|-------------------------------------------------|-------------------------------------------------|
+| [la4k-console](la4k-console) | `implementation("org.la4k:la4k-console:0.5.0")` | `activateBridge(org.la4k.test.ConsoleBridge())` |
+| [la4k-test](la4k-test)       | `implementation("org.la4k:la4k-test:0.5.0")`    | `activateBridge(org.la4k.test.TestBridge())`    |
 
 ### NodeJS
 
 The following bridges are available for NodeJS:
 
-| Module                                 | Gradle Syntax                                   | Activation                                      |
-|----------------------------------------|-------------------------------------------------|-------------------------------------------------|
-| [la4k-console](la4k-console/README.md) | `implementation("org.la4k:la4k-console:0.5.0")` | `activateBridge(org.la4k.test.ConsoleBridge())` |
-| [la4k-test](la4k-test/README.md)       | `implementation("org.la4k:la4k-test:0.5.0")`    | `activateBridge(org.la4k.test.TestBridge())`    |
-| [la4k-winston](la4k-winston/README.md) | `implementation("org.la4k:la4k-winston:0.5.0")` | `activateBridge(org.la4k.test.WinstonBridge())` |
+| Module                       | Gradle Syntax                                   | Activation                                      |
+|------------------------------|-------------------------------------------------|-------------------------------------------------|
+| [la4k-console](la4k-console) | `implementation("org.la4k:la4k-console:0.5.0")` | `activateBridge(org.la4k.test.ConsoleBridge())` |
+| [la4k-test](la4k-test)       | `implementation("org.la4k:la4k-test:0.5.0")`    | `activateBridge(org.la4k.test.TestBridge())`    |
+| [la4k-winston](la4k-winston) | `implementation("org.la4k:la4k-winston:0.5.0")` | `activateBridge(org.la4k.test.WinstonBridge())` |
