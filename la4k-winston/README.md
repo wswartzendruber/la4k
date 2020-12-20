@@ -4,16 +4,30 @@
 
 The `la4k-winston` bridge connects `la4k-api` to the Winston logger for NodeJS.
 
-## Registering Loggers
+## Activation
 
-Once the bridge has been activated via `org.la4k.activateBridge`, LA4K loggers can be mapped to
-Winston loggers via the former's name.
+Activation is done via the `org.la4k.activateBridge` function:
+
+```kotlin
+import org.la4k.activateBridge
+```
+
+```kotlin
+activateBridge(org.la4k.winston.WinstonBridge())
+```
+
+This must be done before any LA4K loggers are initialized by any component. Otherwise, all LA4K
+logging will be discarded.
+
+## Mapping
+
+Once the bridge has been activated, LA4K loggers can be mapped to Winston loggers via the
+former's name.
 
 For example, say that a dependency in a Kotlin/JS application uses a LA4K logger named
 `org.wswartzendruber.GrandConspiracy`:
 
 ```kotlin
-import org.la4k.activateBridge
 import org.la4k.winston.registerLogger
 ```
 
@@ -27,7 +41,6 @@ val masonicLogger = js("""
     });
 """)
 
-activateBridge(org.la4k.winston.WinstonBridge())
 registerLogger("org.wswartzendruber.GrandConspiracy", masonicLogger)
 ```
 
@@ -42,16 +55,16 @@ discarded. Once a logger is registered, it becomes locked and cannot be re-regis
 
 The following level mappings are used:
 
-| LA4K  | SLF4J |
-|-------|-------|
-| FATAL | ERROR |
-| ERROR | ERROR |
-| WARN  | WARN  |
-| INFO  | INFO  |
-| DEBUG | DEBUG |
-| TRACE | SILLY |
+| LA4K  | Winston |
+|-------|---------|
+| FATAL | ERROR   |
+| ERROR | ERROR   |
+| WARN  | WARN    |
+| INFO  | INFO    |
+| DEBUG | DEBUG   |
+| TRACE | SILLY   |
 
 ## Tags
 
-LA4K tags are discarded by the bridge. Any query for a level being enabled for a specific tag
+LA4K tags are discarded by this bridge. Any query for a level being enabled for a specific tag
 returns `true` as long as that level is enabled for the logger in question.
