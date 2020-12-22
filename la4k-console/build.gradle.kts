@@ -51,7 +51,11 @@ kotlin {
     jvm { }
     android { }
     js {
-        browser { }
+        browser {
+            testTask {
+                enabled = false
+            }
+        }
         nodejs { }
     }
 }

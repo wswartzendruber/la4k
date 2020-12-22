@@ -61,9 +61,7 @@ kotlin {
     js {
         browser {
             testTask {
-                useKarma {
-                    usePhantomJS()
-                }
+                enabled = false
             }
         }
         nodejs { }
