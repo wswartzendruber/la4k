@@ -9,15 +9,15 @@ val mavenUrlBase: String? by project
 val mavenUsername: String? by project
 val mavenPassword: String? by project
 
+repositories {
+    google()
+}
+
 plugins {
     id("com.android.library")
     kotlin("android")
     id("org.jetbrains.dokka")
     id("maven-publish")
-}
-
-repositories {
-    google()
 }
 
 tasks {
