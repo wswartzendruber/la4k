@@ -40,6 +40,7 @@ kotlin {
 }
 
 dependencies {
+    implementation(platform(kotlin("bom")))
     implementation(project(":la4k-api"))
     implementation(npm("winston", ">=3.0.0"))
     testImplementation(kotlin("test-common"))

@@ -37,6 +37,7 @@ kotlin {
 }
 
 dependencies {
+    implementation(platform(kotlin("bom")))
     implementation(project(":la4k-api"))
     implementation("org.slf4j:slf4j-api:1.7.26")
     testImplementation(kotlin("test"))

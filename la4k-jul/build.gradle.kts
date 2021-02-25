@@ -37,6 +37,7 @@ kotlin {
 }
 
 dependencies {
+    implementation(platform(kotlin("bom")))
     implementation(project(":la4k-api"))
     testImplementation(kotlin("test"))
     testImplementation(kotlin("test-annotations-common"))

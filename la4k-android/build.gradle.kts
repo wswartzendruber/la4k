@@ -42,6 +42,7 @@ kotlin {
 }
 
 dependencies {
+    implementation(platform(kotlin("bom")))
     implementation(project(":la4k-api"))
 }
 

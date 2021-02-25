@@ -70,6 +70,7 @@ android {
 
 dependencies {
     // Common
+    commonMainImplementation(platform(kotlin("bom")))
     commonMainImplementation(project(":la4k-api"))
 }
 
