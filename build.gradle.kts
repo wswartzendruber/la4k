@@ -13,10 +13,10 @@ buildscript {
 }
 
 plugins {
-   kotlin("multiplatform").version("1.4.30").apply(false)
-   kotlin("jvm").version("1.4.30").apply(false)
-   kotlin("android").version("1.4.30").apply(false)
-   kotlin("js").version("1.4.30").apply(false)
+   kotlin("multiplatform").version("1.5.0").apply(false)
+   kotlin("jvm").version("1.5.0").apply(false)
+   kotlin("android").version("1.5.0").apply(false)
+   kotlin("js").version("1.5.0").apply(false)
    id("org.jetbrains.dokka").version("1.4.20").apply(false)
 }
 

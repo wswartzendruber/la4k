@@ -41,8 +41,6 @@ dependencies {
     implementation(project(":la4k-api"))
     implementation("org.apache.logging.log4j:log4j-api:2.12.0")
     testImplementation(kotlin("test"))
-    testImplementation(kotlin("test-annotations-common"))
-    testImplementation(kotlin("test-junit"))
     testImplementation("org.apache.logging.log4j:log4j-core:2.12.0")
 }
 

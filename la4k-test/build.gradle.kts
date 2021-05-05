@@ -76,14 +76,7 @@ dependencies {
     // Common
     commonMainImplementation(platform(kotlin("bom")))
     commonMainImplementation(project(":la4k-api"))
-    commonTestImplementation(kotlin("test-common"))
-    commonTestImplementation(kotlin("test-annotations-common"))
-    // JVM
-    "jvmTestImplementation"(kotlin("test-junit"))
-    // Android
-    "androidTestImplementation"(kotlin("test-junit"))
-    // JS
-    "jsTestImplementation"(kotlin("test-js"))
+    commonTestImplementation(kotlin("test"))
 }
 
 publishing {

@@ -78,12 +78,7 @@ android {
 dependencies {
     // Common
     commonMainImplementation(platform(kotlin("bom")))
-    commonTestImplementation(kotlin("test-common"))
-    commonTestImplementation(kotlin("test-annotations-common"))
-    // JVM
-    "jvmTestImplementation"(kotlin("test-junit"))
-    // JS
-    "jsTestImplementation"(kotlin("test-js"))
+    commonTestImplementation(kotlin("test"))
 }
 
 publishing {
