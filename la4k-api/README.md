@@ -15,27 +15,17 @@ To use this library, import the `org.la4k.logger` function:
 import org.la4k.logger
 ```
 
-There are two ways to instansiate a logger. JVM and Android developers will likely prefer the
-simplest approach:
+Then instansiate a new logger by calling it with the desired name as the only parameter:
 
 ```kotlin
-val log = logger()
+val log = logger("io.mypackage.OneOfMyClasses")
 ```
 
-This will return an instance of `org.la4k.Logger` with the fully qualified name of the calling
-class. Note that this approach **does not** depend on Kotlin/JVM reflection.
+As Kotlin Multiplatform gains better reflection support, logger instansiation should become more
+intuitive and remove the need to specify the logger's name.
 
-If anything other than the JVM or Android targets are being used, or if a component is a part of
-the common source set, the name of the logger must be passed in as the only parameter:
-
-```kotlin
-val log = logger(this::class.qualifiedName)
-```
-
-As Kotlin/JS gains better reflection support, the need to pass the name in explicitly may be
-removed.
-
-Both of these functions cache `org.la4k.Logger` instances for immediate future retrieval.
+Note that the `logger` function caches each instance it creates. Future calls with the same name
+will simply involve retrieving an existing logger from a dictionary.
 
 ## Usage
 
