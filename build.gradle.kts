@@ -17,7 +17,8 @@ plugins {
    kotlin("jvm").version("1.5.0").apply(false)
    kotlin("android").version("1.5.0").apply(false)
    kotlin("js").version("1.5.0").apply(false)
-   id("org.jetbrains.dokka").version("1.4.20").apply(false)
+   // TODO: Re-enable Dokka when it becomes fit for service.
+   // id("org.jetbrains.dokka").version("1.4.32").apply(false)
 }
 
 allprojects {
