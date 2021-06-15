@@ -1,3 +1,5 @@
+#!/usr/bin/env sh
+
 #
 # SPDX-FileCopyrightText: 2015 the original author or authors
 #
