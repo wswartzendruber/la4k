@@ -1,3 +1,9 @@
+<!--
+    SPDX-FileCopyrightText: 2021 William Swartzendruber <wswartzendruber@gmail.com>
+
+    SPDX-License-Identifier: CC-BY-4.0
+-->
+
 # Introduction
 
 LA4K is a from-scratch logging API for Kotlin Multiplatform. It contains two main parts:

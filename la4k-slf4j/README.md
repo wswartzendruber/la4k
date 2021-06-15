@@ -1,3 +1,9 @@
+<!--
+    SPDX-FileCopyrightText: 2021 William Swartzendruber <wswartzendruber@gmail.com>
+
+    SPDX-License-Identifier: CC-BY-4.0
+-->
+
 # Module la4k-slf4j
 
 ## Introduction

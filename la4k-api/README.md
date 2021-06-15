@@ -1,3 +1,9 @@
+<!--
+    SPDX-FileCopyrightText: 2021 William Swartzendruber <wswartzendruber@gmail.com>
+
+    SPDX-License-Identifier: CC-BY-4.0
+-->
+
 # Module la4k-api
 
 `la4k-api` is used by libraries to log events in an entirely agnostic manner. In this way, the
