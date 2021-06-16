@@ -105,3 +105,13 @@ The following bridges are available for NodeJS:
 | [la4k-console](la4k-console) | `implementation("org.la4k:la4k-console:0.5.0")` | `activateBridge(org.la4k.test.ConsoleBridge())` |
 | [la4k-test](la4k-test)       | `implementation("org.la4k:la4k-test:0.5.0")`    | `activateBridge(org.la4k.test.TestBridge())`    |
 | [la4k-winston](la4k-winston) | `implementation("org.la4k:la4k-winston:0.5.0")` | `activateBridge(org.la4k.test.WinstonBridge())` |
+
+# Licensing
+
+The redistributable portions of this work are licensed under the terms of the Apache License
+version 2.0 (SPDX: `Apache-2.0`).
+
+Documentation is placed under the Creative Commons (SPDX: `CC-BY-4.0`).
+
+Buildscripts and unit tests are placed in the Public Domain to the highest degree allowed by law
+(SPDX: `CC0-1.0`).
