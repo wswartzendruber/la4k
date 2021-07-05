@@ -108,10 +108,11 @@ The following bridges are available for NodeJS:
 
 # Licensing
 
-The redistributable portions of this work are licensed under the terms of the Apache License
-version 2.0 (SPDX: `Apache-2.0`).
+Different portions of this project are placed under different licenses:
 
-Documentation is placed under the Creative Commons (SPDX: `CC-BY-4.0`).
-
-Buildscripts and unit tests are placed in the Public Domain to the highest degree allowed by law
-(SPDX: `CC0-1.0`).
+| Component     | License                        | SPDX ID                                 |
+|---------------|--------------------------------|-----------------------------------------|
+| Library       | Apache License 2.0             | [`Apache-2.0`](LICENSES/Apache-2.0.txt) |
+| Documentation | Creative Commons (Attribution) | [`CC-BY-4.0`](LICENSES/CC-BY-4.0.txt)   |
+| Build scripts | Public Domain                  | [`CC0-1.0`](LICENSES/CC0-1.0.txt)       |
+| Unit tests    | Public Domain                  | [`CC0-1.0`](LICENSES/CC0-1.0.txt)       |
