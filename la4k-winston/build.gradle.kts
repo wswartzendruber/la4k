@@ -12,8 +12,7 @@ val mavenPassword: String? by project
 
 plugins {
     kotlin("js")
-    // TODO: Re-enable Dokka when it becomes fit for service.
-    // id("org.jetbrains.dokka")
+    id("org.jetbrains.dokka")
     id("maven-publish")
 }
 
@@ -26,13 +25,12 @@ tasks {
         from("src/main/kotlin")
     }
 
-    // TODO: Re-enable Dokka when it becomes fit for service.
-    // register<Jar>("dokkaHtmlJar") {
-    //     group = "Build"
-    //     description = "Packages dokkaHtml output into a JAR."
-    //     classifier = "dokka"
-    //     from(dokkaHtml)
-    // }
+    register<Jar>("dokkaHtmlJar") {
+        group = "Build"
+        description = "Packages dokkaHtml output into a JAR."
+        classifier = "dokka"
+        from(dokkaHtml)
+    }
 }
 
 kotlin {
@@ -54,8 +52,7 @@ publishing {
         create<MavenPublication>("maven") {
             from(components["kotlin"])
             artifact(tasks["sourcesJar"])
-            // TODO: Re-enable Dokka when it becomes fit for service.
-            // artifact(tasks["dokkaHtmlJar"])
+            artifact(tasks["dokkaHtmlJar"])
         }
     }
     repositories {

@@ -6,8 +6,7 @@
 
 import java.net.URI
 
-// TODO: Re-enable Dokka when it becomes fit for service.
-// import org.jetbrains.dokka.Platform
+import org.jetbrains.dokka.Platform
 
 val mavenUrlBase: String? by project
 val mavenUsername: String? by project
@@ -20,41 +19,38 @@ repositories {
 plugins {
     id("com.android.library")
     kotlin("multiplatform")
-    // TODO: Re-enable Dokka when it becomes fit for service.
-    // id("org.jetbrains.dokka")
+    id("org.jetbrains.dokka")
     id("maven-publish")
 }
 
 tasks {
 
-    // TODO: Re-enable Dokka when it becomes fit for service.
-    // dokkaHtml {
-    //     dokkaSourceSets {
-    //         named("commonMain") {
-    //             displayName.set("Common")
-    //             platform.set(Platform.common)
-    //         }
-    //         named("jsMain") {
-    //             displayName.set("JS")
-    //             platform.set(Platform.js)
-    //         }
-    //     }
-    // }
-    //
-    // register<Jar>("dokkaHtmlJar") {
-    //     group = "Build"
-    //     description = "Packages dokkaHtml output into a JAR."
-    //     classifier = "dokka"
-    //     from(dokkaHtml)
-    // }
+    dokkaHtml {
+        dokkaSourceSets {
+            named("commonMain") {
+                displayName.set("Common")
+                platform.set(Platform.common)
+            }
+            named("jsMain") {
+                displayName.set("JS")
+                platform.set(Platform.js)
+            }
+        }
+    }
+
+    register<Jar>("dokkaHtmlJar") {
+        group = "Build"
+        description = "Packages dokkaHtml output into a JAR."
+        classifier = "dokka"
+        from(dokkaHtml)
+    }
 }
 
 kotlin {
     explicitApi()
     metadata {
         mavenPublication {
-            // TODO: Re-enable Dokka when it becomes fit for service.
-            // artifact(tasks["dokkaHtmlJar"])
+            artifact(tasks["dokkaHtmlJar"])
         }
     }
     jvm { }
