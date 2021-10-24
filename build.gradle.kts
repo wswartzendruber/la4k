@@ -9,16 +9,16 @@ buildscript {
         google()
     }
     dependencies {
-
+        classpath("com.android.tools.build:gradle:4.2.0")
     }
 }
 
 plugins {
-    kotlin("multiplatform").version("1.5.20").apply(false)
-    kotlin("jvm").version("1.5.20").apply(false)
-    kotlin("android").version("1.5.20").apply(false)
-    kotlin("js").version("1.5.20").apply(false)
-    id("org.jetbrains.dokka").version("1.5.0").apply(false)
+    kotlin("multiplatform").version("1.5.31").apply(false)
+    kotlin("jvm").version("1.5.31").apply(false)
+    kotlin("android").version("1.5.31").apply(false)
+    kotlin("js").version("1.5.31").apply(false)
+    id("org.jetbrains.dokka").version("1.5.31").apply(false)
 }
 
 allprojects {

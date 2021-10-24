@@ -31,6 +31,11 @@ tasks {
         classifier = "dokka"
         from(dokkaHtml)
     }
+
+    withType<JavaCompile>() {
+        sourceCompatibility = "1.8"
+        targetCompatibility = "1.8"
+    }
 }
 
 kotlin {
