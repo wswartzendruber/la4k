@@ -1,7 +1,7 @@
 <!--
     SPDX-FileCopyrightText: 2021 William Swartzendruber <wswartzendruber@gmail.com>
 
-    SPDX-License-Identifier: CC-BY-4.0
+    SPDX-License-Identifier: Apache-2.0
 -->
 
 # Introduction
@@ -110,9 +110,9 @@ The following bridges are available for NodeJS:
 
 Different portions of this project are placed under different licenses:
 
-| Component     | License                        | SPDX ID                                 |
-|---------------|--------------------------------|-----------------------------------------|
-| Library       | Apache License 2.0             | [`Apache-2.0`](LICENSES/Apache-2.0.txt) |
-| Documentation | Creative Commons (Attribution) | [`CC-BY-4.0`](LICENSES/CC-BY-4.0.txt)   |
-| Build scripts | Public Domain                  | [`CC0-1.0`](LICENSES/CC0-1.0.txt)       |
-| Unit tests    | Public Domain                  | [`CC0-1.0`](LICENSES/CC0-1.0.txt)       |
+| Component     | License            | SPDX ID                                 |
+|---------------|--------------------|-----------------------------------------|
+| Library       | Apache License 2.0 | [`Apache-2.0`](LICENSES/Apache-2.0.txt) |
+| Documentation | Apache License 2.0 | [`Apache-2.0`](LICENSES/Apache-2.0.txt) |
+| Build scripts | Public Domain      | [`CC0-1.0`](LICENSES/CC0-1.0.txt)       |
+| Unit tests    | Public Domain      | [`CC0-1.0`](LICENSES/CC0-1.0.txt)       |
