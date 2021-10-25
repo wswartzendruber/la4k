@@ -89,7 +89,7 @@ statement is made by `la4k-api`.
 
 ### Browser
 
-The following bridge is available for the browser:
+The following bridges are available for the browser:
 
 | Module                       | Gradle Syntax                                   | Activation
 |------------------------------|-------------------------------------------------|-------------------------------------------------|
