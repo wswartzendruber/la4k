@@ -12,7 +12,7 @@ val mavenPassword: String? by project
 
 plugins {
     kotlin("js")
-    // id("org.jetbrains.dokka")
+    id("org.jetbrains.dokka")
     id("signing")
     id("maven-publish")
 }
@@ -26,12 +26,12 @@ tasks {
         from("src/main/kotlin")
     }
 
-    // register<Jar>("dokkaHtmlJar") {
-    //     group = "Build"
-    //     description = "Packages dokkaHtml output into a JAR."
-    //     classifier = "javadoc"
-    //     from(dokkaHtml)
-    // }
+    register<Jar>("dokkaHtmlJar") {
+        group = "Build"
+        description = "Packages dokkaHtml output into a JAR."
+        classifier = "javadoc"
+        from(dokkaHtml)
+    }
 }
 
 kotlin {
@@ -58,7 +58,7 @@ publishing {
         create<MavenPublication>("maven") {
             from(components["kotlin"])
             artifact(tasks["sourcesJar"])
-            // artifact(tasks["dokkaHtmlJar"])
+            artifact(tasks["dokkaHtmlJar"])
             pom {
                 name.set("LA4K Bridge: Winston")
                 description.set("LA4K bridge for Winston")
