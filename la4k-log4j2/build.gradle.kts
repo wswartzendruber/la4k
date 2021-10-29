@@ -6,13 +6,14 @@
 
 import java.net.URI
 
-val mavenUrlBase: String? by project
+val mavenUrl: String? by project
 val mavenUsername: String? by project
 val mavenPassword: String? by project
 
 plugins {
     kotlin("jvm")
     id("org.jetbrains.dokka")
+    id("signing")
     id("maven-publish")
 }
 
@@ -28,7 +29,7 @@ tasks {
     register<Jar>("dokkaHtmlJar") {
         group = "Build"
         description = "Packages dokkaHtml output into a JAR."
-        classifier = "dokka"
+        classifier = "javadoc"
         from(dokkaHtml)
     }
 
@@ -50,17 +51,45 @@ dependencies {
     testImplementation("org.apache.logging.log4j:log4j-core:2.12.0")
 }
 
+signing {
+    useGpgCmd()
+    sign(publishing.publications)
+}
+
 publishing {
     publications {
         create<MavenPublication>("maven") {
             from(components["kotlin"])
             artifact(tasks["sourcesJar"])
             artifact(tasks["dokkaHtmlJar"])
+            pom {
+                name.set("LA4K Bridge: Log4j 2")
+                description.set("LA4K bridge for Log4j 2")
+                url.set("https://github.com/wswartzendruber/la4k")
+                developers {
+                    developer {
+                        id.set("wswartzendruber")
+                        name.set("William Swartzendruber")
+                        email.set("wswartzendruber@gmail.com")
+                    }
+                }
+                licenses {
+                    license {
+                        name.set("The Apache License, Version 2.0")
+                        url.set("http://www.apache.org/licenses/LICENSE-2.0.txt")
+                    }
+                }
+                scm {
+                    connection.set("scm:git:git://github.com/wswartzendruber/la4k.git")
+                    developerConnection.set("scm:git:git://github.com/wswartzendruber/la4k.git")
+                    url.set("https://github.com/wswartzendruber/la4k")
+                }
+            }
         }
     }
     repositories {
         maven {
-            url = URI("$mavenUrlBase/la4k-log4j2;publish=1")
+            url = URI(mavenUrl.toString())
             credentials {
                 username = mavenUsername
                 password = mavenPassword

@@ -8,7 +8,7 @@ import java.net.URI
 
 import org.jetbrains.dokka.Platform
 
-val mavenUrlBase: String? by project
+val mavenUrl: String? by project
 val mavenUsername: String? by project
 val mavenPassword: String? by project
 
@@ -20,6 +20,7 @@ plugins {
     id("com.android.library")
     kotlin("multiplatform")
     id("org.jetbrains.dokka")
+    id("signing")
     id("maven-publish")
 }
 
@@ -45,7 +46,7 @@ tasks {
     register<Jar>("dokkaHtmlJar") {
         group = "Build"
         description = "Packages dokkaHtml output into a JAR."
-        classifier = "dokka"
+        classifier = "javadoc"
         from(dokkaHtml)
     }
 }
@@ -82,10 +83,43 @@ dependencies {
     commonTestImplementation(kotlin("test"))
 }
 
+signing {
+    useGpgCmd()
+    sign(publishing.publications)
+}
+
 publishing {
+    publications {
+        create<MavenPublication>("maven") {
+            artifact(tasks["dokkaHtmlJar"])
+            pom {
+                name.set("LA4K API")
+                description.set("LA4K API for Kotlin Multiplatform")
+                url.set("https://github.com/wswartzendruber/la4k")
+                developers {
+                    developer {
+                        id.set("wswartzendruber")
+                        name.set("William Swartzendruber")
+                        email.set("wswartzendruber@gmail.com")
+                    }
+                }
+                licenses {
+                    license {
+                        name.set("The Apache License, Version 2.0")
+                        url.set("http://www.apache.org/licenses/LICENSE-2.0.txt")
+                    }
+                }
+                scm {
+                    connection.set("scm:git:git://github.com/wswartzendruber/la4k.git")
+                    developerConnection.set("scm:git:git://github.com/wswartzendruber/la4k.git")
+                    url.set("https://github.com/wswartzendruber/la4k")
+                }
+            }
+        }
+    }
     repositories {
         maven {
-            url = URI("$mavenUrlBase/la4k-api;publish=1")
+            url = URI(mavenUrl.toString())
             credentials {
                 username = mavenUsername
                 password = mavenPassword
