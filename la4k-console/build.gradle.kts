@@ -51,7 +51,9 @@ kotlin {
         }
     }
     jvm { }
-    android { }
+    android {
+        publishLibraryVariants("release")
+    }
     js {
         browser {
             testTask {
