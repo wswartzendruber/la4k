@@ -42,7 +42,7 @@ tasks {
     register<Jar>("dokkaHtmlJar") {
         group = "Build"
         description = "Packages dokkaHtml output into a JAR."
-        classifier = "javadoc"
+        classifier = "dokka"
         from(dokkaHtml)
     }
 }
