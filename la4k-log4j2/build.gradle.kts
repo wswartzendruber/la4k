@@ -46,9 +46,9 @@ kotlin {
 dependencies {
     implementation(platform(kotlin("bom")))
     implementation(project(":la4k-api"))
-    implementation("org.apache.logging.log4j:log4j-api:2.12.0")
+    implementation("org.apache.logging.log4j:log4j-api:2.16.0")
     testImplementation(kotlin("test"))
-    testImplementation("org.apache.logging.log4j:log4j-core:2.12.0")
+    testImplementation("org.apache.logging.log4j:log4j-core:2.16.0")
 }
 
 signing {
