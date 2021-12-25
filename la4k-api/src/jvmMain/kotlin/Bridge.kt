@@ -8,10 +8,4 @@ package org.la4k
 
 import java.util.ServiceLoader
 
-internal actual val bridge =
-    ServiceLoader
-        .load(Bridge::class.java)
-        .asSequence()
-        .toList()
-        .lastOrNull()
-        ?: NullBridge()
+internal actual val bridge = ServiceLoader.load(Bridge::class.java).lastOrNull() ?: NullBridge()
