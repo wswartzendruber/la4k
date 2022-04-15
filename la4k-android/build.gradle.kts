@@ -51,6 +51,9 @@ dependencies {
 }
 
 android {
+    defaultConfig {
+        minSdkVersion(9)
+    }
     compileSdkVersion(9)
 }
 

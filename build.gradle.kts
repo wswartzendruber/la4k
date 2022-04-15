@@ -11,15 +11,15 @@ buildscript {
         google()
     }
     dependencies {
-        classpath("com.android.tools.build:gradle:7.0.1")
+        classpath("com.android.tools.build:gradle:7.1.2")
     }
 }
 
 plugins {
-    kotlin("multiplatform").version("1.6.10").apply(false)
-    kotlin("jvm").version("1.6.10").apply(false)
-    kotlin("android").version("1.6.10").apply(false)
-    kotlin("js").version("1.6.10").apply(false)
+    kotlin("multiplatform").version("1.6.20").apply(false)
+    kotlin("jvm").version("1.6.20").apply(false)
+    kotlin("android").version("1.6.20").apply(false)
+    kotlin("js").version("1.6.20").apply(false)
     id("org.jetbrains.dokka").version("1.6.10").apply(false)
 }
 
