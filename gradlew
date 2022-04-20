@@ -1,12 +1,6 @@
 #!/usr/bin/env sh
 
 #
-# SPDX-FileCopyrightText: 2015 the original author or authors
-#
-# SPDX-License-Identifier: Apache-2.0
-#
-
-#
 # Copyright 2015 the original author or authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -20,6 +14,8 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
+#
+# SPDX-License-Identifier: Apache-2.0
 #
 
 ##############################################################################
