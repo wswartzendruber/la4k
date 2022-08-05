@@ -1,13 +1,32 @@
 #
-# Any copyright is dedicated to the Public Domain.
+# Copyright 2022 William Swartzendruber
 #
-# Copyright 2021 William Swartzendruber
+# To the extent possible under law, the person who associated CC0 with this file has waived all
+# copyright and related or neighboring rights to this file.
+#
+# You should have received a copy of the CC0 legalcode along with this work. If not, see
+# <http://creativecommons.org/publicdomain/zero/1.0/>.
 #
 # SPDX-License-Identifier: CC0-1.0
 #
 
-# Ignore Gradle project-specific cache directory
 .gradle
+/build/
+
+# Ignore Gradle GUI config
+gradle-app.setting
+
+# Avoid ignoring Gradle wrapper jar file (.jar files are usually ignored)
+!gradle-wrapper.jar
+
+# Cache of project
+.gradletasknamecache
+
+# # Work around https://youtrack.jetbrains.com/issue/IDEA-116898
+# gradle/wrapper/gradle-wrapper.properties
 
 # Ignore Gradle build output directory
 build
+
+# GitHub seems to be complaining about this having vulnerabilities.
+/kotlin-js-store
